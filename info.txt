@@ -3,3 +3,5 @@ PROGETTO APP MEDICINA
 API
 
 https://www.drugbankplus.com/api.html
+
+http://www.aifa.gov.it/content/dati-sulle-liste-dei-farmaci-open-data
