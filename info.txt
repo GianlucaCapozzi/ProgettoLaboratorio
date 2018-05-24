@@ -6,7 +6,13 @@ https://www.drugbankplus.com/api.html
 
 http://www.aifa.gov.it/content/dati-sulle-liste-dei-farmaci-open-data
 
-SPECIFICHE
+http://www.dati.salute.gov.it/dati/elencoDataset.jsp?menu=dati
+
+http://www.cercamedicodentista.it/Albo/Home.jsf
+
+http://www.ordinemedici.ancona.it/index.php?option=com_weblinks&view=category&id=53&Itemid=90
+
+FUNZIONALITÀ DA OFFRIRE AGLI UTENTI
 
 App per la gestione di terapie. Sono previsti tre utenti: amministratore, medico e paziente.
 Per accedere all'app sia medico che paziente devono autenticarsi, o localmente o tramite oauth (ad esempio su google).
