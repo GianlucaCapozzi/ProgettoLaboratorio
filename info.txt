@@ -12,12 +12,14 @@ http://www.cercamedicodentista.it/Albo/Home.jsf
 
 http://www.ordinemedici.ancona.it/index.php?option=com_weblinks&view=category&id=53&Itemid=90
 
+
+
 FUNZIONALITÀ DA OFFRIRE AGLI UTENTI
 
 App per la gestione di terapie. Sono previsti tre utenti: amministratore, medico e paziente.
 Per accedere all'app sia medico che paziente devono autenticarsi, o localmente o tramite oauth (ad esempio su google).
 A questo punto l'azione si suddivide in base al tipo di utente:
 
-• Medico: un medico può prescrivere la terapia per un paziente, inserendo varie informazioni come la diagnosi, il dosaggio, la frequenza. Inoltre si può gestire il sistema di appuntamenti.
+• Medico: un medico può prescrivere la terapia per un paziente, inserendo varie informazioni come la diagnosi, il dosaggio, la frequenza. Inoltre si può gestire il sistema di appuntamenti. Il medico inserisce alcune informazioni
 
 • Paziente: può vedere la terapia che gli è stata prescritta e trovare informazioni riguardo il medicinale prescritto. Un paziente può inoltre prenotare una visita.
