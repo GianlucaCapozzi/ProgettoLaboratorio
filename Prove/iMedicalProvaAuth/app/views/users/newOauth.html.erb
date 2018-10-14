@@ -1,0 +1,46 @@
+<h1>Sign up oauth</h1>
+
+<%= form_for @user do |f| %>
+	
+	<div>
+		<%= f.label :name%>
+		<%= f.text_field :name, autofocus: true %>
+	</div>
+
+	<div>
+		<%= f.label :surname%>
+		<%= f.text_field :surname, autofocus: true %>
+	</div>
+
+	<div>
+		<%= f.label :email%>
+		<%= f.text_field :email%>
+	</div>
+
+	</div>
+
+	<div>
+		<%= f.label :birthdayDate%>
+		<%= f.text_field :birthdayDate %>
+	</div>
+
+	<div>
+		<%= f.label :birthdayPlace%>
+		<%= f.text_field :birthdayPlace %>
+	</div>
+
+	<div>
+		<%= f.label :phoneNumber%>
+		<%= f.text_field :phoneNumber %>
+	</div>
+
+	<div>
+		<%= f.label :cf%>
+		<%= f.text_field :cf %>
+	</div>
+
+	<div>
+		<%= f.submit "Sign up oauth!" %>
+	</div>
+
+<% end %>

@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<h1>BENVENUTI IN iMedical</h1>
+	</head>
+	<body>
+		<div>
+			<%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
+		</div>
+		<div>
+			<%= link_to "Create an account", "/users/new", id: "local_sign_in"%>
+		</div>
+		<div>
+			<%= link_to "Login", "/login", id: "login" %>
+		</div>
+	</body>
+</html>
