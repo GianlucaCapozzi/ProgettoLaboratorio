@@ -1,0 +1,2 @@
+class SecretariesController < ApplicationController
+end
