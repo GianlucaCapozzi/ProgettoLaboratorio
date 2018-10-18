@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		
+
 		@user = User.new(user_params)
 
 		# We store all emails in lowercase to avoid duplicates and case-sensitive login errors
@@ -37,6 +37,30 @@ class UsersController < ApplicationController
 			flash[:errors] = user.errors.full_messages
 			redirect_back fallback_location: root_path
 		end
+	end
+
+	def newOwner
+		user = User.find(params[:id])
+		user.type = 'Owner'
+		user.save!
+	end
+
+	def newDoctor
+		user = User.find(params[:id])
+		user.type = 'Doctor'
+		user.save!
+	end
+
+	def newPatient
+		user = User.find(params[:id])
+		user.type = 'Patient'
+		user.save!
+	end
+
+	def newSecretary
+		user = User.find(params[:id])
+		user.type = 'Secretary'
+		user.save!
 	end
 
 	private

@@ -7,18 +7,18 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
-    
-    <% if notice %>
-      <%= notice %>
-    <% end %>
-
-    <% if alert %>
-      <%= alert %>
-    <% end %>
-
-    <%= yield %>
+      <nav class="navbar navbar-fixed-top navbar-light" style="background-color: #e3f2fd;">
+          <a class="navbar-brand" href="/homepage/info">iMedical</a>
+          <form class="form-inline">
+              <a class="btn btn-outline-primary" href="/auth/google_oauth2" role="button">Login with Google</a>
+              <a class="btn btn-outline-secondary" href="/users/new" role="button">Create an account</a>
+              <a class="btn btn-outline-success" href="/login" role="button">Login</a>
+          </form>
+      </nav>
+      <%= yield %>
   </body>
 </html>

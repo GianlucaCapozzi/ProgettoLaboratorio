@@ -1,0 +1,2 @@
+class Drug < Prescription
+end

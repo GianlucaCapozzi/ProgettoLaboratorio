@@ -1,0 +1,2 @@
+class PrescriptedExamination < Prescription
+end

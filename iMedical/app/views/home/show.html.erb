@@ -9,7 +9,12 @@
         <br/>
         <%= link_to "Sign out", signout_path, id: "sign_out" %>
     </div>
-    <div>
+    <br/>
+    <h2>Scegli la tua tipologia di utente</h2>
+        <%= button_to "Proprietario", new_owner_path(current_user.id), :method => "get" %>
+        <%= button_to "Dottore", new_doctor_path(current_user.id), :method => "get" %>
+        <%= button_to "Paziente", new_patient_path(current_user.id), :method => "get" %>
+        <%= button_to "Segretario", new_secretary_path(current_user.id), :method => "get" %>
     <%= yield %>
     </div>
   </body>

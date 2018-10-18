@@ -1,16 +1,13 @@
 <html>
 	<head>
 		<h1>BENVENUTI IN iMedical</h1>
+
+		<%= csrf_meta_tags %>
+	    <%= csp_meta_tag %>
+
+		<%= stylesheet_link_tag    'homepage', media: 'all', 'data-turbolinks-track': 'reload' %>
+	    <%= javascript_include_tag 'homepage', 'data-turbolinks-track': 'reload' %>
 	</head>
 	<body>
-		<div>
-			<%= link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in" %>
-		</div>
-		<div>
-			<%= link_to "Create an account", "/users/new", id: "local_sign_in"%>
-		</div>
-		<div>
-			<%= link_to "Login", "/login", id: "login" %>
-		</div>
 	</body>
 </html>
