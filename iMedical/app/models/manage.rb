@@ -1,6 +1,6 @@
 class Manage < ApplicationRecord
 
-    has_many :Secretaries
-    has_many :Clinics
+    has_many :secretaries
+    has_many :clinics
 
 end

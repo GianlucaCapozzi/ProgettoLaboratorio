@@ -1,5 +1,5 @@
 class Prescription < ApplicationRecord
 
-    has_many :Examination
+    has_many :examinations
 
 end
