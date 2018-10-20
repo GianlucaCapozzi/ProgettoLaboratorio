@@ -20,7 +20,6 @@ class UsersController < ApplicationController
 	end
 
 	def create
-
 		@user = User.new(user_params)
 
 		# We store all emails in lowercase to avoid duplicates and case-sensitive login errors
@@ -34,7 +33,6 @@ class UsersController < ApplicationController
 			flash.now.alert = "Impossibile creare l'account."
 			render :new
 		end
-
 	end
 
 	def newOauth
@@ -118,6 +116,18 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		user.type = 'Secretary'
 		user.save!
+	end
+
+	# Owner's functions
+
+	def addNewDoctor
+		@doctors = Doctor.all.order('created_at DESC')
+		@doctors = @doctors.search(params[:search]) if params[:search].present?
+	end
+
+	def addNewSecretary
+		@secretaries = Secretary.all.order('created_at DESC')
+		@secretaries = @secretaries.search(params[:search]) if params[:search].present?
 	end
 
 	private

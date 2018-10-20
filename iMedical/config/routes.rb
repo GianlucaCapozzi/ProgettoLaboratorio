@@ -4,7 +4,6 @@ Rails.application.routes.draw do
 
 	get 'auth/:provider/callback', to: 'sessions#createOauth'
 	get 'auth/failure', to: redirect('/')
-	get 'signout', to: 'sessions#destroy', as: 'signout'
 
 	get 'users/new' => 'users#new', as: :new_user
 	get 'users/:id/newOauth' => 'users#newOauth', as: :newOauth
@@ -23,9 +22,16 @@ Rails.application.routes.draw do
 	get 'users/:id/setDoctorID' => 'users#setDoctorID', as: :set_doctorid
 	patch 'users/:id/setDoctorID' => 'users#patchDoctorID', as: :patch_doctorid
 
+	# Owner's routes
+	get 'users/createClinic' => 'users#createClinic', as: :create_clinic
+	get 'users/manageClinic' => 'users#manageClinic', as: :manage_clinic
+	get 'users/addNewDoctor' => 'users#addNewDoctor', as: :add_new_doctor
+	get 'users/addNewSecretary' => 'users#addNewSecretary', as: :add_new_secretary
+
+
 	get '/login' => 'sessions#new'
 	post '/login' => 'sessions#createLocal'
-	delete '/logout' => 'sessions#destroy'
+	delete '/logout' => 'sessions#destroy', as: :logout
 
 	resources :sessions, only: [:create, :destroy]
 	resources :home
