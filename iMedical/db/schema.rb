@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_151408) do
+ActiveRecord::Schema.define(version: 2018_10_20_202928) do
 
   create_table "clinics", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_id"
+    t.string "name"
+    t.string "address"
+    t.string "description"
+    t.index ["owner_id"], name: "index_clinics_on_owner_id"
   end
 
   create_table "doctors", force: :cascade do |t|
@@ -80,6 +85,11 @@ ActiveRecord::Schema.define(version: 2018_10_18_151408) do
     t.string "uid"
     t.string "doctorID"
     t.string "type"
+  end
+
+  create_table "visits", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "works", force: :cascade do |t|

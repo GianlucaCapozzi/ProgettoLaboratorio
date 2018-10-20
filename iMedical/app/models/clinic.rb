@@ -1,7 +1,7 @@
 class Clinic < ApplicationRecord
 
-    belongs_to :Owner
-    belongs_to :Works
-    belongs_to :Examinations
+    belongs_to :owner
+    belongs_to :work, optional: :true
+    belongs_to :examination, optional: :true
 
 end
