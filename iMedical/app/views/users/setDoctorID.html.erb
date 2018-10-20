@@ -1,0 +1,10 @@
+<h2> Set DoctorID </h2> <br>
+<%= form_tag(set_doctorid_path(@user), method: "patch") do |f| %>
+	<div>
+		<%= label_tag(:doctorID, "DoctorID") %>
+		<%= text_field_tag :doctorID %>
+	</div>
+	<div>
+		<%= submit_tag "Set doctorID" %>
+	</div>
+<% end %>
