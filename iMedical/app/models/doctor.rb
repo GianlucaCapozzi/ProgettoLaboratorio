@@ -1,7 +1,7 @@
 class Doctor < User
 
-    belongs_to :Works, optional: true
-    belongs_to :Examinations, optional: true
+    has_many :works
+    has_many :examinations
 
     def self.search(search_term)
         where("LOWER(name) LIKE ?", "%#{search_term.downcase}%")

@@ -11,10 +11,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <%= button_to "Crea nuovo studio medico", create_clinic_path, :method => "get", class: "btn"%>
+                    <%= button_to "Crea nuovo studio medico", new_owner_clinic_path(current_user.id), :method => "get", class: "btn"%>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <%= button_to "Gestisci studio medico", manage_clinic_path, :method => "get", class: "btn"%>
+                    <%= button_to "Gestisci studio medico", owner_clinics_path(current_user.id), :method => "get", class: "btn"%>
                 </div>
             </div>
         </div>

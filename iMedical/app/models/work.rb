@@ -1,6 +1,6 @@
 class Work < ApplicationRecord
 
-    has_many :Doctors
-    has_many :Clinics
+    belongs_to :doctor, optional: :true
+    belongs_to :clinic, optional: :true
 
 end

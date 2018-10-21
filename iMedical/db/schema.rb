@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_151408) do
+ActiveRecord::Schema.define(version: 2018_10_21_164432) do
 
   create_table "clinics", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "owner_id"
+    t.string "name"
+    t.string "address"
+    t.string "description"
+    t.index ["owner_id"], name: "index_clinics_on_owner_id"
   end
 
   create_table "doctors", force: :cascade do |t|
@@ -30,11 +35,21 @@ ActiveRecord::Schema.define(version: 2018_10_18_151408) do
   create_table "examinations", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "patient_id"
+    t.integer "doctor_id"
+    t.integer "clinic_id"
+    t.index ["clinic_id"], name: "index_examinations_on_clinic_id"
+    t.index ["doctor_id"], name: "index_examinations_on_doctor_id"
+    t.index ["patient_id"], name: "index_examinations_on_patient_id"
   end
 
   create_table "manages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "secretary_id"
+    t.integer "clinic_id"
+    t.index ["clinic_id"], name: "index_manages_on_clinic_id"
+    t.index ["secretary_id"], name: "index_manages_on_secretary_id"
   end
 
   create_table "owners", force: :cascade do |t|
@@ -57,6 +72,8 @@ ActiveRecord::Schema.define(version: 2018_10_18_151408) do
   create_table "prescriptions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "examination_id"
+    t.index ["examination_id"], name: "index_prescriptions_on_examination_id"
   end
 
   create_table "secretaries", force: :cascade do |t|
@@ -82,9 +99,18 @@ ActiveRecord::Schema.define(version: 2018_10_18_151408) do
     t.string "type"
   end
 
+  create_table "visits", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "works", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "doctor_id"
+    t.integer "clinic_id"
+    t.index ["clinic_id"], name: "index_works_on_clinic_id"
+    t.index ["doctor_id"], name: "index_works_on_doctor_id"
   end
 
 end

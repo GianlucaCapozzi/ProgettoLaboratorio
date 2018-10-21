@@ -23,11 +23,12 @@ Rails.application.routes.draw do
 	patch 'users/:id/setDoctorID' => 'users#patchDoctorID', as: :patch_doctorid
 
 	# Owner's routes
-	get 'users/createClinic' => 'users#createClinic', as: :create_clinic
-	get 'users/manageClinic' => 'users#manageClinic', as: :manage_clinic
 	get 'users/addNewDoctor' => 'users#addNewDoctor', as: :add_new_doctor
 	get 'users/addNewSecretary' => 'users#addNewSecretary', as: :add_new_secretary
 
+	# Patient's routes
+	get 'patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story
+	
 
 	get '/login' => 'sessions#new'
 	post '/login' => 'sessions#createLocal'
@@ -39,7 +40,9 @@ Rails.application.routes.draw do
 	resources :doctors, controller: 'users', type: 'Doctor'
 	resources :secretaries, controller: 'users', type: 'Secretary'
 	resources :patient, controller: 'users', type: 'Patient'
-	resources :owner, controller: 'users', type: 'Owner'
+	resources :owner, controller: 'users', type: 'Owner' do
+		resources :clinics
+	end
 	resources :homepage
 
 	root "homepage#show"

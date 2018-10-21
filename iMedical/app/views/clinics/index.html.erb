@@ -1,0 +1,20 @@
+<h1>GESTISCI STUDI MEDICI</h1>
+<h2>Ci sono <%= @clinics.count %> studi medici creati da te</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome Studio</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @clinics.each do |clinic| %>
+        <tr>
+            <td><%= clinic.name %></td>
+                <%= button_to "Modifica studio medico", edit_owner_clinic_path(current_user.id, clinic.id), :method => :get, class: "btn" %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

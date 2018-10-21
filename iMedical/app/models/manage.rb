@@ -1,6 +1,6 @@
 class Manage < ApplicationRecord
 
-    has_many :Secretaries
-    has_many :Clinics
+    belongs_to :secretary, optional: :true
+    belongs_to :clinic, optional: :true
 
 end
