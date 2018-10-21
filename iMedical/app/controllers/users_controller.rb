@@ -103,7 +103,7 @@ class UsersController < ApplicationController
 		else
 			puts "File non esistente"
 		end
-		redirect_to root_path
+		redirect_to newDoctor_path(@user)
 	end
 	
 	def newPatient
