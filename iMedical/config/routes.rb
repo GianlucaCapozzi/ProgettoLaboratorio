@@ -26,6 +26,9 @@ Rails.application.routes.draw do
 	get 'users/addNewDoctor' => 'users#addNewDoctor', as: :add_new_doctor
 	get 'users/addNewSecretary' => 'users#addNewSecretary', as: :add_new_secretary
 
+	# Patient's routes
+	get 'patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story
+	
 
 	get '/login' => 'sessions#new'
 	post '/login' => 'sessions#createLocal'

@@ -1,1 +1,33 @@
-<h2>PAZIENTE</h2>
+<!DOCTYPE html>
+<html>
+  <head>
+    <h1>HOME PAGE PAZIENTE</h1>
+  </head>
+  <body>
+    <div>
+        <h2>Signed in as <strong><%= current_user.email %></strong>!</h2>
+        <h1>Operazioni</h1>
+        <br/>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <%= button_to "Visualizza cartella clinica", show_patient_story_path(current_user.id), :method => "get", class: "btn"%>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <%= button_to "Prenota Visita", owner_clinics_path(current_user.id), :method => "get", class: "btn"%>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <%= button_to "Cerca studio medico", add_new_secretary_path, :method => "get", class: "btn"%>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <%= button_to "Visualizza prescrizioni", add_new_secretary_path, :method => "get", class: "btn"%>
+                </div>
+            </div>
+        </div>
+  </body>
+</html>

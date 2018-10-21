@@ -1,8 +1,8 @@
 class Examination < ApplicationRecord
 
-    has_many :patients
-    has_many :doctors
-    has_many :clinics
-    belongs_to :prescription
+    belongs_to :patient, optional: :true
+    belongs_to :doctor, optional: :true
+    belongs_to :clinic, optional: :true
+    has_many :prescriptions
 
 end

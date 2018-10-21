@@ -1,5 +1,5 @@
 class Patient < User
 
-    belongs_to :examination
+    has_many :examinations
 
 end

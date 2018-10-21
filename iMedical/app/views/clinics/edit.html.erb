@@ -1,17 +1,17 @@
 <h1>MODIFICA STUDIO MEDICO</h1>
 
-<%= form_for @clinic do |f| %>
+<%= form_for [@owner, @clinic] do |f| %>
     <div>
         <%= f.label :nome%>
         <%= f.text_field :name%>
     </div>
     <div>
-		<%= f.label :address%>
+		<%= f.label :indirizzo%>
 		<%= f.text_field :address%>
 	</div>
     <div>
-		<%= f.label :description%>
-		<%= f.text_area :name%>
+		<%= f.label :descrizione%>
+		<%= f.text_area :description%>
 	</div>
 	<div>
         <%= f.submit "Modifica" %>

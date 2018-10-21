@@ -12,9 +12,9 @@ class UsersController < ApplicationController
 				# Pagina temporanea
 				render 'newDoctor'
 			when "Secretary"
-			
+
 			when "Owner"
-			
+
 			when "Patient"
 		end
 	end
@@ -73,9 +73,9 @@ class UsersController < ApplicationController
 
 	# Method to get information about user that wants to set a doctorID
 	def setDoctorID
-		@user = User.find(params[:id])	
+		@user = User.find(params[:id])
 	end
-	
+
 	# Method to check if the doctorID is valid. If it's valid it will be written on DB
 	def patchDoctorID
 		user = User.find(params[:id])
@@ -97,7 +97,7 @@ class UsersController < ApplicationController
 					user.save!
 					puts "Trovato!"
 				else
-					puts "Non corrisponde"				
+					puts "Non corrisponde"
 				end
 			end
 		else
@@ -105,7 +105,7 @@ class UsersController < ApplicationController
 		end
 		redirect_to root_path
 	end
-	
+
 	def newPatient
 		user = User.find(params[:id])
 		user.type = 'Patient'
@@ -128,6 +128,13 @@ class UsersController < ApplicationController
 	def addNewSecretary
 		@secretaries = Secretary.all.order('created_at DESC')
 		@secretaries = @secretaries.search(params[:search]) if params[:search].present?
+	end
+
+	# Patient's functions
+
+	def showPatientStory
+		@patient = Patient.find(params[:id])
+		puts @patient
 	end
 
 	private
