@@ -1,8 +1,12 @@
 class Clinic < ApplicationRecord
 
     belongs_to :owner
-    belongs_to :work, optional: :true
-    belongs_to :examination, optional: :true
+    has_many :works
+    has_many :examinations
     has_many :manages
+
+    def self.search(search_term)
+        where("LOWER(name) LIKE ?", "%#{search_term.downcase}%")
+    end
 
 end

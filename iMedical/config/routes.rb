@@ -23,12 +23,15 @@ Rails.application.routes.draw do
 	patch 'users/:id/setDoctorID' => 'users#patchDoctorID', as: :patch_doctorid
 
 	# Owner's routes
-	get 'users/addNewDoctor' => 'users#addNewDoctor', as: :add_new_doctor
-	get 'users/addNewSecretary' => 'users#addNewSecretary', as: :add_new_secretary
+	get '/owner/:owner_id/clinics/showClinics' => 'clinics#showClinics', as: :show_clinics
+	get '/owner/:owner_id/clinics/:id/searchDoctor' => 'clinics#searchDoctor', as: :search_doctor
+	get '/owner/:owner_id/clinics/:id/searchSecretary' => 'clinics#searchSecretary', as: :search_secretary
+	get '/work/addNewDoctor/:doctor_id&:clinic_id' => 'works#addNewDoctor', as: :add_new_doctor
+	get '/manage/addNewSecretary/:secretary:id&clinic.id' => 'manages#addNewSecretary', as: :add_new_secretary
 
 	# Patient's routes
-	get 'patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story
-	
+	get '/patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story
+	get '/patient/searchClinic' => 'users#searchClinic', as: :search_clinic
 
 	get '/login' => 'sessions#new'
 	post '/login' => 'sessions#createLocal'
@@ -42,6 +45,10 @@ Rails.application.routes.draw do
 	resources :patient, controller: 'users', type: 'Patient'
 	resources :owner, controller: 'users', type: 'Owner' do
 		resources :clinics
+	end
+	resources :works do
+		resources :clinics
+		resources :doctors
 	end
 	resources :homepage
 

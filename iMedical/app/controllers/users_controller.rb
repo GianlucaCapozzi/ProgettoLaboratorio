@@ -118,23 +118,16 @@ class UsersController < ApplicationController
 		user.save!
 	end
 
-	# Owner's functions
-
-	def addNewDoctor
-		@doctors = Doctor.all.order('created_at DESC')
-		@doctors = @doctors.search(params[:search]) if params[:search].present?
-	end
-
-	def addNewSecretary
-		@secretaries = Secretary.all.order('created_at DESC')
-		@secretaries = @secretaries.search(params[:search]) if params[:search].present?
-	end
-
 	# Patient's functions
 
 	def showPatientStory
 		@patient = Patient.find(params[:id])
 		puts @patient
+	end
+
+	def searchClinic
+		@clinics = Clinic.all.order('created_at DESC')
+		@clinics = @clinics.search(params[:search]) if params[:search].present?
 	end
 
 	private

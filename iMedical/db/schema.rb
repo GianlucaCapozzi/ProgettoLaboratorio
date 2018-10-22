@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_21_164432) do
+ActiveRecord::Schema.define(version: 2018_10_21_193141) do
 
   create_table "clinics", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2018_10_21_164432) do
     t.string "uid"
     t.string "doctorID"
     t.string "type"
+    t.string "story"
   end
 
   create_table "visits", force: :cascade do |t|

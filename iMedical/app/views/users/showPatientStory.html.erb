@@ -1,9 +1,9 @@
 <h1>CARTELLA CLINICA</h1>
 
 <h2>
-    <% if @patient.name.blank? %>
+    <% if @patient.story.blank? %>
         La cartella clinica è vuota
     <% else %>
-        <%= @patient.name %>
+        <%= @patient.story %>
     <% end %>
 </h2>
