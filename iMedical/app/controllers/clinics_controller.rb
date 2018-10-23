@@ -34,7 +34,12 @@ class ClinicsController < ApplicationController
 
     # Owner's functions
 
-    def showClinics
+    def showClinicsForDoctor
+        @owner = Owner.find(params[:owner_id])
+        @clinics = @owner.clinics
+    end
+
+    def showClinicsForSecretary
         @owner = Owner.find(params[:owner_id])
         @clinics = @owner.clinics
     end
@@ -45,7 +50,8 @@ class ClinicsController < ApplicationController
 		@doctors = @doctors.search(params[:search]) if params[:search].present?
 	end
 
-	def addNewSecretary
+	def searchSecretary
+        session[:clinic_id] = Clinic.find(params[:id])
 		@secretaries = Secretary.all.order('created_at DESC')
 		@secretaries = @secretaries.search(params[:search]) if params[:search].present?
 	end

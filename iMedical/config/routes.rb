@@ -23,11 +23,12 @@ Rails.application.routes.draw do
 	patch 'users/:id/setDoctorID' => 'users#patchDoctorID', as: :patch_doctorid
 
 	# Owner's routes
-	get '/owner/:owner_id/clinics/showClinics' => 'clinics#showClinics', as: :show_clinics
+	get '/owner/:owner_id/clinics/showClinicsForDoctor' => 'clinics#showClinicsForDoctor', as: :show_clinicsDoctor
+	get '/owner/:owner_id/clinics/showClinicsForSecretary' => 'clinics#showClinicsForSecretary', as: :show_clinicsSecretary
 	get '/owner/:owner_id/clinics/:id/searchDoctor' => 'clinics#searchDoctor', as: :search_doctor
 	get '/owner/:owner_id/clinics/:id/searchSecretary' => 'clinics#searchSecretary', as: :search_secretary
 	get '/work/addNewDoctor/:doctor_id&:clinic_id' => 'works#addNewDoctor', as: :add_new_doctor
-	get '/manage/addNewSecretary/:secretary:id&clinic.id' => 'manages#addNewSecretary', as: :add_new_secretary
+	get '/manage/addNewSecretary/:secretary_id&:clinic_id' => 'manages#addNewSecretary', as: :add_new_secretary
 
 	# Patient's routes
 	get '/patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story
@@ -43,6 +44,10 @@ Rails.application.routes.draw do
 	resources :doctors, controller: 'users', type: 'Doctor'
 	resources :secretaries, controller: 'users', type: 'Secretary'
 	resources :patient, controller: 'users', type: 'Patient'
+	resources :manages do
+		resources :clinics
+		resources :secretaries
+	end
 	resources :owner, controller: 'users', type: 'Owner' do
 		resources :clinics
 	end

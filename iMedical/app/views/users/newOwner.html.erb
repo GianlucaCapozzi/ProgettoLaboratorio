@@ -22,10 +22,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <%= button_to "Aggiungi medico", show_clinics_path(current_user.id), :method => "get", class: "btn"%>
+                    <%= button_to "Aggiungi medico", show_clinicsDoctor_path(current_user.id), :method => "get", class: "btn"%>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <%= button_to "Aggiungi Segretario", add_new_secretary_path(current_user.id), :method => "get", class: "btn"%>
+                    <%= button_to "Aggiungi Segretario", show_clinicsSecretary_path(current_user.id), :method => "get", class: "btn"%>
                 </div>
             </div>
         </div>
