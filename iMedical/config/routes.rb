@@ -69,7 +69,9 @@ Rails.application.routes.draw do
 	end
 	
 	
-	resources :secretaries, controller: 'users', type: 'Secretary'
+	resources :secretaries, controller: 'users', type: 'Secretary' do
+		resources :clinics, shallow: true
+	end
 
 	resources :patient, controller: 'users', type: 'Patient'
 	resources :manages do

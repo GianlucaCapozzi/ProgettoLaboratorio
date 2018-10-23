@@ -5,8 +5,8 @@ class ClinicsController < ApplicationController
             @owner = Owner.find(params[:owner_id])
             @clinics = @owner.clinics
         else
-            # Parte Segretario
-
+            @secretary = Secretary.find(params[:secretary_id])
+            @clinics = @secretary.clinics
         end
     end
 
