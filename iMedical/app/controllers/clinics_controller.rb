@@ -6,6 +6,7 @@ class ClinicsController < ApplicationController
             @clinics = @owner.clinics
         else
             # Parte Segretario
+
         end
     end
 
