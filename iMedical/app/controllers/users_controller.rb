@@ -9,8 +9,14 @@ class UsersController < ApplicationController
 		# In params[:type] i have the type of what i want to see (Doctor, Secretary, ecc)
 		case params[:type]
 			when "Doctor"
-				# Pagina temporanea
-				render 'newDoctor'
+				# La vista dovrebbe variare in base a ciò che è l'utente, memorizzare nella sessione che cosa è l'utente?
+				# Ovvero quando clicca quale tipo di utenza è, memorizzarla nella sessione
+				# Select all clinics where the doctor works ( i'm a doctor ancora non controllato )
+				#@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
+				@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
+				puts @clinics.all
+				puts session[:user_id]
+				render 'showDoctor'
 			when "Secretary"
 
 			when "Owner"
@@ -105,6 +111,8 @@ class UsersController < ApplicationController
 		end
 		redirect_to newDoctor_path(@user)
 	end
+
+	
 
 	def newPatient
 		user = User.find(params[:id])

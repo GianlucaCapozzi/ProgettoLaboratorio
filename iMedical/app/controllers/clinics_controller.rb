@@ -1,10 +1,14 @@
 class ClinicsController < ApplicationController
 
     def index
-            @clinics = Clinic.all
-        end
+		@clinics = Clinic.all
+	end
 
     def show
+		# If the user is a doctor I show his patients
+		# If the user is a patient I show the doctors that work in this clinic
+		# If the user is a secretary I show the doctors that work in this clinic
+		# If the user is a owner I show.. nothing?
     end
 
     def new
@@ -36,5 +40,10 @@ class ClinicsController < ApplicationController
     def clinic_params
         params.require(:clinic).permit(:name, :address, :description)
     end
+	
+	# Method to verify if the user with the actual role can go in this page
+	def verifyRole
+		# The role is set in session variable :role
+	end
 
 end

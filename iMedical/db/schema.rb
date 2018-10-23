@@ -99,11 +99,6 @@ ActiveRecord::Schema.define(version: 2018_10_21_164432) do
     t.string "type"
   end
 
-  create_table "visits", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "works", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

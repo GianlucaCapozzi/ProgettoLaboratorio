@@ -37,9 +37,36 @@ Rails.application.routes.draw do
 	resources :sessions, only: [:create, :destroy]
 	resources :home
 	resources :users
-	resources :doctors, controller: 'users', type: 'Doctor'
+	#resources :doctors, controller: 'users', type: 'Doctor' do
+	#	resources :clinics, shallow: true do
+	#		resources :patient, controller: 'users', type: 'Patient', shallow: true do
+	#			resources :examinations, shallow: true do
+	#				resources :prescriptions
+	#			end
+	#		end
+	#	end
+	#end
+	
+	# I want to see where the given doctor works
+	resources :doctors, controller: 'users', type: 'Doctor' do
+		resources :clinics, shallow: true, only: [:index, :show]
+	end
+	# I want to see the patient that had a visit in the given clinic
+	resources :clinics do
+		resources :patients, shallow: true, only: [:index, :show]
+	end
+	# I want to see the visits of a patient
+	resources :patients, controller: 'users', type: 'Patient' do
+		resources :examinations, shallow: true, only: [:index, :show]
+	end
+	# I want to see the prescriptions of a examinations
+	resources :examinations do
+		resources :prescriptions, shallow: true
+	end
+	
+	
 	resources :secretaries, controller: 'users', type: 'Secretary'
-	resources :patient, controller: 'users', type: 'Patient'
+	#resources :patient, controller: 'users', type: 'Patient'
 	resources :owner, controller: 'users', type: 'Owner' do
 		resources :clinics
 	end
