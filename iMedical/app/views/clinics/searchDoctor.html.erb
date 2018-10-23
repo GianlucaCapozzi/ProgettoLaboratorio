@@ -1,0 +1,10 @@
+<%= form_tag(search_doctor_path, method: :get, id: "owDoct-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search ..." %>
+<% end %>
+<table>
+    <% @doctors.each do |doctor| %>
+        <tr>
+            <td><%= doctor.name %><%= button_to "Aggiungi Medico", add_new_doctor_path(doctor.id, session[:clinic_id]), :method => :get, class: "btn" %></td>
+        </tr>
+    <% end %>
+</table>

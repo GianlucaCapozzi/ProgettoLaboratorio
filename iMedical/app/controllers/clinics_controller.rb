@@ -1,9 +1,10 @@
 class ClinicsController < ApplicationController
 
     def index
-		@clinics = Clinic.all
-	end
-
+        @owner = Owner.find(params[:owner_id])
+        @clinics = @owner.clinics
+    end
+    
     def show
 		# If the user is a doctor I show his patients
 		# If the user is a patient I show the doctors that work in this clinic
@@ -34,6 +35,30 @@ class ClinicsController < ApplicationController
         @clinic.update(clinic_params)
         redirect_to new_owner_path(params[:owner_id])
     end
+
+    # Owner's functions
+
+    def showClinicsForDoctor
+        @owner = Owner.find(params[:owner_id])
+        @clinics = @owner.clinics
+    end
+
+    def showClinicsForSecretary
+        @owner = Owner.find(params[:owner_id])
+        @clinics = @owner.clinics
+    end
+
+    def searchDoctor
+        session[:clinic_id] = Clinic.find(params[:id])
+		@doctors = Doctor.all.order('created_at DESC')
+		@doctors = @doctors.search(params[:search]) if params[:search].present?
+	end
+
+	def searchSecretary
+        session[:clinic_id] = Clinic.find(params[:id])
+		@secretaries = Secretary.all.order('created_at DESC')
+		@secretaries = @secretaries.search(params[:search]) if params[:search].present?
+	end
 
     private
 
