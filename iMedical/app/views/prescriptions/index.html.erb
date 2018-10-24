@@ -1,0 +1,17 @@
+<h1>PRESCRIZIONI</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Prescrizione</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @prescriptions.each do |prescription| %>
+        <tr>
+            <td><%= prescription.name %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

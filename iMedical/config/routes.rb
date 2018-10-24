@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 	# Patient's routes
 	get '/patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story
 	get '/patient/searchClinic' => 'users#searchClinic', as: :search_clinic
+	get '/patient/:id/clinics/:clinic_id/showDoctors/:doctor_id/createExamination' => 'examinations#createExamination', as: :create_examination
 
 	get '/login' => 'sessions#new'
 	post '/login' => 'sessions#createLocal'
@@ -50,7 +51,7 @@ Rails.application.routes.draw do
 	#		end
 	#	end
 	#end
-	
+
 	# I want to see where the given doctor works
 	resources :doctors, controller: 'users', type: 'Doctor' do
 		resources :clinics, shallow: true, only: [:index, :show]
@@ -62,16 +63,28 @@ Rails.application.routes.draw do
 		end
 	end
 	# I want to see the visits of a patient
+<<<<<<< HEAD
 	#resources :patients, controller: 'users', type: 'Patient' do
 	#	resources :examinations, shallow: true, only: [:index, :show]
 	#end
+=======
+	resources :patients, controller: 'users', type: 'Patient' do
+		resources :examinations, shallow: true, only: [:index, :show, :create]
+		resources :prescriptions, shallow: true
+	end
+>>>>>>> cc7f0ecf926a1e7f75810d501519bd0549a810d8
 	# I want to see the prescriptions of a examinations
 	resources :examinations do
 		resources :prescriptions, shallow: true
 	end
+<<<<<<< HEAD
 	
 	#resources :prescriptions
 	
+=======
+
+
+>>>>>>> cc7f0ecf926a1e7f75810d501519bd0549a810d8
 	resources :secretaries, controller: 'users', type: 'Secretary' do
 		resources :clinics, shallow: true
 	end
