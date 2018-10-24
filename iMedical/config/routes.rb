@@ -70,6 +70,7 @@ Rails.application.routes.draw do
 		resources :prescriptions, shallow: true
 	end
 	
+	#resources :prescriptions
 	
 	resources :secretaries, controller: 'users', type: 'Secretary' do
 		resources :clinics, shallow: true

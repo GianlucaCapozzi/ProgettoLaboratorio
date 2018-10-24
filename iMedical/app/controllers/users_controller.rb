@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 	def index
 		# Different view for every role
 		puts params
-		puts session[:role]
-		case session[:role]
+		#puts session[:role]
+		case session[:type]
 			when "Doctor"
 				case params[:type]
 					when "Doctor"
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 	def show
 		puts params
 		# Role of the session
-		case session[:role]
+		case session[:type]
 			when "Doctor"
 				case params[:type]
 					when "Doctor"

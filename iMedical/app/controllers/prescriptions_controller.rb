@@ -1,7 +1,7 @@
 class PrescriptionsController < ApplicationController
 	
 	def index
-		case session[:role]
+		case session[:type]
 			when "Doctor"
 				# List of prescriptions of the selected examination
 				@examination = Examination.find(params[:examination_id])
@@ -16,14 +16,38 @@ class PrescriptionsController < ApplicationController
 	end
 	
 	def show
+		case session[:type]
+			when "Doctor"
+				
+			when "Secretary"
+			
+			when "Patient"
+			
+			when "Owner"	
+		end
 	end
 	
 	def create
+		
 	end
 	
 	def new
+		case session[:type]
+			when "Doctor"
+				@examination = Examination.find(params[:examination_id])
+				@prescription = @examination.prescriptions.new
+				render "doctorPrescriptionsNew"
+			when "Secretary"
+				#Nothing
+			when "Patient"
+				#Nothing
+			when "Owner"	
+				#Nothing
+		end
 	end
 
+	def create
+	end
 
   #def type:String
   #end

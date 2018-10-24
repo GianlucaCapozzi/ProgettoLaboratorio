@@ -2,7 +2,7 @@ class ExaminationsController < ApplicationController
 	require 'date'
 
 	def index
-		case session[:role]
+		case session[:type]
 			when "Doctor"
 				#List of examination
 				@examinations = Examination.where("clinic_id = ? AND patient_id = ?", params[:clinic_id], params[:patient_id])
@@ -19,7 +19,7 @@ class ExaminationsController < ApplicationController
 	end
 	
 	def show
-		case session[:role]
+		case session[:type]
 			when "Doctor"
 				# See the existing examinations and he can create them
 				@examination = Examination.find(params[:id])
