@@ -1,0 +1,7 @@
+<h2> Prescrizioni di una data visita (vista del medico) </h2>
+<br>
+<table>
+	<%= @prescriptions.each do |prescription| %>
+		<tr> <td> <%= prescription.id %>  </td> </tr> 
+	<% end %>
+</table>

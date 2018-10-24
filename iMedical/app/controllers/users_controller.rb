@@ -4,25 +4,85 @@ class UsersController < ApplicationController
 		@user = User.new
 	end
 
+	def index
+		# Different view for every role
+		puts params
+		puts session[:role]
+		case session[:role]
+			when "Doctor"
+				case params[:type]
+					when "Doctor"
+						
+					when "Secretary"
+					
+					when "Owner"
+					
+					when "Patient"
+						# List of patients if the user has connected as Doctor
+						# The doctor id is stored in session[:user_id]
+						@patients = Patient.joins("INNER JOIN examinations ON users.id = examinations.patient_id").where("examinations.doctor_id = ?", session[:user_id])
+						puts params
+						@clinic = Clinic.find(params[:clinic_id])
+						render "doctorPatients"
+				end
+			when "Secretary"
+			
+			when "Owner"
+			
+			when "Patient"
+		end
+		
+	end
+
 	def show
 		puts params
-		# In params[:type] i have the type of what i want to see (Doctor, Secretary, ecc)
-		case params[:type]
+		# Role of the session
+		case session[:role]
 			when "Doctor"
+				case params[:type]
+					when "Doctor"
+						# La vista dovrebbe variare in base a ciò che è l'utente, memorizzare nella sessione che cosa è l'utente?
+						# Ovvero quando clicca quale tipo di utenza è, memorizzarla nella sessione
+						# Select all clinics where the doctor works ( i'm a doctor ancora non controllato )
+						#@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
+						@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
+						puts @clinics.all
+						puts session[:user_id]
+						render 'showDoctor'
+					when "Secretary"
+
+					when "Owner"
+
+					when "Patient"
+						# See the menu where i can choose my examination of the patient on the selected clinic 
+						patient = Patient.find(params[:id])
+						clinic = Clinic.find(params[:clinic_id])
+						redirect_to clinic_patient_examinations_path(clinic, patient)
+				end
+			when "Secretary"
+			
+			when "Owner"
+			
+			when "Patient"
+		end
+		
+		# In params[:type] i have the type of what i want to see (Doctor, Secretary, ecc)
+		#case params[:type]
+			#when "Doctor"
 				# La vista dovrebbe variare in base a ciò che è l'utente, memorizzare nella sessione che cosa è l'utente?
 				# Ovvero quando clicca quale tipo di utenza è, memorizzarla nella sessione
 				# Select all clinics where the doctor works ( i'm a doctor ancora non controllato )
 				#@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
-				@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
-				puts @clinics.all
-				puts session[:user_id]
-				render 'showDoctor'
-			when "Secretary"
+			#	@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
+			#	puts @clinics.all
+			#	puts session[:user_id]
+			#	render 'showDoctor'
+			#when "Secretary"
 
-			when "Owner"
+			#when "Owner"
 
-			when "Patient"
-		end
+			#when "Patient"
+		#end
 	end
 
 	def create
@@ -66,6 +126,7 @@ class UsersController < ApplicationController
 		# Check if the user has set his doctorID
 		if user.doctorID != nil
 			# If it's set, redirect to the main page of doctor where he can choose its clinic
+			session[:role] = "Doctor"
 			redirect_to doctor_path(user)
 		else
 			# The user must set the doctorID
