@@ -1,0 +1,17 @@
+<h1> VISITE </h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Visita</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @examinations.each do |examination| %>
+        <tr>
+            <td><%= examination.name %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

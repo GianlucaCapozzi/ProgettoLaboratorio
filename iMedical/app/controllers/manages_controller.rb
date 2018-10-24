@@ -5,13 +5,15 @@ class ManagesController < ApplicationController
     end
 
     def addNewSecretary
-        @secretary = Secretary.find(params[:secretary_id])
-        @clinic = Clinic.find(params[:clinic_id])
-        @manage = Manage.new(manage_params)
-        @manage.save!
-        @secretary.manages << @manage
-        @clinic.manages << @manage
-        redirect_to new_owner_path(@clinic.owner_id)
+        if(session[:type] == "Owner")
+            @secretary = Secretary.find(params[:secretary_id])
+            @clinic = Clinic.find(params[:clinic_id])
+            @manage = Manage.new(manage_params)
+            @manage.save!
+            @secretary.manages << @manage
+            @clinic.manages << @manage
+            redirect_to new_owner_path(@clinic.owner_id)
+        end
     end
 
     private
