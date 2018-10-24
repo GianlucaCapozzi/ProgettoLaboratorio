@@ -1,10 +1,16 @@
 class ClinicsController < ApplicationController
 
     def index
-
+        if(session[:type] == "Owner")
+            @owner = Owner.find(params[:owner_id])
+            @clinics = @owner.clinics
+        else
+            @secretary = Secretary.find(params[:secretary_id])
+            @clinics = @secretary.clinics
+        end
 
     end
-    
+
     def show
 		# If the user is a patient I show the doctors that work in this clinic
 		# If the user is a secretary I show the doctors that work in this clinic
@@ -12,7 +18,7 @@ class ClinicsController < ApplicationController
 		puts session
 		puts params
 		clinic = Clinic.find(params[:id])
-		case session[:role]
+		case session[:type]
 			when "Doctor"
 				# If the user is a doctor I show his patients
 				# The doctor id is stored in session[:user_id]
@@ -80,7 +86,7 @@ class ClinicsController < ApplicationController
     def clinic_params
         params.require(:clinic).permit(:name, :address, :description)
     end
-	
+
 	# Method to verify if the user with the actual role can go in this page
 	def verifyRole
 		# The role is set in session variable :role

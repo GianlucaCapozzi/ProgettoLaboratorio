@@ -118,6 +118,7 @@ class UsersController < ApplicationController
 	def newOwner
 		user = User.find(params[:id])
 		user.type = 'Owner'
+		session[:type] = 'Owner'
 		user.save!
 	end
 
@@ -126,7 +127,7 @@ class UsersController < ApplicationController
 		# Check if the user has set his doctorID
 		if user.doctorID != nil
 			# If it's set, redirect to the main page of doctor where he can choose its clinic
-			session[:role] = "Doctor"
+			session[:type] = "Doctor"
 			redirect_to doctor_path(user)
 		else
 			# The user must set the doctorID
@@ -173,17 +174,19 @@ class UsersController < ApplicationController
 		redirect_to newDoctor_path(@user)
 	end
 
-	
+
 
 	def newPatient
 		user = User.find(params[:id])
 		user.type = 'Patient'
+		session[:type] = 'Patient'
 		user.save!
 	end
 
 	def newSecretary
 		user = User.find(params[:id])
 		user.type = 'Secretary'
+		session[:type] = 'Secretary'
 		user.save!
 	end
 
