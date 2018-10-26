@@ -2,6 +2,6 @@
 <br>
 <table>
 	<%= @prescriptions.each do |prescription| %>
-		<tr> <td> <%= prescription.id %>  </td> </tr> 
+		<tr> <td> <%= link_to prescription.id, prescription_path(prescription) %>  </td> </tr> 
 	<% end %>
 </table>

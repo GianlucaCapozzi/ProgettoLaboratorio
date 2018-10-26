@@ -171,7 +171,7 @@ class UsersController < ApplicationController
 		else
 			puts "File non esistente"
 		end
-		redirect_to newDoctor_path(@user)
+		redirect_to new_doctor_path(user)
 	end
 
 

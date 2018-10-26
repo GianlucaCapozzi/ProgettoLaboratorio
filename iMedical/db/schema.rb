@@ -105,11 +105,6 @@ ActiveRecord::Schema.define(version: 2018_10_24_111403) do
     t.string "story"
   end
 
-  create_table "visits", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "works", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -63,28 +63,26 @@ Rails.application.routes.draw do
 		end
 	end
 	# I want to see the visits of a patient
-<<<<<<< HEAD
+
 	#resources :patients, controller: 'users', type: 'Patient' do
 	#	resources :examinations, shallow: true, only: [:index, :show]
 	#end
-=======
+
 	resources :patients, controller: 'users', type: 'Patient' do
 		resources :examinations, shallow: true, only: [:index, :show, :create]
 		resources :prescriptions, shallow: true
 	end
->>>>>>> cc7f0ecf926a1e7f75810d501519bd0549a810d8
+
 	# I want to see the prescriptions of a examinations
 	resources :examinations do
-		resources :prescriptions, shallow: true
+		resources :prescriptions, shallow: true, only: [:index, :show]
+		resources :drugs, controller: 'prescriptions', type: 'Drug', only: [:new, :create]
+		resources :prescriptedExaminations, controller: 'prescriptions', type: 'PrescriptedExamination', only: [:new, :create]
 	end
-<<<<<<< HEAD
 	
-	#resources :prescriptions
-	
-=======
+	# Route to search drug
+	get '/searchDrug', to: 'prescriptions#searchDrug', as:  :search_drug
 
-
->>>>>>> cc7f0ecf926a1e7f75810d501519bd0549a810d8
 	resources :secretaries, controller: 'users', type: 'Secretary' do
 		resources :clinics, shallow: true
 	end

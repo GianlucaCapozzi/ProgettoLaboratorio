@@ -27,6 +27,7 @@ class ExaminationsController < ApplicationController
 				@examination = Examination.find(params[:id])
 				@doctor = Doctor.find(@examination.doctor_id)
 				@clinic = Clinic.find(@examination.clinic_id)
+				@patient = Patient.find(@examination.patient_id)
 				#@prescriptions = @examination.prescriptions
 				render 'examinationShow'
 			when "Secretary"
