@@ -53,6 +53,24 @@ class Examination < ApplicationRecord
 
     # Validations
 
-    validate :start_time, presence: { message: "La data inserita deve essere valida" }
+    validates :start_time, presence: { message: "La data inserita deve essere valida" }
+    validates :patient_id, presence: :true
+    validates :clinic_id, presence: :true
+    validates :doctor_id, presence: :true
+
+    validate :time_still_valid
+
+    def time_still_valid
+        ExaminationTimeValidator.new(self).validate
+    end
+
+    include ActiveModel::Validations
+
+    class ExaminationTimeValidator
+        def initialize(examination)
+            @examination = examination
+            @patient = examination.patient
+        end
+    end
 
 end
