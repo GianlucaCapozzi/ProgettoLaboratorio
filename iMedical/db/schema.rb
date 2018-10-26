@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_24_111403) do
+ActiveRecord::Schema.define(version: 2018_10_25_171201) do
 
   create_table "clinics", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2018_10_24_111403) do
     t.string "description"
     t.string "province"
     t.string "city"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["owner_id"], name: "index_clinics_on_owner_id"
   end
 
@@ -40,6 +42,8 @@ ActiveRecord::Schema.define(version: 2018_10_24_111403) do
     t.integer "patient_id"
     t.integer "doctor_id"
     t.integer "clinic_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.index ["clinic_id"], name: "index_examinations_on_clinic_id"
     t.index ["doctor_id"], name: "index_examinations_on_doctor_id"
     t.index ["patient_id"], name: "index_examinations_on_patient_id"

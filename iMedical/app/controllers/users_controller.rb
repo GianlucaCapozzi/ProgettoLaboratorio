@@ -30,8 +30,9 @@ class UsersController < ApplicationController
 			when "Owner"
 			
 			when "Patient"
+				@users= User.all.order('created_at DESC')
+				@users = @users.search(params[:search]) if params[:search].present?
 		end
-		
 	end
 
 	def show
@@ -101,7 +102,7 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def newOauth
+	def edit
 		@user = User.find(params[:id])
 	end
 

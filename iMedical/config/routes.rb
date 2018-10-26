@@ -5,12 +5,6 @@ Rails.application.routes.draw do
 	get 'auth/:provider/callback', to: 'sessions#createOauth'
 	get 'auth/failure', to: redirect('/')
 
-	get 'users/new' => 'users#new', as: :new_user
-	get 'users/:id/newOauth' => 'users#newOauth', as: :newOauth
-	get 'users/show' => 'users#show'
-	patch 'users/:id' => 'users#update'
-	post 'users/new' => 'users#create'
-
 	# Role chosing
 	get 'users/:id/newOwner' => 'users#newOwner', as: :new_owner
 	get 'users/:id/newDoctor' => 'users#newDoctor', as: :new_doctor
@@ -33,7 +27,12 @@ Rails.application.routes.draw do
 	# Patient's routes
 	get '/patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story
 	get '/patient/searchClinic' => 'users#searchClinic', as: :search_clinic
-	get '/patient/:id/clinics/:clinic_id/showDoctors/:doctor_id/createExamination' => 'examinations#createExamination', as: :create_examination
+	get '/patient/clinics/:clinic_id/showDoctors/:doctor_id/createExamination' => 'examinations#createExamination', as: :create_examination
+
+	# Clinics
+
+	get '/clinics/:id' => 'clinics#show', as: :clinics_show
+	get 'examinations/calendar', as: :examinations_calendar
 
 	get '/login' => 'sessions#new'
 	post '/login' => 'sessions#createLocal'
@@ -58,9 +57,10 @@ Rails.application.routes.draw do
 	end
 	# I want to see the patient that had a visit in the given clinic
 	resources :clinics do
-		resources :patients, controller: 'users', type: 'Patient', only: [:index, :show] do
-			resources :examinations, shallow: true, only: [:index, :show]
-		end
+
+	resources :patients, shallow: true, only: [:index, :show]
+	resources :doctors, controller: 'user', type: 'Doctor', shallow: true
+
 	end
 	# I want to see the visits of a patient
 
