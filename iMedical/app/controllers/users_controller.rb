@@ -4,6 +4,13 @@ class UsersController < ApplicationController
 		@user = User.new
 	end
 
+	def index
+		if(session[:type] == "Patient")
+			@users= User.all.order('created_at DESC')
+			@users = @users.search(params[:search]) if params[:search].present?
+		end
+	end
+
 	def show
 		puts params
 		# In params[:type] i have the type of what i want to see (Doctor, Secretary, ecc)
@@ -41,7 +48,7 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def newOauth
+	def edit
 		@user = User.find(params[:id])
 	end
 
@@ -111,7 +118,7 @@ class UsersController < ApplicationController
 		else
 			puts "File non esistente"
 		end
-		redirect_to newDoctor_path(@user)
+		redirect_to new_doctor_path(user)
 	end
 
 

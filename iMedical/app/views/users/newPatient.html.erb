@@ -14,20 +14,17 @@
                     <%= button_to "Visualizza cartella clinica", show_patient_story_path(current_user.id), :method => "get", class: "btn"%>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <%= button_to "Prenota Visita", patient_prescriptions_path(current_user.id), class: "btn"%>
+                    <%= button_to "Cerca studio medico", search_clinic_path, :method => "get", class: "btn"%>
                 </div>
             </div>
         </div>
         <br/>
         <div class="container">
             <div class="row">
-                <div class="col-sm-4">
-                    <%= button_to "Cerca studio medico", search_clinic_path, :method => "get", class: "btn"%>
-                </div>
-                <div class="col-sm-4 text-center">
+                <div class="col-sm-6">
                     <%= button_to "Visualizza visite",patient_examinations_path(current_user.id), :method => "get", class: "btn"%>
                 </div>
-                <div class="col-sm-4 text-right">
+                <div class="col-sm-6 text-right">
                     <%= button_to "Visualizza prescrizioni", patient_prescriptions_path(current_user.id), class: "btn"%>
                 </div>
             </div>

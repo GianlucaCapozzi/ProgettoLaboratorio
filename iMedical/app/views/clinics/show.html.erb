@@ -1,1 +1,7 @@
-<h2> CLINICA </h2>
+<h1 class="display-4"> INFORMAZIONI CLINICA </h1>
+
+<h2>Indirizzo: <%= @clinic.address + " " + @clinic.city + ", " + @clinic.province %></h2>
+<h2>Coordinate: <%= @clinic.latitude %> <%= @clinic.longitude %></h2>
+
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@clinic.latitude},#{@clinic.longitude}&markers=#{@clinic.latitude},#{@clinic.longitude}&zoom=50&size=640x400&key=AIzaSyDtesb2NW5Saib_MpT0_kksdzcFoZG7xL8",
+              class: 'img-fluid img-rounded', alt: "#{@clinic.name} on the map"%>

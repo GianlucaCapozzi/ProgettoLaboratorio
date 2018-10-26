@@ -13,8 +13,17 @@ class ClinicsController < ApplicationController
     def show
 		# If the user is a doctor I show his patients
 		# If the user is a patient I show the doctors that work in this clinic
+        if(session[:type] == "Patient")
+            @clinic = Clinic.find(params[:id])
+        end
 		# If the user is a secretary I show the doctors that work in this clinic
 		# If the user is a owner I show.. nothing?
+    end
+
+    def calendar
+        if(session[:type])
+            @clinic = Clinic.find(params[:id])
+        end
     end
 
     def new
@@ -68,7 +77,7 @@ class ClinicsController < ApplicationController
     private
 
     def clinic_params
-        params.require(:clinic).permit(:name, :address, :description)
+        params.require(:clinic).permit(:name, :address, :description, :province, :city, :latitude, :longitude)
     end
 
 	# Method to verify if the user with the actual role can go in this page
