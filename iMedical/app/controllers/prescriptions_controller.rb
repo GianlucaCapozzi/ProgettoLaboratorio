@@ -109,11 +109,14 @@ class PrescriptionsController < ApplicationController
 				prescription.comment = params[:prescripted_examination][:comment]
 		end
 		prescription.save
-		redirect_to examination_prescriptions_path(examination, prescription)
+		redirect_to examination_prescriptions_path(examination)
 	end
 	
 	def destroy
-		prescription.delete(params[:id])
+		prescription = Prescription.find(params[:id])
+		examination = Examination.find(prescription.examination_id)
+		Prescription.delete(params[:id])
+		redirect_to examination_prescriptions_path(examination)
 	end
 	
 	def searchDrug
