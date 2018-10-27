@@ -55,11 +55,14 @@ Rails.application.routes.draw do
 	resources :doctors, controller: 'users', type: 'Doctor' do
 		resources :clinics, shallow: true, only: [:index, :show]
 	end
+	
 	# I want to see the patient that had a visit in the given clinic
 	resources :clinics do
 
-	resources :patients, shallow: true, only: [:index, :show]
-	resources :doctors, controller: 'user', type: 'Doctor', shallow: true
+		resources :patients, controller: 'users', type: 'Patient', only: [:index, :show] do
+			resources :examinations, only: [:index]
+		end
+		resources :doctors, controller: 'user', type: 'Doctor', shallow: true
 
 	end
 	# I want to see the visits of a patient
@@ -69,10 +72,10 @@ Rails.application.routes.draw do
 	#end
 
 	resources :patients, controller: 'users', type: 'Patient' do
-		resources :examinations, shallow: true, only: [:index, :show, :create]
+		resources :examinations, shallow: true, only: [:show, :create]
 		resources :prescriptions, shallow: true
 	end
-
+		
 	# I want to see the prescriptions of a examinations
 	resources :examinations do
 		resources :prescriptions, shallow: true, only: [:index, :show]

@@ -1,5 +1,8 @@
 class Drug < Prescription
-
+		
+	validates :drugName, presence: true
+	validates :comment, presence: true
+	
 	def self.search(name)
 		drugs = Array.new
 		path = Rails.root + "farmaci.csv"

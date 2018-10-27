@@ -59,10 +59,10 @@ class PrescriptionsController < ApplicationController
 
 	def create
 		params.require(:type)
-		params.require(:examination_id)
 		prescription = Prescription.new
 		case session[:type]
 			when "Doctor"
+				params.require(:examination_id)
 				@examination = Examination.find(params[:examination_id])
 				case params[:type]
 					when "Drug"
@@ -83,7 +83,7 @@ class PrescriptionsController < ApplicationController
 			when "Secretary"
 			
 			when "Patient"
-			
+				redirect_to patient_prescriptions_path(current_user.id)
 			when "Owner"
 		end
 	end

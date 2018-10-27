@@ -2,7 +2,7 @@ class ExaminationsController < ApplicationController
 	
     before_action :set_examination, only: [:show, :edit, :update, :destroy]
     before_action :set_examinations, only: [:index, :show, :edit]
-    before_action :set_user, only: [:index, :new, :edit]
+    #before_action :set_user, only: [:index, :new, :edit]
     before_action :set_clinic, only: [:index, :new, :edit]
 
 	require 'date'
@@ -50,10 +50,7 @@ class ExaminationsController < ApplicationController
         @examination = current_user.examinations.build
     end
 
-    def show
-        @examination = Examination.find(params[:id])
-    end
-
+  
     def create#Examination
         #if(session[:type] == "Patient")
             #@patient = Patient.find(current_user.id)
