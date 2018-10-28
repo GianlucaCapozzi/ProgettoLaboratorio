@@ -1,9 +1,0 @@
-<h2> VISITA </h2>
-<br>
-Paziente: <%= @patient.surname %> <br>
-Medico: <%= @doctor.surname %> <br>
-Clinica: <%= @clinic.name %> <br>
-<br>
-<%= link_to "Visualizza prescrizioni", examination_prescriptions_path(@examination)  %> <br>
-<%= link_to "Aggiungi prescrizione prestazione medica", new_examination_prescriptedExamination_path(@examination) %> <br>
-<%= link_to "Aggiungi prescrizione medicina", new_examination_drug_path(@examination) %>

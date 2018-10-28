@@ -1,6 +1,0 @@
-<h2> Lista pazienti di un dottore di una determinata clinica </h2>
-<table>
-	<%= @patients.each do |patient| %>
-		<tr> <td> <%= link_to patient.surname, clinic_patient_path(@clinic, patient) %> </td> </tr>
-	<% end %>
-</table>

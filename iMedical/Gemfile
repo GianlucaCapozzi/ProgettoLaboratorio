@@ -23,6 +23,9 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
+gem 'jquery-rails'
+gem 'momentjs-rails'
+
 gem 'bootstrap-sass', '~> 3.3.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -33,7 +36,8 @@ gem "omniauth-google-oauth2", "~> 0.2.1"
 
 gem 'geocoder'
 
-gem "simple_calendar", "~> 2.0"
+#gem "simple_calendar", "~> 2.0"
+gem 'fullcalendar'
 
 gem 'hirb'
 

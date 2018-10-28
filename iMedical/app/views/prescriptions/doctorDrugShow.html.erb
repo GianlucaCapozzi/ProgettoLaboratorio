@@ -1,7 +1,0 @@
-<h2> Farmaco prescritto </h2>
-<br>
-<b> Farmaco: </b> <%= @prescription.drugName %> <br>
-<b> Dosaggio: </b> <%= @prescription.comment %> <br>
-<br>
-<%= link_to "Modifica prescrizione farmaco", edit_prescription_path(@prescription)%> <br>
-<%= link_to "Elimina prescrizione farmaco", prescription_path(@prescription), method: :delete %>

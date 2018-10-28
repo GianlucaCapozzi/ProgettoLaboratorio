@@ -18,23 +18,30 @@ class SessionsController < ApplicationController
 
 		# Look up User in db by the email address submitted to the login form and
 		# convert to lowercase to match email in db in case they had caps lock on
-		user = User.find_by(email: params[:login][:email].downcase)
+		user = User.find_by(email: params[:session][:email].downcase)
 
 		# Verify user exists in db
-		if user && user.authenticate(params[:login][:password])
-			# Save the user.id in that user's session cookie:
-			session[:user_id] = user.id.to_s
-			flash[:notice] = "Login avvenuto con successo"
-			redirect_to '/home/show'
+		if user && user.authenticate(params[:session][:password])
+			if user.activated?
+				# Save the user.id in that user's session cookie:
+				log_in user
+				params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+				flash[:notice] = "Login avvenuto con successo"
+				redirect_to '/home/show'
+			else
+				message = "Account non attivato."
+				message += "Controlla la tua mail per il link di attivazione"
+				flash[:warning] = message
+				redirect_to root_url
+			end
 		else
-			flash.now.alert = "Email e/o password non corretti, riprova"
-			render :new
+			flash.now[:danger] = "Email e/o Password non corretta/e"
+			render 'new'
 		end
-
 	end
 
 	def destroy
-		session[:user_id] = nil
+		log_out if logged_in?
   		redirect_to root_path
 	end
 

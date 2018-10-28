@@ -1,9 +1,10 @@
 class HomepageController < ApplicationController
 
-  def show
+  def index
+      if logged_in?
+          redirect_to "/home/show"
+      end
   end
 
-  def info
-  end
 
 end

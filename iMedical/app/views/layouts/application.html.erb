@@ -11,20 +11,32 @@
   </head>
 
   <body>
+      <div class="container">
+          <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+          <% end %>
+      </div>
       <header class="navbar navbar-fixed-top navbar-light" style="background-color: #e3f2fd;">
           <div class="container">
-              <%= link_to "iMedical", "/homepage/show", id: "logo" %>
-              <nav>
-                  <ul class="nav navbar-nav navbar-right">
-                      <% if logged_in? %>
-                          <%= button_to "Sign out", logout_path, :method => "delete", class: "btn btn-success"%>
-                      <% else %>
-                          <a class="btn btn-primary" href="/auth/google_oauth2" role="button">Login with Google</a>
-                          <a class="btn btn-info" href="/users/new" role="button">Create an account</a>
-                          <a class="btn btn-success" href="/login" role="button">Login</a>
-                      <% end %>
-                  </ul>
-              </nav>
+              <div class="row">
+                  <%= link_to "iMedical", "/homepage/show", id: "logo" %>
+                  <nav>
+                      <ul class="nav navbar-nav navbar-right">
+                          <% if logged_in? %>
+                              <div class="col-sm-6">
+                                  <%= button_to "Sign out", logout_path, :method => "delete", class: "btn btn-success"%>
+                              </div>
+                              <div class="col-sm-6 text-right">
+                                  <%= button_to "Impostazioni", edit_user_path(current_user), :method => "get", class: "btn btn-info custom" %>
+                              </div>
+                          <% else %>
+                              <a class="btn btn-primary" href="/auth/google_oauth2" role="button">Login with Google</a>
+                              <a class="btn btn-info" href="/users/new" role="button">Create an account</a>
+                              <a class="btn btn-success" href="/login" role="button">Login</a>
+                          <% end %>
+                      </ul>
+                  </nav>
+              </div>
           </div>
       </header>
       <%= yield %>
