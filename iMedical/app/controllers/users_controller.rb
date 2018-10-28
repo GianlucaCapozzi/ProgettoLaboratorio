@@ -65,6 +65,30 @@ class UsersController < ApplicationController
 			when "Owner"
 			
 			when "Patient"
+				case params[:type]
+					when "Doctor"
+						# Patients want to see doctor and wants to book an examination
+						# I need doctor id and clinic id
+						if params[:date] == nil
+							redirect_to clinic_doctor_path(params[:clinic_id], params[:id])+"?date="+DateTime.now.to_date.to_s
+						else
+							@clinic = Clinic.find(params[:clinic_id])
+							@doctor = Doctor.find(params[:id])
+							@examinations = getExaminations()
+							@nextDay = (params[:date].to_date + 1.days).to_s
+							@previousDay = (params[:date].to_date - 1.days).to_s
+							@startDateTime = params[:date]+" 09:00:00"
+							@endDateTime = params[:date]+" 18:00:00"
+							@bookableDates = getBookableDates(@examinations, @startDateTime, @endDateTime)
+							puts @bookableDates
+							render "patientDoctorShow"
+						end
+					when "Secretary"
+					
+					when "Owner" 
+					
+					when "Patient"
+				end
 		end
 		
 		# In params[:type] i have the type of what i want to see (Doctor, Secretary, ecc)
@@ -201,6 +225,43 @@ class UsersController < ApplicationController
 	def searchClinic
 		@clinics = Clinic.all.order('created_at DESC')
 		@clinics = @clinics.search(params[:search]) if params[:search].present?
+	end
+	
+	def getExaminations
+		# Get doctor's examinations date in a clinic and when the patients can get an examination
+		# Date has format AAAA-MM-GG
+		# Le date di apertura ancora devono essere implementate
+		params.permit(:clinic_id, :id, :date)
+		examinations = Examination.select("start_time").where("clinic_id = ? AND doctor_id = ? AND start_time >= ? AND start_time <= ?", params[:clinic_id], params[:id],params[:date]+" 00:00:00", params[:date]+" 23:59:59")
+		examinations
+	end
+
+	# Get all the intervals of 30 minutes from startTime to endTime and the availability of that spot
+	def getBookableDates(examinations, startTime, endTime)
+		# Get all intervals of 30 minutes from start time to end time
+		# Ex startTime = 9:00 endTime = 11:00 -> 9:00, 9:30, 10:00, 10:30, 11:00
+		bookableDates = []
+		time = startTime.to_datetime
+		while time <= endTime
+			bookable = checkDateAvailabilty(examinations, time)
+			bookableDates.push([time, bookable])
+			time = time + 30.minutes
+		end
+		bookableDates
+	end
+	
+	# Check if at that datetime there is already an examination
+	def checkDateAvailabilty(examinations, time)
+		availability = true
+		#puts "entro"
+		#puts examinations
+		examinations.each do |examination|
+			if examination.start_time.to_datetime == time
+				#puts "Occupato!"
+				availability = availability & false
+			end
+		end
+		availability
 	end
 
 	private

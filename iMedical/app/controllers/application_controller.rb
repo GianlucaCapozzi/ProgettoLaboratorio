@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 	def verifySession
 		if session[:type] == nil 
 			#session[:type] = "Guest"
-			redirect_to root_path
+			#redirect_to root_path
 		end
 	end
 	

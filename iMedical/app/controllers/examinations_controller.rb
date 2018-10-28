@@ -62,15 +62,29 @@ class ExaminationsController < ApplicationController
             #@patient.examinations << @examination
             #@doctor.examinaions << @examination
         #end
-        @examination = Examination.new(examination_params.merge(patient_id: current_user.id))
-        if @examination.valid?
-            @examination.save
-            redirect_to examinations_path
-        else
-            @examination.patient = nil
-            @examinations = current_user.examinations.select { |a| a.persisted? }
-            render :new
-        end
+        #@examination = Examination.new(examination_params.merge(patient_id: current_user.id))
+        #if @examination.valid?
+        #    @examination.save
+         #   redirect_to examinations_path
+        #else
+        #    @examination.patient = nil
+       #     @examinations = current_user.examinations.select { |a| a.persisted? }
+       #    render :new
+       # end
+		case session[:type]
+			when "Patient"
+				# Clinic and doctor required, the patient id is in session's variable
+				params.require(:doctor_id)
+				params.require(:clinic_id)
+				params.require(:date)
+				examination = Examination.new
+				examination.start_time = params[:date]
+				examination.doctor_id = params[:doctor_id]
+				examination.clinic_id = params[:clinic_id]
+				examination.patient_id = session[:user_id]
+				examination.save
+				redirect_to patient_examinations_path(session[:user_id])
+		end
     end
 
     def edit
