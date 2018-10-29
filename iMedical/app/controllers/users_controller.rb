@@ -12,11 +12,11 @@ class UsersController < ApplicationController
 			when "Doctor"
 				case params[:type]
 					when "Doctor"
-						
+
 					when "Secretary"
-					
+
 					when "Owner"
-					
+
 					when "Patient"
 						# List of patients if the user has connected as Doctor
 						# The doctor id is stored in session[:user_id]
@@ -26,9 +26,9 @@ class UsersController < ApplicationController
 						render "doctorPatients"
 				end
 			when "Secretary"
-			
+
 			when "Owner"
-			
+
 			when "Patient"
 				# Dove devo metterle?
 				@users= User.all.order('created_at DESC')
@@ -62,15 +62,15 @@ class UsersController < ApplicationController
 					when "Owner"
 
 					when "Patient"
-						# See the menu where i can choose my examination of the patient on the selected clinic 
+						# See the menu where i can choose my examination of the patient on the selected clinic
 						patient = Patient.find(params[:id])
 						clinic = Clinic.find(params[:clinic_id])
 						redirect_to clinic_patient_examinations_path(clinic, patient)
 				end
 			when "Secretary"
-			
+
 			when "Owner"
-			
+
 			when "Patient"
 				case params[:type]
 					when "Doctor"
@@ -91,9 +91,9 @@ class UsersController < ApplicationController
 							render "patientDoctorShow"
 						end
 					when "Secretary"
-					
-					when "Owner" 
-					
+
+					when "Owner"
+
 					when "Patient"
 				end
 		end
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 
 		# We store all emails in lowercase to avoid duplicates and case-sensitive login errors
-		@user.email.downcase!
+		#@user.email.downcase!
 
 		if @user.save
 			@user.send_activation_email
@@ -138,8 +138,8 @@ class UsersController < ApplicationController
 	def newOwner
 		user = User.find(params[:id])
 		user.type = 'Owner'
+		user.save!(validate: false)
 		session[:type] = 'Owner'
-		user.save!
 	end
 
 	def newDoctor
@@ -182,7 +182,7 @@ class UsersController < ApplicationController
 					# Found the doctor in the file and the information are correct
 					user.type = "Doctor"
 					user.doctorID = doctor[4]
-					user.save!
+					user.save!(validate: false)
 					puts "Trovato!"
 				else
 					puts "Non corrisponde"
@@ -199,15 +199,15 @@ class UsersController < ApplicationController
 	def newPatient
 		user = User.find(params[:id])
 		user.type = 'Patient'
+		user.save!(validate: false)
 		session[:type] = 'Patient'
-		#user.save!
 	end
 
 	def newSecretary
 		user = User.find(params[:id])
 		user.type = 'Secretary'
+		user.save!(validate: false)
 		session[:type] = 'Secretary'
-		user.save!
 	end
 
 	# Patient's functions
@@ -221,7 +221,7 @@ class UsersController < ApplicationController
 		@clinics = Clinic.all.order('created_at DESC')
 		@clinics = @clinics.search(params[:search]) if params[:search].present?
 	end
-	
+
 	def getExaminations
 		# Get doctor's examinations date in a clinic and when the patients can get an examination
 		# Date has format AAAA-MM-GG
@@ -244,7 +244,7 @@ class UsersController < ApplicationController
 		end
 		bookableDates
 	end
-	
+
 	# Check if at that datetime there is already an examination
 	def checkDateAvailabilty(examinations, time)
 		availability = true

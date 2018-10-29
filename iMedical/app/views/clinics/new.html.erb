@@ -1,34 +1,38 @@
+<% provide(:title, 'Nuovo studio medico') %>
 <h1> Crea nuovo studio medico </h1>
 
-<%= form_for @clinic, :url => {:controller => "clinics", :action => "create"} do |f| %>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for @clinic, :url => {:controller => "clinics", :action => "create"} do |f| %>
+			<div>
+				<%= f.label :nome%>
+				<%= f.text_field :name, class: 'form-control' %>
+			</div>
 
-	<div>
-		<%= f.label :nome%>
-		<%= f.text_field :name%>
+			<div>
+				<%= f.label :indirizzo%>
+				<%= f.text_field :address, class: 'form-control' %>
+			</div>
+
+			<div>
+				<%= f.label :città%>
+				<%= f.text_field :city, class: 'form-control' %>
+			</div>
+
+			<div>
+				<%= f.label :provincia%>
+				<%= f.text_field :province, class: 'form-control' %>
+			</div>
+
+		    <div>
+				<%= f.label :descrizione%>
+				<%= f.text_area :description, class: 'form-control' %>
+			</div>
+
+			<div>
+				<%= f.submit "Crea nuovo studio", class: "btn btn-primary" %>
+			</div>
+
+		<% end %>
 	</div>
-
-	<div>
-		<%= f.label :indirizzo%>
-		<%= f.text_field :address %>
-	</div>
-
-	<div>
-		<%= f.label :città%>
-		<%= f.text_field :city%>
-	</div>
-
-	<div>
-		<%= f.label :provincia%>
-		<%= f.text_field :province%>
-	</div>
-
-    <div>
-		<%= f.label :descrizione%>
-		<%= f.text_area :description %>
-	</div>
-
-	<div>
-		<%= f.submit "Crea nuovo studio" %>
-	</div>
-
-<% end %>
+</div>	

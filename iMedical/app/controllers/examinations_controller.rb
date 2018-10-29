@@ -19,12 +19,12 @@ class ExaminationsController < ApplicationController
 				#List of examination
 				@patient = Patient.find(current_user.id)
 				@examinations = @patient.examinations
-			when "Owner"	
+			when "Owner"
 				#Nothing?
 		end
 
 	end
-	
+
 	def show
 		case session[:type]
 			when "Doctor"
@@ -36,11 +36,11 @@ class ExaminationsController < ApplicationController
 				#@prescriptions = @examination.prescriptions
 				render 'examinationShow'
 			when "Secretary"
-				
+
 			when "Patient"
-				
-			when "Owner"	
-				
+
+			when "Owner"
+
 		end
 	end
 
@@ -49,27 +49,8 @@ class ExaminationsController < ApplicationController
         @examination = current_user.examinations.build
     end
 
-  
-    def create#Examination
-        #if(session[:type] == "Patient")
-            #@patient = Patient.find(current_user.id)
-            #@clinic = Clinic.find(params[:clinic_id])
-            #@doctor = Doctor.find(params[:doctor_id])
-            #@examination = Examination.new(examination_params)
-            #@examination.save!
-            #@clinics.examinations << @examination
-            #@patient.examinations << @examination
-            #@doctor.examinaions << @examination
-        #end
-        #@examination = Examination.new(examination_params.merge(patient_id: current_user.id))
-        #if @examination.valid?
-        #    @examination.save
-         #   redirect_to examinations_path
-        #else
-        #    @examination.patient = nil
-       #     @examinations = current_user.examinations.select { |a| a.persisted? }
-       #    render :new
-       # end
+
+    def create
 		case session[:type]
 			when "Patient"
 				# Clinic and doctor required, the patient id is in session's variable
