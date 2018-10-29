@@ -30,8 +30,15 @@ class UsersController < ApplicationController
 			when "Owner"
 			
 			when "Patient"
+				# Dove devo metterle?
 				@users= User.all.order('created_at DESC')
 				@users = @users.search(params[:search]) if params[:search].present?
+				case params[:type]
+					when "Doctor"
+						@clinic = Clinic.find(params[:clinic_id])
+						@doctors = Doctor.joins("INNER JOIN works ON users.id = works.doctor_id").where("works.clinic_id = ?", params[:clinic_id])
+						render "patientClinicDoctorsShow"
+				end
 		end
 	end
 

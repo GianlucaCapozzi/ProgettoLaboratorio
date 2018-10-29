@@ -1,0 +1,4 @@
+<h2> Lista medici di una determinata clinica </h2>
+<%= @doctors.each do |doctor| %>
+	<%= link_to doctor.id, clinic_doctor_path(@clinic, doctor) %>
+<% end %>
