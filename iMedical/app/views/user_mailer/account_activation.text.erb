@@ -1,0 +1,3 @@
+Ciao <%= @user.name %>
+Benvenuto in iMedical, clicca sul link sottostante per attivare il tuo account:
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>

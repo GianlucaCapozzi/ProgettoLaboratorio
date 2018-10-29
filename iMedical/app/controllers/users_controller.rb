@@ -97,24 +97,6 @@ class UsersController < ApplicationController
 					when "Patient"
 				end
 		end
-		
-		# In params[:type] i have the type of what i want to see (Doctor, Secretary, ecc)
-		#case params[:type]
-			#when "Doctor"
-				# La vista dovrebbe variare in base a ciò che è l'utente, memorizzare nella sessione che cosa è l'utente?
-				# Ovvero quando clicca quale tipo di utenza è, memorizzarla nella sessione
-				# Select all clinics where the doctor works ( i'm a doctor ancora non controllato )
-				#@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
-			#	@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
-			#	puts @clinics.all
-			#	puts session[:user_id]
-			#	render 'showDoctor'
-			#when "Secretary"
-
-			#when "Owner"
-
-			#when "Patient"
-		#end
 	end
 
 	def create
@@ -124,9 +106,9 @@ class UsersController < ApplicationController
 		@user.email.downcase!
 
 		if @user.save
-			session[:user_id] = @user.id
-			flash[:notice] = "Account creato con successo"
-			redirect_to "/home/show"
+			@user.send_activation_email
+			flash[:info] = "Controlla la tua mail per attivare l'account"
+			redirect_to root_path
 		else
 			flash.now.alert = "Impossibile creare l'account."
 			render :new
@@ -134,6 +116,10 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+		@user = User.find(params[:id])
+	end
+
+	def newOauth
 		@user = User.find(params[:id])
 	end
 
@@ -147,6 +133,8 @@ class UsersController < ApplicationController
 		end
 	end
 
+
+
 	def newOwner
 		user = User.find(params[:id])
 		user.type = 'Owner'
@@ -159,7 +147,7 @@ class UsersController < ApplicationController
 		# Check if the user has set his doctorID
 		if user.doctorID != nil
 			# If it's set, redirect to the main page of doctor where he can choose its clinic
-			session[:type] = "Doctor"
+			session[:type] = 'Doctor'
 			redirect_to doctor_path(user)
 		else
 			# The user must set the doctorID
@@ -212,7 +200,7 @@ class UsersController < ApplicationController
 		user = User.find(params[:id])
 		user.type = 'Patient'
 		session[:type] = 'Patient'
-		user.save!
+		#user.save!
 	end
 
 	def newSecretary

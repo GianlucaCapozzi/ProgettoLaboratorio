@@ -14,6 +14,6 @@
 <br>
 <table>
 	<% @clinics.each do |clinic| %>
-		<tr> <td> <%= link_to clinic.name, clinic_path(clinic) %> </tr> </td>
+		<td> <%= link_to clinic.name, clinic_path(clinic) %> </td>
 	<% end %>
 </table>

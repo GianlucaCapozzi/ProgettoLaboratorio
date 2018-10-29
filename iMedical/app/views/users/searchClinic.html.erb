@@ -6,7 +6,7 @@
         <tr>
             <br/>
             <div class="flex">
-                <%= clinic.name %><%= button_to "Informazioni", clinics_show_path(clinic.id), :method => "get", class: "btn"%><%= button_to "Prenota", examinations_calendar_path, :method => "get", class: "btn"%>
+                <%= clinic.name %><%= button_to "Informazioni", clinics_show_path(clinic.id), :method => "get", class: "btn"%>
             </div>
         </tr>
     <% end %>

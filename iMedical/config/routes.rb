@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-	get '/homepage/info' => 'homepage#info'
+	default_url_options :host => "localhost:3000"
 
 	get 'auth/:provider/callback', to: 'sessions#createOauth'
 	get 'auth/failure', to: redirect('/')
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 	get 'users/:id/newDoctor' => 'users#newDoctor', as: :new_doctor
 	get 'users/:id/newPatient' => 'users#newPatient', as: :new_patient
 	get 'users/:id/newSecretary' => 'users#newSecretary', as: :new_secretary
+	get 'users/:id/newOauth' => 'users#newOauth', as: :newOauth
 
 
 	# Checking/setting doctorID
@@ -32,7 +33,7 @@ Rails.application.routes.draw do
 	# Clinics
 
 	get '/clinics/:id' => 'clinics#show', as: :clinics_show
-	get 'examinations/calendar', as: :examinations_calendar
+	#get 'examinations/calendar', as: :examinations_calendar
 
 	get '/login' => 'sessions#new'
 	post '/login' => 'sessions#createLocal'
@@ -55,7 +56,6 @@ Rails.application.routes.draw do
 	resources :doctors, controller: 'users', type: 'Doctor' do
 		resources :clinics, shallow: true, only: [:index, :show]
 	end
-	
 	# I want to see the patient that had a visit in the given clinic
 	resources :clinics do
 		resources :patients, controller: 'users', type: 'Patient', only: [:index, :show] do
@@ -65,28 +65,17 @@ Rails.application.routes.draw do
 		resources :doctors, controller: 'users', type: 'Doctor', only: [:index, :show] do
 			resources :examinations, only: [:create]
 		end
-
 	end
 	# I want to see the visits of a patient
-
-	#resources :patients, controller: 'users', type: 'Patient' do
-	#	resources :examinations, shallow: true, only: [:index, :show]
-	#end
-
 	resources :patients, controller: 'users', type: 'Patient' do
-		resources :examinations, shallow: true, only: [:show, :create]
+		resources :examinations, shallow: true, only: [:index, :show, :create, :new]
 		resources :prescriptions, shallow: true
 	end
-		
 	# I want to see the prescriptions of a examinations
 	resources :examinations do
-		resources :prescriptions, shallow: true, only: [:index, :show]
-		resources :drugs, controller: 'prescriptions', type: 'Drug', only: [:new, :create]
-		resources :prescriptedExaminations, controller: 'prescriptions', type: 'PrescriptedExamination', only: [:new, :create]
+		resources :prescriptions, shallow: true
 	end
-	
-	# Route to search drug
-	get '/searchDrug', to: 'prescriptions#searchDrug', as:  :search_drug
+
 
 	resources :secretaries, controller: 'users', type: 'Secretary' do
 		resources :clinics, shallow: true
@@ -106,7 +95,8 @@ Rails.application.routes.draw do
 		resources :doctors
 	end
 	resources :homepage
+	resources :account_activations, only: [:edit]
 
-	root "homepage#show"
+	root "homepage#index"
 
 end

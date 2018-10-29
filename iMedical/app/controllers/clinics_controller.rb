@@ -4,36 +4,20 @@ class ClinicsController < ApplicationController
         if(session[:type] == "Owner")
             @owner = Owner.find(params[:owner_id])
             @clinics = @owner.clinics
-        else
+        elsif(session[:type] == "Secretary")
             @secretary = Secretary.find(params[:secretary_id])
             @clinics = @secretary.clinics
         end
-
     end
 
     def show
+		# If the user is a doctor I show his patients
 		# If the user is a patient I show the doctors that work in this clinic
         if(session[:type] == "Patient")
             @clinic = Clinic.find(params[:id])
         end
 		# If the user is a secretary I show the doctors that work in this clinic
 		# If the user is a owner I show.. nothing?
-		puts session
-		puts params
-		clinic = Clinic.find(params[:id])
-		case session[:type]
-			when "Doctor"
-				# If the user is a doctor I show his patients
-				# The doctor id is stored in session[:user_id]
-				redirect_to clinic_patients_path(clinic)
-			when "Secretary"
-			
-			when "Patient"
-			
-			when "Owner"
-				@owner = Owner.find(params[:owner_id])
-				@clinics = @owner.clinics
-		end
     end
 
     def calendar
