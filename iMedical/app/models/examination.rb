@@ -75,14 +75,14 @@ class Examination < ApplicationRecord
 
         def validate
             if @examination.start_time
-                examinations = @patient.examinations.select{ |a| a.start_timemidnight == @aexamination.start_time.midnight || a.start_time.midnight == @examination.start_time - 1.day || a.start_time.midnight == @examination.start_time + 1.day }
-                examinations.each do |examination|
-                    if @examination != examination
-                        if examination.start_time <= @examination.start_time && @examination.start_time <= examination.end_time || @examination.start_time <= examination.start_time && examination.start_time <= @examination.end_time
-                            @examination.errors.add(:start_time, "Non è disponibile")
-                        end
-                    end
-                end
+                #examinations = @patient.examinations.select{ |a| a.start_time.midnight == @aexamination.start_time.midnight || a.start_time.midnight == @examination.start_time - 1.day || a.start_time.midnight == @examination.start_time + 1.day }
+               # examinations.each do |examination|
+                 #   if @examination != examination
+                 #       if examination.start_time <= @examination.start_time && @examination.start_time <= examination.end_time || @examination.start_time <= examination.start_time && examination.start_time <= @examination.end_time
+                 #           @examination.errors.add(:start_time, "Non è disponibile")
+                 #       end
+                 #   end
+                #end
             end
 
         end

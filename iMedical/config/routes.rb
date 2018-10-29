@@ -68,7 +68,7 @@ Rails.application.routes.draw do
 	end
 	# I want to see the visits of a patient
 	resources :patients, controller: 'users', type: 'Patient' do
-		resources :examinations, shallow: true, only: [:show, :create]
+		resources :examinations, shallow: true, only: [:index, :show, :create]
 		resources :prescriptions, shallow: true
 	end
 	# I want to see the prescriptions of a examinations
