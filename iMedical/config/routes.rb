@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-	default_url_options :host => "localhost:3000"
-
 	get 'auth/:provider/callback', to: 'sessions#createOauth'
 	get 'auth/failure', to: redirect('/')
 
@@ -100,6 +98,7 @@ Rails.application.routes.draw do
 	end
 	resources :homepage
 	resources :account_activations, only: [:edit]
+    resources :password_resets, only: [:new, :create, :edit, :update]
 
 	root "homepage#index"
 
