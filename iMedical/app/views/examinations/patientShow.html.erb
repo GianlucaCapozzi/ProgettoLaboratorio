@@ -4,4 +4,6 @@ Dottore: <%= (@doctor.surname + " " + @doctor.name) %> <br>
 Clinica: <%= (@clinic.name) %> <br>
 Data: <%= @examination.start_time.to_s %>  <br>
 <br>
+<%= link_to "Visualizza prescrizioni", examination_prescriptions_path(@examination) %>
+<br>
 <%= link_to_if (@examination.start_time > Time.now.utc) ,"Annulla visita", examination_path(@examination), method: :delete %>

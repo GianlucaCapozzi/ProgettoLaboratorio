@@ -2,4 +2,5 @@
 <br>
 <b> Commento: </b> <%= @prescription.comment %> <br>
 <br>
-<%= link_to "Modifica prescrizione visita", edit_prescription_path(@prescription)%>
+<%= link_to_if (session[:type] == "Doctor"), "Modifica prescrizione visita", edit_prescription_path(@prescription)%> <br>
+<%= link_to_if (session[:type] == "Doctor"), "Elimina prescrizione farmaco", prescription_path(@prescription), method: :delete %>

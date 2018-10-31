@@ -9,16 +9,18 @@ class PrescriptionsController < ApplicationController
 			when "Secretary"
 			
 			when "Patient"
-				@patient = Patient.find(params[:patient_id])
-				@prescriptions = @patient.prescriptions
+				#@patient = Patient.find(params[:patient_id])
+				@examination = Examination.find(params[:examination_id])
+				@prescriptions = @examination.prescriptions
+				render "patientPrescriptionsIndex"
 			when "Owner"	
 		end
 	end
 	
 	def show
+		@prescription = Prescription.find(params[:id])
 		case session[:type]
 			when "Doctor"
-				@prescription = Prescription.find(params[:id])
 				case @prescription.type
 					when "Drug"
 						render "doctorDrugShow"
@@ -28,7 +30,12 @@ class PrescriptionsController < ApplicationController
 			when "Secretary"
 			
 			when "Patient"
-			
+				case @prescription.type
+					when "Drug"
+						render "doctorDrugShow"
+					when "PrescriptedExamination"
+						render "doctorPrescriptedExaminationShow"
+				end
 			when "Owner"	
 		end
 	end
