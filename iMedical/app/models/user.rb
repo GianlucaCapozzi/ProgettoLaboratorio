@@ -9,8 +9,9 @@ class User < ApplicationRecord
 	validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
 	VALID_PHONE_REGEX = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/
 	validates :phoneNumber, format: { with: VALID_PHONE_REGEX }, uniqueness: true
-	validates :password, presence: true, length: { minimum: 5 }
-
+	validates :password, presence: true, length: { minimum: 5 }, :if => :not_social?
+	VALID_CF_REGEX = /\A(?:(?:[B-DF-HJ-NP-TV-Z]|[AEIOU])[AEIOU][AEIOUX]|[B-DF-HJ-NP-TV-Z]{2}[A-Z]){2}[\dLMNP-V]{2}(?:[A-EHLMPR-T](?:[04LQ][1-9MNP-V]|[1256LMRS][\dLMNP-V])|[DHPS][37PT][0L]|[ACELMRT][37PT][01LM])(?:[A-MZ][1-9MNP-V][\dLMNP-V]{2}|[A-M][0L](?:[1-9MNP-V][\dLMNP-V]|[0L][1-9MNP-V]))[A-Z]\z/i
+	validates :cf, presence: true, format: { with: VALID_CF_REGEX }, uniqueness: { case_sensitive: false }
 
 	has_secure_password
 
@@ -22,7 +23,7 @@ class User < ApplicationRecord
 			user.email = auth.info.email
 			user.password_digest = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-			user.save!
+			user.save!(validate: false)
 		end
 	end
 
@@ -85,6 +86,10 @@ class User < ApplicationRecord
 	# Return true if a password reset
 	def password_reset_expired?
 		reset_sent_at < 2.hours.ago
+	end
+
+	def not_social?
+		provider.blank?
 	end
 
 	private
