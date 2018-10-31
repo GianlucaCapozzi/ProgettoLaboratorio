@@ -19,6 +19,7 @@ class ExaminationsController < ApplicationController
 				#List of examination
 				@patient = Patient.find(current_user.id)
 				@examinations = @patient.examinations
+				render "patientIndex"
 			when "Owner"
 				#Nothing?
 		end
@@ -36,11 +37,14 @@ class ExaminationsController < ApplicationController
 				#@prescriptions = @examination.prescriptions
 				render 'examinationShow'
 			when "Secretary"
-
+				
 			when "Patient"
-
+				@examination = Examination.find(params[:id])
+				@doctor = Doctor.find(@examination.doctor_id)
+				@clinic = Clinic.find(@examination.clinic_id)
+				render 'patientShow'
 			when "Owner"
-
+				#Nothing
 		end
 	end
 
@@ -80,6 +84,9 @@ class ExaminationsController < ApplicationController
     end
 
     def destroy
+		# Only the patient that booked the examination can delete a booked appointment
+		# or the secretary of that doctor
+		@examination = Examination.find(params[:id])
         @examination.destroy
         redirect_to examinations_path
     end

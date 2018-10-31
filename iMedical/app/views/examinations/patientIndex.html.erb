@@ -1,0 +1,7 @@
+<h2> Lista visite di un paziente (Vista paziente) </h2> 
+
+<table>
+	<%= @examinations.each do |examination| %>
+		<tr> <td> <%= link_to examination.id, examination_path(examination) %></td> </tr>
+	<% end %>
+</table>

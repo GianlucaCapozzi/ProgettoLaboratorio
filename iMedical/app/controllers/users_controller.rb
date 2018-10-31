@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 				case params[:type]
 					when "Doctor"
 						@clinic = Clinic.find(params[:clinic_id])
-						@doctors = Doctor.joins("INNER JOIN works ON users.id = works.doctor_id").where("works.clinic_id = ?", params[:clinic_id])
+						@doctors = Doctor.joins("INNER JOIN works ON users.id = works.doctor_id").where("works.clinic_id = ?", params[:clinic_id]).uniq
 						render "patientClinicDoctorsShow"
 				end
 		end
@@ -76,7 +76,7 @@ class UsersController < ApplicationController
 					when "Doctor"
 						# Patients want to see doctor and wants to book an examination
 						# I need doctor id and clinic id
-						if params[:date] == nil
+						if params[:date] == nil 
 							redirect_to clinic_doctor_path(params[:clinic_id], params[:id])+"?date="+DateTime.now.to_date.to_s
 						else
 							@clinic = Clinic.find(params[:clinic_id])
@@ -84,9 +84,13 @@ class UsersController < ApplicationController
 							@examinations = getExaminations()
 							@nextDay = (params[:date].to_date + 1.days).to_s
 							@previousDay = (params[:date].to_date - 1.days).to_s
-							@startDateTime = params[:date]+" 09:00:00"
-							@endDateTime = params[:date]+" 18:00:00"
-							@bookableDates = getBookableDates(@examinations, @startDateTime, @endDateTime)
+							@works = Work.select('day, start_time, end_time').where("clinic_id = ? AND doctor_id = ? AND day = ?", params[:clinic_id], params[:id], params[:date].to_date.wday)
+							@bookableDates = []
+							if @works.length != 0
+								@startDateTime = params[:date] + " " + @works[0].start_time
+								@endDateTime = params[:date] + " " + @works[0].end_time
+								@bookableDates = getBookableDates(@examinations, @startDateTime, @endDateTime)
+							end
 							puts @bookableDates
 							render "patientDoctorShow"
 						end
@@ -225,7 +229,6 @@ class UsersController < ApplicationController
 	def getExaminations
 		# Get doctor's examinations date in a clinic and when the patients can get an examination
 		# Date has format AAAA-MM-GG
-		# Le date di apertura ancora devono essere implementate
 		params.permit(:clinic_id, :id, :date)
 		examinations = Examination.select("start_time").where("clinic_id = ? AND doctor_id = ? AND start_time >= ? AND start_time <= ?", params[:clinic_id], params[:id],params[:date]+" 00:00:00", params[:date]+" 23:59:59")
 		examinations
@@ -250,11 +253,18 @@ class UsersController < ApplicationController
 		availability = true
 		#puts "entro"
 		#puts examinations
-		examinations.each do |examination|
-			if examination.start_time.to_datetime == time
-				#puts "Occupato!"
-				availability = availability & false
+		if time.utc > Time.now.utc
+			examinations.each do |examination|
+				puts time
+				puts Time.now.utc
+				puts time < Time.now.utc
+				if examination.start_time.to_datetime == time 
+					#puts "Occupato!"
+					availability = availability & false
+				end
 			end
+		else
+			availability = false
 		end
 		availability
 	end

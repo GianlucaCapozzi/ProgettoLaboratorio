@@ -10,10 +10,14 @@ Dottore: <%= @doctor.surname %> <%= @doctor.name %> <br>
 		<%= button_to "Next day", clinic_doctor_path(@clinic, @doctor), method: :get, params: {date: @nextDay} %>
 	</div>
 	<div id ="date">
-		<%= @bookableDates.each do |date| %>
-			<div>
-				<%= date[0].to_formatted_s(:db) %> <%= date[1] ? (button_to "Prenota", clinic_doctor_examinations_path(@clinic, @doctor), params: { date: date[0].to_formatted_s(:db)}) : "Non prenotabile" %><br>
-			</div>
+		<% if @bookableDates.length > 0 %>
+			<%= @bookableDates.each do |date| %>
+				<div>
+					<%= date[0].to_formatted_s(:db) %> <%= date[1] ? (button_to "Prenota", clinic_doctor_examinations_path(@clinic, @doctor), params: { date: date[0].to_formatted_s(:db)}) : "Non prenotabile" %><br>
+				</div>
+			<% end %>
+		<% else %>
+			<%= "Il medico non riceve in questo giorno della settimana" %>
 		<% end %>
 	</div>
 </div>

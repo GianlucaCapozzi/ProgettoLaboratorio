@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_28_175703) do
+ActiveRecord::Schema.define(version: 2018_10_29_152927) do
 
   create_table "clinics", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -118,6 +118,9 @@ ActiveRecord::Schema.define(version: 2018_10_28_175703) do
     t.datetime "updated_at", null: false
     t.integer "doctor_id"
     t.integer "clinic_id"
+    t.integer "day"
+    t.string "start_time"
+    t.string "end_time"
     t.index ["clinic_id"], name: "index_works_on_clinic_id"
     t.index ["doctor_id"], name: "index_works_on_doctor_id"
   end
