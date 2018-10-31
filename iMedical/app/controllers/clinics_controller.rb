@@ -41,6 +41,11 @@ class ClinicsController < ApplicationController
         redirect_to new_owner_path(params[:owner_id])
     end
 
+    def showClinics
+        @secretary = Secretary.find(params[:secretary_id])
+        @clinics = @secretary.clinics
+    end 
+
     # Owner's functions
 
     def showClinicsForDoctor

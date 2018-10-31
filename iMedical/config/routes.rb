@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 	get '/work/addNewDoctor/:doctor_id&:clinic_id' => 'works#addNewDoctor', as: :add_new_doctor
 	get '/manage/addNewSecretary/:secretary_id&:clinic_id' => 'manages#addNewSecretary', as: :add_new_secretary
 
+	get '/secretary/:secretary_id/clinics/showClinics' => 'clinics#showClinics', as: :show_clinics
+
 	# Patient's routes
 	get '/patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story
 	get '/patient/searchClinic' => 'users#searchClinic', as: :search_clinic
@@ -71,6 +73,7 @@ Rails.application.routes.draw do
 	
 	resources :secretaries, controller: 'users', type: 'Secretary' do
 		resources :clinics, shallow: true
+	
 	end
 
 	resources :patient, controller: 'users', type: 'Patient'
