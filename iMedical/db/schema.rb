@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_21_193141) do
+ActiveRecord::Schema.define(version: 2018_10_29_160246) do
 
   create_table "clinics", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -19,6 +19,10 @@ ActiveRecord::Schema.define(version: 2018_10_21_193141) do
     t.string "name"
     t.string "address"
     t.string "description"
+    t.string "province"
+    t.string "city"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["owner_id"], name: "index_clinics_on_owner_id"
   end
 
@@ -38,6 +42,8 @@ ActiveRecord::Schema.define(version: 2018_10_21_193141) do
     t.integer "patient_id"
     t.integer "doctor_id"
     t.integer "clinic_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.index ["clinic_id"], name: "index_examinations_on_clinic_id"
     t.index ["doctor_id"], name: "index_examinations_on_doctor_id"
     t.index ["patient_id"], name: "index_examinations_on_patient_id"
@@ -73,6 +79,9 @@ ActiveRecord::Schema.define(version: 2018_10_21_193141) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "examination_id"
+    t.string "type"
+    t.string "comment"
+    t.string "drugName"
     t.index ["examination_id"], name: "index_prescriptions_on_examination_id"
   end
 
@@ -98,6 +107,15 @@ ActiveRecord::Schema.define(version: 2018_10_21_193141) do
     t.string "doctorID"
     t.string "type"
     t.string "story"
+<<<<<<< HEAD
+=======
+    t.string "remember_digest"
+    t.string "activation_digest"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
+>>>>>>> 051da37f5ade99c0d21818309f954d8e63824b15
   end
 
   create_table "works", force: :cascade do |t|

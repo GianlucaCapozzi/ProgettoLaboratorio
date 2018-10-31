@@ -1,23 +1,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  surname: MyString
-  email: MyString
-  password_digest: MyString
-  birthdayDate: MyString
-  birthdayPlace: MyString
-  phoneNumber: MyString
-  cf: MyString
-  oauth_expires_at: 2018-10-12 17:25:38
+michael:
+  name: Michael
+  surname: Example
+  email: michaelrails@gmail.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  birthdayDate: '15101980'
+  birthdayPlace: Roma
+  phoneNumber: '3421523145'
+  cf: XMPMCH80R23G502B
+  remember_digest: <%= User.digest('remember_token') %>
+  activation_digest: <%= User.digest('activation_digest') %>
+  reset_digest: <%= User.digest('reset_token') %>
+  reset_sent_at: <%= Time.zone.now %>
+  type: Owner
+  created_at: <%= Time.zone.now %>
+  update_at: <%= Time.zone.now %>
 
-two:
-  name: MyString
-  surname: MyString
-  email: MyString
-  password_digest: MyString
-  birthdayDate: MyString
-  birthdayPlace: MyString
-  phoneNumber: MyString
-  cf: MyString
-  oauth_expires_at: 2018-10-12 17:25:38
+tom:
+  name: Thomas
+  surname: Test
+  email: thomasrails@gmail.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  birthdayDate: '18051965'
+  birthdayPlace: Milano
+  phoneNumber: '3271828394'
+  cf: TSTHMS80R23G502B
+  remember_digest: <%= User.digest('remember_token') %>
+  activation_digest: <%= User.digest('activation_digest') %>
+  reset_digest: <%= User.digest('reset_token') %>
+  reset_sent_at: <%= Time.zone.now %>
+  type: Patient
+  created_at: <%= Time.zone.now %>
+  update_at: <%= Time.zone.now %>

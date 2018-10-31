@@ -4,8 +4,10 @@
 <table>
     <% @clinics.each do |clinic| %>
         <tr>
-            <td><%= clinic.name %></td>
-            <td><%= clinic.description %></td>
+            <br/>
+            <div class="flex">
+                <%= clinic.name %><%= button_to "Informazioni", clinics_show_path(clinic.id), :method => "get", class: "btn"%>
+            </div>
         </tr>
     <% end %>
 </table>

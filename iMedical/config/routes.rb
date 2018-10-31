@@ -1,21 +1,14 @@
 Rails.application.routes.draw do
 
-	get '/homepage/info' => 'homepage#info'
-
 	get 'auth/:provider/callback', to: 'sessions#createOauth'
 	get 'auth/failure', to: redirect('/')
-
-	get 'users/new' => 'users#new', as: :new_user
-	get 'users/:id/newOauth' => 'users#newOauth', as: :newOauth
-	get 'users/show' => 'users#show'
-	patch 'users/:id' => 'users#update'
-	post 'users/new' => 'users#create'
 
 	# Role chosing
 	get 'users/:id/newOwner' => 'users#newOwner', as: :new_owner
 	get 'users/:id/newDoctor' => 'users#newDoctor', as: :new_doctor
 	get 'users/:id/newPatient' => 'users#newPatient', as: :new_patient
 	get 'users/:id/newSecretary' => 'users#newSecretary', as: :new_secretary
+	get 'users/:id/newOauth' => 'users#newOauth', as: :newOauth
 
 
 	# Checking/setting doctorID
@@ -35,6 +28,12 @@ Rails.application.routes.draw do
 	# Patient's routes
 	get '/patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story
 	get '/patient/searchClinic' => 'users#searchClinic', as: :search_clinic
+	get '/patient/clinics/:clinic_id/showDoctors/:doctor_id/createExamination' => 'examinations#createExamination', as: :create_examination
+
+	# Clinics
+
+	get '/clinics/:id' => 'clinics#show', as: :clinics_show
+	#get 'examinations/calendar', as: :examinations_calendar
 
 	get '/login' => 'sessions#new'
 	post '/login' => 'sessions#createLocal'
@@ -52,25 +51,36 @@ Rails.application.routes.draw do
 	#		end
 	#	end
 	#end
-	
+
 	# I want to see where the given doctor works
 	resources :doctors, controller: 'users', type: 'Doctor' do
 		resources :clinics, shallow: true, only: [:index, :show]
 	end
 	# I want to see the patient that had a visit in the given clinic
 	resources :clinics do
-		resources :patients, shallow: true, only: [:index, :show]
+		resources :patients, controller: 'users', type: 'Patient', only: [:index, :show] do
+			resources :examinations, only: [:index]
+		end
+		#resources :doctors, controller: 'user', type: 'Doctor', shallow: true
+		resources :doctors, controller: 'users', type: 'Doctor', only: [:index, :show] do
+			resources :examinations, only: [:create]
+		end
 	end
 	# I want to see the visits of a patient
 	resources :patients, controller: 'users', type: 'Patient' do
-		resources :examinations, shallow: true, only: [:index, :show]
+		resources :examinations, shallow: true, only: [:index, :show, :create]
+		resources :prescriptions, shallow: true
 	end
 	# I want to see the prescriptions of a examinations
 	resources :examinations do
-		resources :prescriptions, shallow: true
+		resources :prescriptions, shallow: true, only: [:index, :show]
+		resources :drugs, controller: 'prescriptions', type: 'Drug', only: [:new, :create]
+		resources :prescriptedExaminations, controller: 'prescriptions', type: 'PrescriptedExamination', only: [:new, :create]
 	end
-	
-	
+
+	# Route to search drug
+	get '/searchDrug', to: 'prescriptions#searchDrug', as:  :search_drug
+
 	resources :secretaries, controller: 'users', type: 'Secretary' do
 		resources :clinics, shallow: true
 	
@@ -90,7 +100,9 @@ Rails.application.routes.draw do
 		resources :doctors
 	end
 	resources :homepage
+	resources :account_activations, only: [:edit]
+    resources :password_resets, only: [:new, :create, :edit, :update]
 
-	root "homepage#show"
+	root "homepage#index"
 
 end

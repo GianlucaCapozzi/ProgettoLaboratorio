@@ -1,0 +1,14 @@
+<h2> Creazione prescrizione di una visita per determinata visita (Vista Dottore) </h2>
+
+<%= form_for @prescription, url: examination_prescriptedExaminations_path do |p| %>
+	
+	<div>
+		<%= p.label :comment%>
+		<%= p.text_field :comment, autofocus: true %>
+	</div>
+
+	<div>
+		<%= p.submit "Inserisci prescrizione" %>
+	</div>
+
+<% end %>

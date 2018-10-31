@@ -1,0 +1,12 @@
+<h2> Modifica prescrizione visita </h2>
+<%= form_for @prescription, url: prescription_path do |p| %>
+	<div>
+		<%= p.label :comment%>
+		<%= p.text_field :comment %>
+	</div>
+
+	<div>
+		<%= p.submit "Modifica prescrizione" %>
+	</div>
+
+<% end %>

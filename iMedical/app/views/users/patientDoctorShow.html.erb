@@ -1,0 +1,19 @@
+<h2> Pagina del dottore di una clinica ( vista Paziente ) </h2>
+<br>
+Dottore: <%= @doctor.surname %> <%= @doctor.name %> <br>
+
+<h2> Prenota </h2>
+<div id="calendario">
+	<div>
+		<%= button_to "Previous day", clinic_doctor_path(@clinic, @doctor), method: :get, params: {date: @previousDay} %>
+		<input type="date" id="dataAttuale" value=<%= params[:date] %>>
+		<%= button_to "Next day", clinic_doctor_path(@clinic, @doctor), method: :get, params: {date: @nextDay} %>
+	</div>
+	<div id ="date">
+		<%= @bookableDates.each do |date| %>
+			<div>
+				<%= date[0].to_formatted_s(:db) %> <%= date[1] ? (button_to "Prenota", clinic_doctor_examinations_path(@clinic, @doctor), params: { date: date[0].to_formatted_s(:db)}) : "Non prenotabile" %><br>
+			</div>
+		<% end %>
+	</div>
+</div>

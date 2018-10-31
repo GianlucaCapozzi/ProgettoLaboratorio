@@ -1,54 +1,59 @@
+<% provide(:title, 'Sign up') %>
 <h1>Sign up</h1>
 
-<%= form_for @user do |f| %>
-	
-	<div>
-		<%= f.label :name%>
-		<%= f.text_field :name, autofocus: true %>
-	</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_for @user do |f| %>
+			<%= render 'shared/error_messages' %>
+			<div>
+				<%= f.label :nome%>
+				<%= f.text_field :name, autofocus: true, class: 'form-control' %>
+			</div>
 
-	<div>
-		<%= f.label :surname%>
-		<%= f.text_field :surname, autofocus: true %>
-	</div>
+			<div>
+				<%= f.label :cognome%>
+				<%= f.text_field :surname, autofocus: true, class: 'form-control' %>
+			</div>
 
-	<div>
-		<%= f.label :email%>
-		<%= f.text_field :email%>
-	</div>
+			<div>
+				<%= f.label :email%>
+				<%= f.text_field :email, class: 'form-control'%>
+			</div>
 
-	<div>
-		<%= f.label :password%>
-		<%= f.password_field :password%>
-	</div>
+			<div>
+				<%= f.label :password%>
+				<%= f.password_field :password, class: 'form-control'%>
+			</div>
 
-	<div>
-		<%= f.label :password_confirmation%>
-		<%= f.password_field :password_confirmation%>
-	</div>
+			<div>
+				<%= f.label :password_confirmation, "Conferma Password"%>
+				<%= f.password_field :password_confirmation, class: 'form-control'%>
+			</div>
 
-	<div>
-		<%= f.label :birthdayDate%>
-		<%= f.text_field :birthdayDate %>
-	</div>
+			<div>
+				<%= f.label :birthdayDate, "Data di nascita"%>
+				<%= f.text_field :birthdayDate, class: 'form-control' %>
+			</div>
 
-	<div>
-		<%= f.label :birthdayPlace%>
-		<%= f.text_field :birthdayPlace %>
-	</div>
+			<div>
+				<%= f.label :birthdayPlace, "Luogo di Nascita"%>
+				<%= f.text_field :birthdayPlace, class: 'form-control' %>
+			</div>
 
-	<div>
-		<%= f.label :phoneNumber%>
-		<%= f.text_field :phoneNumber %>
-	</div>
+			<div>
+				<%= f.label :phoneNumber, "Numero di Telefono"%>
+				<%= f.text_field :phoneNumber, class: 'form-control' %>
+			</div>
 
-	<div>
-		<%= f.label :cf%>
-		<%= f.text_field :cf %>
-	</div>
+			<div>
+				<%= f.label :cf, "Codice Fiscale"%>
+				<%= f.text_field :cf, class: 'form-control' %>
+			</div>
 
-	<div>
-		<%= f.submit "Sign up!" %>
-	</div>
+			<div>
+				<%= f.submit "Sign up!", class: "btn btn-primary" %>
+			</div>
 
-<% end %>
+		<% end %>
+	</div>
+</div>
