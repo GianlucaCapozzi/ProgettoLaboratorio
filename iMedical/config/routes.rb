@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-	default_url_options :host => "localhost:3000"
-
 	get 'auth/:provider/callback', to: 'sessions#createOauth'
 	get 'auth/failure', to: redirect('/')
 
@@ -24,6 +22,8 @@ Rails.application.routes.draw do
 	get '/owner/:owner_id/clinics/:id/searchSecretary' => 'clinics#searchSecretary', as: :search_secretary
 	get '/work/addNewDoctor/:doctor_id&:clinic_id' => 'works#addNewDoctor', as: :add_new_doctor
 	get '/manage/addNewSecretary/:secretary_id&:clinic_id' => 'manages#addNewSecretary', as: :add_new_secretary
+
+	get '/secretary/:secretary_id/clinics/showClinics' => 'clinics#showClinics', as: :show_clinics
 
 	# Patient's routes
 	get '/patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story
@@ -83,6 +83,7 @@ Rails.application.routes.draw do
 
 	resources :secretaries, controller: 'users', type: 'Secretary' do
 		resources :clinics, shallow: true
+	
 	end
 
 	resources :patient, controller: 'users', type: 'Patient'
@@ -100,6 +101,7 @@ Rails.application.routes.draw do
 	end
 	resources :homepage
 	resources :account_activations, only: [:edit]
+    resources :password_resets, only: [:new, :create, :edit, :update]
 
 	root "homepage#index"
 

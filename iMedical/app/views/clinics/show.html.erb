@@ -4,5 +4,5 @@
 <h2>Coordinate: <%= @clinic.latitude %> <%= @clinic.longitude %></h2>
 <%= link_to "Lista medici", clinic_doctors_path(@clinic) %> <br>
 
-<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@clinic.latitude},#{@clinic.longitude}&markers=#{@clinic.latitude},#{@clinic.longitude}&zoom=50&size=640x400&key="+Rails.application.credentials.google[:API_KEY],
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@clinic.latitude},#{@clinic.longitude}&markers=#{@clinic.latitude},#{@clinic.longitude}&zoom=15&size=640x400&key="+Rails.application.credentials.google[:API_KEY],
               class: 'img-fluid img-rounded', alt: "#{@clinic.name} on the map"%>
