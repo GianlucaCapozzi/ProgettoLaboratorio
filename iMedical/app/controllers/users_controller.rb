@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+	load_and_authorize_resource
 	def new
 		@user = User.new
 	end
@@ -208,6 +208,7 @@ class UsersController < ApplicationController
 		user.roles_mask = user.roles_mask | 4
 		user.save!(validate: false)
 		session[:type] = 'Patient'
+		
 	end
 
 	def newSecretary
@@ -295,5 +296,4 @@ class UsersController < ApplicationController
 		end
 		roles
 	end
-
 end

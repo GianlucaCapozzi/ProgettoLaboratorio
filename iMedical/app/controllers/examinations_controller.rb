@@ -1,5 +1,5 @@
 class ExaminationsController < ApplicationController
-
+	load_and_authorize_resource
     #before_action :set_examination, only: [:show, :edit, :update, :destroy]
     #before_action :set_examinations, only: [:index, :show, :edit]
     #before_action :set_patient, only: [:index, :new, :edit]

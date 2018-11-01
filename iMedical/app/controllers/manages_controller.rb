@@ -1,5 +1,5 @@
 class ManagesController < ApplicationController
-
+	load_and_authorize_resource
     def new
         @manage = Manage.new
     end

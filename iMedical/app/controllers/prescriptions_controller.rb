@@ -1,4 +1,5 @@
 class PrescriptionsController < ApplicationController	
+	load_and_authorize_resource	
 	def index
 		case session[:type]
 			when "Doctor"

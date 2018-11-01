@@ -1,5 +1,6 @@
 class ClinicsController < ApplicationController
-
+	load_and_authorize_resource
+	
     def index
         if(session[:type] == "Owner")
             @owner = User.get_owners.find(params[:owner_id])

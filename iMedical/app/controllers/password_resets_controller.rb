@@ -1,5 +1,4 @@
 class PasswordResetsController < ApplicationController
-
     before_action :get_user, only: [:edit, :update]
     #before_action :valid_user, only: [:edit, :update]
     before_action :check_expiration, only: [:edit, :update] # Expired password reset
