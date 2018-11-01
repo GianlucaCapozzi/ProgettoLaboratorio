@@ -6,7 +6,7 @@ class ManagesController < ApplicationController
 
     def addNewSecretary
         if(session[:type] == "Owner")
-            @secretary = Secretary.find(params[:secretary_id])
+            @secretary = User.get_secretaries.find(params[:secretary_id])
             @clinic = Clinic.find(params[:clinic_id])
             @manage = Manage.new(manage_params)
             @manage.save!

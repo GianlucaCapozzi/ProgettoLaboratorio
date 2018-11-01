@@ -5,7 +5,7 @@ class WorksController < ApplicationController
     end
 
     def addNewDoctor
-        @doctor = Doctor.find(params[:doctor_id])
+        @doctor = User.get_doctors.find(params[:doctor_id])
         @clinic = Clinic.find(params[:clinic_id])
         @work = Work.new(work_params)
         @work.save!

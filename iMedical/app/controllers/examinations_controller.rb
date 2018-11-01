@@ -17,7 +17,7 @@ class ExaminationsController < ApplicationController
 				#List of examination
 			when "Patient"
 				#List of examination
-				@patient = Patient.find(current_user.id)
+				@patient = User.get_patients.find(current_user.id)
 				@examinations = @patient.examinations
 				render "patientIndex"
 			when "Owner"
@@ -31,16 +31,16 @@ class ExaminationsController < ApplicationController
 			when "Doctor"
 				# See the existing examinations and he can create them
 				@examination = Examination.find(params[:id])
-				@doctor = Doctor.find(@examination.doctor_id)
+				@doctor = User.get_doctors.find(@examination.doctor_id)
 				@clinic = Clinic.find(@examination.clinic_id)
-				@patient = Patient.find(@examination.patient_id)
+				@patient = User.get_patients.find(@examination.patient_id)
 				#@prescriptions = @examination.prescriptions
 				render 'examinationShow'
 			when "Secretary"
 				
 			when "Patient"
 				@examination = Examination.find(params[:id])
-				@doctor = Doctor.find(@examination.doctor_id)
+				@doctor = User.get_doctors.find(@examination.doctor_id)
 				@clinic = Clinic.find(@examination.clinic_id)
 				render 'patientShow'
 			when "Owner"

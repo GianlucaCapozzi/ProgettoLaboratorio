@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 					when "Patient"
 						# List of patients if the user has connected as Doctor
 						# The doctor id is stored in session[:user_id]
-						@patients = Patient.joins("INNER JOIN examinations ON users.id = examinations.patient_id").where("examinations.doctor_id = ? AND examinations.clinic_id = ?", session[:user_id], params[:clinic_id]).uniq
+						@patients = User.get_patients.joins("INNER JOIN examinations ON users.id = examinations.patient_id").where("examinations.doctor_id = ? AND examinations.clinic_id = ?", session[:user_id], params[:clinic_id]).uniq
 						puts params
 						@clinic = Clinic.find(params[:clinic_id])
 						render "doctorPatients"
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 				case params[:type]
 					when "Doctor"
 						@clinic = Clinic.find(params[:clinic_id])
-						@doctors = Doctor.joins("INNER JOIN works ON users.id = works.doctor_id").where("works.clinic_id = ?", params[:clinic_id]).uniq
+						@doctors = User.get_doctors.joins("INNER JOIN works ON users.id = works.doctor_id").where("works.clinic_id = ?", params[:clinic_id]).uniq
 						render "patientClinicDoctorsShow"
 				end
 		end
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
 
 					when "Patient"
 						# See the menu where i can choose my examination of the patient on the selected clinic
-						patient = Patient.find(params[:id])
+						patient = User.get_patients.find(params[:id])
 						clinic = Clinic.find(params[:clinic_id])
 						redirect_to clinic_patient_examinations_path(clinic, patient)
 				end
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
 							redirect_to clinic_doctor_path(params[:clinic_id], params[:id])+"?date="+DateTime.now.to_date.to_s
 						else
 							@clinic = Clinic.find(params[:clinic_id])
-							@doctor = Doctor.find(params[:id])
+							@doctor = User.get_doctors.find(params[:id])
 							@examinations = getExaminations()
 							@nextDay = (params[:date].to_date + 1.days).to_s
 							@previousDay = (params[:date].to_date - 1.days).to_s
@@ -142,6 +142,7 @@ class UsersController < ApplicationController
 	def newOwner
 		user = User.find(params[:id])
 		user.type = 'Owner'
+		user.roles_mask = user.roles_mask | 1
 		user.save!(validate: false)
 		session[:type] = 'Owner'
 	end
@@ -186,6 +187,7 @@ class UsersController < ApplicationController
 					# Found the doctor in the file and the information are correct
 					user.type = "Doctor"
 					user.doctorID = doctor[4]
+					user.roles_mask = user.roles_mask | 8
 					user.save!(validate: false)
 					puts "Trovato!"
 				else
@@ -203,6 +205,7 @@ class UsersController < ApplicationController
 	def newPatient
 		user = User.find(params[:id])
 		user.type = 'Patient'
+		user.roles_mask = user.roles_mask | 4
 		user.save!(validate: false)
 		session[:type] = 'Patient'
 	end
@@ -210,6 +213,7 @@ class UsersController < ApplicationController
 	def newSecretary
 		user = User.find(params[:id])
 		user.type = 'Secretary'
+		user.roles_mask = user.roles_mask | 2
 		user.save!(validate: false)
 		session[:type] = 'Secretary'
 	end
@@ -217,7 +221,7 @@ class UsersController < ApplicationController
 	# Patient's functions
 
 	def showPatientStory
-		@patient = Patient.find(params[:id])
+		@patient = User.get_patients.find(params[:id])
 		puts @patient
 	end
 
@@ -275,5 +279,21 @@ class UsersController < ApplicationController
 		params.require(:user).permit(:name, :surname, :email, :password, :password_confirmation, :birthdayDate, :birthdayPlace, :phoneNumber, :cf)
 	end
 
+	def roles
+		roles = []
+		if self.roles_mask & 1 == 1
+			roles.push("Owner")
+		end
+		if self.roles_mask & 2 == 2
+			roles.push("Secretary")
+		end
+		if self.roles_mask & 4 == 4
+			roles.push("Patient")
+		end
+		if self.roles_mask & 8 == 8
+			roles.push("Doctor")
+		end
+		roles
+	end
 
 end
