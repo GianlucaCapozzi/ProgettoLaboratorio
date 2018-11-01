@@ -1,8 +1,10 @@
 <h2> Lista visite del paziente di una data clinica di un certo dottore </h2>
 
-<table>
+<table style="width:100%">
 	<%= @examinations.each do |examination| %>
-		<tr> <td> <%= link_to examination.id, examination_path(examination) %> </td> </tr>
+		<tr>
+			<td> <%= link_to examination.id, examination_path(examination) %> </td> 
+			<td> <%= examination.start_time.to_s %> </td> 
+		</tr>
 	<% end %>
-
 </table>

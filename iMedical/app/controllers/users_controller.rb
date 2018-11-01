@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 					when "Patient"
 						# List of patients if the user has connected as Doctor
 						# The doctor id is stored in session[:user_id]
-						@patients = Patient.joins("INNER JOIN examinations ON users.id = examinations.patient_id").where("examinations.doctor_id = ?", session[:user_id])
+						@patients = Patient.joins("INNER JOIN examinations ON users.id = examinations.patient_id").where("examinations.doctor_id = ? AND examinations.clinic_id = ?", session[:user_id], params[:clinic_id]).uniq
 						puts params
 						@clinic = Clinic.find(params[:clinic_id])
 						render "doctorPatients"
@@ -53,8 +53,8 @@ class UsersController < ApplicationController
 						# Ovvero quando clicca quale tipo di utenza è, memorizzarla nella sessione
 						# Select all clinics where the doctor works ( i'm a doctor ancora non controllato )
 						#@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
-						@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
-						puts @clinics.all
+						@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id]).uniq
+						#puts @clinics.all
 						puts session[:user_id]
 						render 'showDoctor'
 					when "Secretary"
