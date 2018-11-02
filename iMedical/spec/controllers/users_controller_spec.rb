@@ -63,8 +63,8 @@ RSpec.describe UsersController, type: :controller do
           email: "invalid@example.com",
           password: "password",
           password_confirmation: "passwords",
-          phoneNumber: "3215463452",
-          cf: "XMPMCH80R23G502C",
+          phoneNumber: "32154634",
+          cf: "MPMCH80R23G502C",
           activated: true
       }
   }
@@ -149,36 +149,24 @@ RSpec.describe UsersController, type: :controller do
       }
 
       it "updates the requested user" do
-        put :update, params: {id: @user.to_param, user: new_attributes}, session: valid_session
+        usr = @user
+        put :update, params: {id: usr.to_param, user: new_attributes}, session: valid_session
         @user.reload
       end
 
-      it "redirects to the home page" do
-        put :update, params: {id: @user.to_param, user: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(root_path)
+      it "redirects to the user home page" do
+        usr = @user
+        put :update, params: {id: usr.to_param, user: valid_attributes}, session: valid_session
+        expect(response).to redirect_to("/home/show")
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
-        put :update, params: {id: @user.to_param, user: invalid_attributes}, session: valid_session
+        usr = @user
+        put :update, params: {id: usr.to_param, user: invalid_attributes}, session: valid_session
         expect(response).to be_successful
       end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested user" do
-      user = User.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: user.to_param}, session: valid_session
-      }.to change(User, :count).by(-1)
-    end
-
-    it "redirects to the users list" do
-      user = User.create! valid_attributes
-      delete :destroy, params: {id: user.to_param}, session: valid_session
-      expect(response).to redirect_to(users_url)
     end
   end
 
