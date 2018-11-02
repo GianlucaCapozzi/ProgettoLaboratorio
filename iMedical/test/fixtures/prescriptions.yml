@@ -5,16 +5,16 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-    type: Drug
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
     comment: Medicina
     drugName: Tachipirina
     examination_id: 1
-
-# column: value
-#
-two:
     type: Drug
-    comment: Medicina
-    drugName: Tachipirina
+
+two:
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    comment: Visita
     examination_id: 2
-# column: value
+    type: Prescripted Examination
