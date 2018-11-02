@@ -27,9 +27,9 @@ class ClinicsController < ApplicationController
 				# The doctor id is stored in session[:user_id]
 				redirect_to clinic_patients_path(clinic)
 			when "Secretary"
-			
+
 			when "Patient"
-			
+
 			when "Owner"
 				@owner = Owner.find(params[:owner_id])
 				@clinics = @owner.clinics
@@ -69,7 +69,7 @@ class ClinicsController < ApplicationController
     def showClinics
         @secretary = Secretary.find(params[:secretary_id])
         @clinics = @secretary.clinics
-    end 
+    end
 
     # Owner's functions
 
@@ -84,9 +84,13 @@ class ClinicsController < ApplicationController
     end
 
     def searchDoctor
-        session[:clinic_id] = Clinic.find(params[:id])
-		@doctors = Doctor.all.order('created_at DESC')
-		@doctors = @doctors.search(params[:search]) if params[:search].present?
+        if(session[:type] == "Owner")
+            session[:clinic_id] = Clinic.find(params[:id])
+		    @doctors = Doctor.all.order('created_at DESC')
+		    @doctors = @doctors.search(params[:search]) if params[:search].present?
+        elsif(session[:type] == "Secretary")
+            session[:clinic_id] = Clinic.find(params[:clinic_id])
+        end
 	end
 
 	def searchSecretary

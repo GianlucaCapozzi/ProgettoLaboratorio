@@ -63,8 +63,8 @@ RSpec.describe UsersController, type: :controller do
           email: "invalid@example.com",
           password: "password",
           password_confirmation: "passwords",
-          phoneNumber: "32154634",
-          cf: "MPMCH80R23G502C",
+          phoneNumber: "3215463453",
+          cf: "XGPMCH80R23G502B",
           activated: true
       }
   }
