@@ -1,0 +1,9 @@
+<h2> Lista dottori che lavorano in una determinata clinica di un certo proprietario (Vista proprietario)</h2>
+
+<table>
+	<%= @doctors.each do |doctor| %>
+		<tr>
+			<td> <%= doctor.surname + " " + doctor.name %> </td>
+		</tr>
+	<% end %>
+</table>

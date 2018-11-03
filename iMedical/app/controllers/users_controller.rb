@@ -28,7 +28,13 @@ class UsersController < ApplicationController
 			when "Secretary"
 
 			when "Owner"
-
+				case params[:type]
+					when "Doctor"
+						params.require(:clinic_id)
+						@doctors = User.get_doctors.joins("INNER JOIN works ON users.id = works.doctor_id").where("works.clinic_id = ?", params[:clinic_id]).uniq
+						@clinic = Clinic.find(params[:clinic_id])
+						render "ownerClinicDoctorsIndex"
+				end
 			when "Patient"
 				# Dove devo metterle?
 				@users= User.all.order('created_at DESC')
@@ -70,7 +76,15 @@ class UsersController < ApplicationController
 			when "Secretary"
 
 			when "Owner"
-
+				case params[:type]
+					when "Doctor"
+						params.require(:clinic_id)
+						params.require(:id)
+						@doctor = User.get_doctors.find(params[:id])
+						@clinic = Clinic.find(params[:clinic_id])
+						@works = Work.where("clinic_id = ? AND doctor_id = ? ", params[:clinic_id], params[:id])
+						render "ownerClinicDoctorsShow"
+				end
 			when "Patient"
 				case params[:type]
 					when "Doctor"
@@ -105,7 +119,7 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(user_params)
-
+		user.roles_mask = 0
 		# We store all emails in lowercase to avoid duplicates and case-sensitive login errors
 		#@user.email.downcase!
 

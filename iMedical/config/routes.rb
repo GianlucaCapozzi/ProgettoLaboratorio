@@ -83,7 +83,6 @@ Rails.application.routes.draw do
 
 	resources :secretaries, controller: 'users', type: 'Secretary' do
 		resources :clinics, shallow: true
-	
 	end
 
 	resources :patient, controller: 'users', type: 'Patient'
@@ -93,7 +92,9 @@ Rails.application.routes.draw do
 	end
 
 	resources :owner, controller: 'users', type: 'Owner' do
-		resources :clinics
+		resources :clinics do
+			resources :doctors, controller: 'users', type: 'Doctor', only: [:index, :show]
+		end
 	end
 	resources :works do
 		resources :clinics

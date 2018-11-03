@@ -42,6 +42,7 @@ class SessionsController < ApplicationController
 
 	def destroy
 		log_out if logged_in?
+		session.delete(:type)
   		redirect_to root_path
 	end
 

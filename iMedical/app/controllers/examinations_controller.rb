@@ -123,7 +123,7 @@ class ExaminationsController < ApplicationController
     end
 
     def examination_params
-        params.require(:examination).permit(:start_time, :end_time)
+        #params.require(:examination).permit(:start_time, :end_time)
     end
 
 end

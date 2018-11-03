@@ -1,0 +1,18 @@
+<h2> Dottore che lavora in una certa clinica per un certo proprietario </h2>
+
+Dottore: <%= @doctor.surname + " " + @doctor.name %> <br>
+Clinica: <%= @clinic.name %> <br>
+<br>
+<table border="1">
+	<%= @works.each do |work| %>
+		<tr>
+			<td> <%= work.id %> </td>
+			<td> <%= work.day %> </td>
+			<td> <%= work.start_time %> </td>
+			<td> <%= work.end_time %> </td>
+			<td> <%= link_to "Elimina giorno di lavoro", work_path(work), method: :delete %> </td>
+		</tr>
+	<% end %>
+</table>
+<br>
+<%= link_to "Aggiungi giorno di lavoro", new_work_path(:clinic_id => @clinic.id, :doctor_id => @doctor.id) %>

@@ -14,6 +14,9 @@
             <td><%= clinic.name %>
                 <%= button_to "Modifica studio medico", edit_owner_clinic_path(current_user.id, clinic.id), :method => :get, class: "btn" %>
             </td>
+            <td>
+				<%= button_to "Gestisci medici dello studio", owner_clinic_doctors_path(current_user.id, clinic.id), :method => :get, class: "btn" %>
+            </td>
         </tr>
         <% end %>
     </tbody>

@@ -29,27 +29,32 @@ class Ability
 		# See the wiki for details:
 		# https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 		type = session[:type]
-		can :manage, User, :id => user.id
+		can :newPatient, User
+		can [:newDoctor, :setDoctorID, :patchDoctorID], User
+		can :newOauth, User
+		can :newSecretary, User
+		can :newOwner, User
+		
 		if type == "Doctor"
 			can :read, Clinic
 			can [:read, :update], Doctor
-			can :read, Prescription
-			can [:read, :update, :destroy], Examination
+			can [:create, :update, :destroy, :read], Prescription
+			can :read, Examination
 			can :read, Manage
 			can [:read, :update], Patient
 			can :read, Work
-			can :update, User
+			can [:read,:update], User
 		end
 		
 		if type == "Patient"
-			can :read, Clinic
-			can [:read, :update], Doctor
-			can [:read, :update, :create, :destroy], Prescription
-			can :read, Examination
+			can [:read], Clinic
+			can :read, Doctor
+			can :read, Prescription
+			can [:read, :update, :create, :destroy], Examination
 			can :read, Manage
 			can :read, Patient
 			can :read, Work
-			can :update, User
+			can [:read,:update, :searchClinic], User
 		end
 		
 		if type == "Secretary"
@@ -59,15 +64,15 @@ class Ability
 			can [:read, :update, :destroy], Examination
 			can :read, Patient
 			can :read, Work
-			can :update, User
+			can [:read,:update], User
 		end
 		
 		if type == "Owner"
-			can [:create, :read, :update, :destroy], Clinic
+			can [:manage], Clinic
 			can [:create, :read, :update, :destroy], Manage
 			can :update, Owner
-			can [:create, :read, :update, :destroy], Work
-			can :update, User
+			can [:manage], Work
+			can [:read,:update], User
 		end
 	end
 end

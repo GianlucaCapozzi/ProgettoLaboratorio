@@ -1,0 +1,10 @@
+<h2> Aggiungi giorno di lavoro al dato medico </h2>
+
+<%= form_for @work do |w| %>
+	<%= w.hidden_field :clinic_id, :value => @work.clinic_id %>
+	<%= w.hidden_field :doctor_id, :value => @work.doctor_id %>
+	Giorno: <%= w.select :day, options_for_select([["Lunedì", 1], ["Martedì", 2], ["Mercoledì", 3], ["Giovedì", 4], ["Venerdì", 5], ["Sabato", 6], ["Domenica", 0]]) %> <br>
+	Ora inizio: <%= w.time_select :start_time, {minute_step: 30} %> <br>
+	Ora fine: <%= w.time_select :end_time, {minute_step: 30} %> <br>
+	<%= w.submit %>
+<% end %>
