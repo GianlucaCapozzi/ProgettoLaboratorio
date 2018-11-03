@@ -38,7 +38,7 @@ class Ability
 		if type == "Doctor"
 			can :read, Clinic
 			can [:read, :update], Doctor
-			can [:create, :update, :destroy, :read], Prescription
+			can [:create, :update, :destroy, :read, :searchDrug], Prescription
 			can :read, Examination
 			can :read, Manage
 			can [:read, :update], Patient
