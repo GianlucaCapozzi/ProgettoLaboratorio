@@ -5,13 +5,13 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-    created_at: <%= Time.zone.now %>
-    updated_at: <%= Time.zone.now %>
-    secretary_id: 1
-    clinic_id: 1
+ created_at: <%= Time.zone.now %>
+ updated_at: <%= Time.zone.now %>
+ secretary_id: 1
+ clinic_id: 1
 
 two:
-    created_at: <%= Time.zone.now %>
-    updated_at: <%= Time.zone.now %>
-    secretary_id: 2
-    clinic_id: 2
+ created_at: <%= Time.zone.now %>
+ updated_at: <%= Time.zone.now %>
+ secretary_id: 2
+ clinic_id: 2

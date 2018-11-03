@@ -5,19 +5,19 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-    created_at: <%= Time.zone.now %>
-    updated_at: <%= Time.zone.now %>
-    patient_id: 1
-    doctor_id: 1
-    clinic_id: 1
-    start_time: <%= Time.zone.now %>
-    end_time: <%= Time.zone.now %>
+ created_at: <%= Time.zone.now %>
+ updated_at: <%= Time.zone.now %>
+ patient_id: 3
+ doctor_id: 2
+ clinic_id: 1
+ start_time: <%= Time.zone.now %>
+ end_time: <%= Time.zone.now %>
 
 two:
-    created_at: <%= Time.zone.now %>
-    updated_at: <%= Time.zone.now %>
-    patient_id: 2
-    doctor_id: 2
-    clinic_id: 2
-    start_time: <%= Time.zone.now %>
-    end_time: <%= Time.zone.now %>
+ created_at: <%= Time.zone.now %>
+ updated_at: <%= Time.zone.now %>
+ patient_id: 2
+ doctor_id: 2
+ clinic_id: 2
+ start_time: <%= Time.zone.now %>
+ end_time: <%= Time.zone.now %>

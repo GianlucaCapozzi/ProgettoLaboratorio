@@ -222,7 +222,7 @@ class UsersController < ApplicationController
 		user.roles_mask = user.roles_mask | 4
 		user.save!(validate: false)
 		session[:type] = 'Patient'
-		
+
 	end
 
 	def newSecretary

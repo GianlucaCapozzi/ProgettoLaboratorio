@@ -5,3 +5,12 @@
 # below each fixture, per the syntax in the comments below
 #
 
+#one:
+#   id: 2
+#    created_at: <%= Time.zone.now %>
+#    updated_at: <%= Time.zone.now %>
+
+#two:
+#    created_at: <%= Time.zone.now %>
+#    updated_at: <%= Time.zone.now %>
+

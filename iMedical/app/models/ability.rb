@@ -34,7 +34,7 @@ class Ability
 		can :newOauth, User
 		can :newSecretary, User
 		can :newOwner, User
-		
+
 		if type == "Doctor"
 			can :read, Clinic
 			can [:read, :update], Doctor
@@ -45,7 +45,7 @@ class Ability
 			can :read, Work
 			can [:read,:update], User
 		end
-		
+
 		if type == "Patient"
 			can [:read], Clinic
 			can :read, Doctor
@@ -56,7 +56,7 @@ class Ability
 			can :read, Work
 			can [:read,:update, :searchClinic], User
 		end
-		
+
 		if type == "Secretary"
 			can [:read, :showClinics, :searchDoctor], Clinic
 			can :read, Doctor
@@ -66,7 +66,7 @@ class Ability
 			can :read, Work
 			can [:read,:update], User
 		end
-		
+
 		if type == "Owner"
 			can [:manage], Clinic
 			can [:manage], Manage

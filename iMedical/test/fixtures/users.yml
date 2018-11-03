@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 owner:
+  id: 1
   name: Owner
   surname: Example
   email: ownerrails@gmail.com
@@ -19,6 +20,7 @@ owner:
   updated_at: <%= Time.zone.now %>
 
 doctor:
+  id: 2
   name: Doctor
   surname: Test
   email: doctorrails@gmail.com
@@ -37,6 +39,7 @@ doctor:
   updated_at: <%= Time.zone.now %>
 
 patient:
+  id: 3
   name: Patient
   surname: Test
   email: patientrails@gmail.com

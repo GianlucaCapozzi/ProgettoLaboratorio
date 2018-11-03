@@ -11,9 +11,17 @@ one:
     drugName: Tachipirina
     type: Drug
     examination: one
+    
 two:
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     comment: Visita
     type: Prescripted Examination
     examination: two
+
+#two:
+#    created_at: <%= Time.zone.now %>
+#    updated_at: <%= Time.zone.now %>
+#    comment: Visita
+#    examination_id: 2
+#    type: Prescripted Examination

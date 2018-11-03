@@ -5,21 +5,22 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
-    owner_id: 1
-    name: "Prova studio"
-    address: "Via Guglielmo Marconi 32"
-    description: "Prova studio medico"
-    province: "Latina"
-    city: "Aprilia"
-    latitude: 41.5939
-    longitude: 12.6518
+ id: 1
+ owner_id: 1
+ name: "Prova studio"
+ address: "Via Guglielmo Marconi 32"
+ description: "Prova studio medico"
+ province: "Latina"
+ city: "Aprilia"
+ latitude: 41.5939
+ longitude: 12.6518
 
 two:
-    owner_id: 2
-    name: "Centro Cardiologico"
-    address: "Viale Ippocrate 95"
-    description: "Prova studio medico"
-    province: "Roma"
-    city: "Roma"
-    latitude: 41.9066
-    longitude: 12.5172
+ owner_id: 2
+ name: "Centro Cardiologico"
+ address: "Viale Ippocrate 95"
+ description: "Prova studio medico"
+ province: "Roma"
+ city: "Roma"
+ latitude: 41.9066
+ longitude: 12.5172
