@@ -1,37 +1,55 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-michael:
-  name: Michael
+owner:
+  name: Owner
   surname: Example
-  email: michaelrails@gmail.com
+  email: ownerrails@gmail.com
   password_digest: <%= User.digest('password') %>
   activated: true
   birthdayDate: '15101980'
   birthdayPlace: Roma
   phoneNumber: '3421523145'
-  cf: XMPMCH80R23G502B
+  cf: OWNMCH80R23G502B
   remember_digest: <%= User.digest('remember_token') %>
   activation_digest: <%= User.digest('activation_digest') %>
   reset_digest: <%= User.digest('reset_token') %>
   reset_sent_at: <%= Time.zone.now %>
   type: Owner
   created_at: <%= Time.zone.now %>
-  update_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
 
-tom:
-  name: Thomas
+doctor:
+  name: Doctor
   surname: Test
-  email: thomasrails@gmail.com
+  email: doctorrails@gmail.com
+  password_digest: <%= User.digest('password') %>
+  activated: true
+  birthdayDate: '15031954'
+  birthdayPlace: Firenze
+  phoneNumber: '3271828323'
+  cf: DCTHMS80R23G502B
+  remember_digest: <%= User.digest('remember_token') %>
+  activation_digest: <%= User.digest('activation_digest') %>
+  reset_digest: <%= User.digest('reset_token') %>
+  reset_sent_at: <%= Time.zone.now %>
+  type: Doctor
+  created_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>
+
+patient:
+  name: Patient
+  surname: Test
+  email: patientrails@gmail.com
   password_digest: <%= User.digest('password') %>
   activated: true
   birthdayDate: '18051965'
   birthdayPlace: Milano
   phoneNumber: '3271828394'
-  cf: TSTHMS80R23G502B
+  cf: PTNHMS80R23G502B
   remember_digest: <%= User.digest('remember_token') %>
   activation_digest: <%= User.digest('activation_digest') %>
   reset_digest: <%= User.digest('reset_token') %>
   reset_sent_at: <%= Time.zone.now %>
   type: Patient
   created_at: <%= Time.zone.now %>
-  update_at: <%= Time.zone.now %>
+  updated_at: <%= Time.zone.now %>

@@ -90,7 +90,7 @@ class UsersController < ApplicationController
 					when "Doctor"
 						# Patients want to see doctor and wants to book an examination
 						# I need doctor id and clinic id
-						if params[:date] == nil 
+						if params[:date] == nil
 							redirect_to clinic_doctor_path(params[:clinic_id], params[:id])+"?date="+DateTime.now.to_date.to_s
 						else
 							@clinic = Clinic.find(params[:clinic_id])
@@ -147,7 +147,7 @@ class UsersController < ApplicationController
 			redirect_to "/home/show"
 		else
 			flash[:errors] = user.errors.full_messages
-			redirect_back fallback_location: root_path
+			render :edit
 		end
 	end
 
@@ -277,7 +277,7 @@ class UsersController < ApplicationController
 				puts time
 				puts Time.now.utc
 				puts time < Time.now.utc
-				if examination.start_time.to_datetime == time 
+				if examination.start_time.to_datetime == time
 					#puts "Occupato!"
 					availability = availability & false
 				end

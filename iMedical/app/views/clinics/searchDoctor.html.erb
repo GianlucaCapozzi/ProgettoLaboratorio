@@ -8,6 +8,8 @@
                 <td><%= doctor.name %><%= button_to "Aggiungi Medico", add_new_doctor_path(doctor.id, session[:clinic_id]), :method => :get, class: "btn" %></td>
             <% elsif(session[:type] == "Patient") %>
                 <td><%= doctor.name %><%= button_to "Prenota visita", add_new_doctor_path(doctor.id, session[:clinic_id]), :method => :get, class: "btn" %></td>
+            <% elsif(session[:type] == "Secretary") %>
+                <td><%= doctor.name %> <%= button_to "Vedi Prescrizioni",  examination_prescriptions_path(doctor.id, session[:clinic_id]), :method => :get, class: "btn" %></td>  
             <% end %>
         </tr>
     <% end %>
