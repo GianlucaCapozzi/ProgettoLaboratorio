@@ -30,7 +30,7 @@ class Ability
 		# https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 		type = session[:type]
 		can :newPatient, User
-		can [:newDoctor, :setDoctorID, :patchDoctorID], User
+		can [:newDoctor, :setDoctorID, :patchDoctorID, :update], User
 		can :newOauth, User
 		can :newSecretary, User
 		can :newOwner, User
