@@ -1,24 +1,19 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <script>
-            var uid = <%= current_user.id %>
-        </script>
-    <body>
-        <h1> VISITE </h1>
-        <!--
-        <table>
-            <thead>
-                <tr>
-                    <th>Visita</th>
-                </tr>
-            </thead>
+<h1> VISITE(SEGRETARIO)</h1>
 
-            <tbody>
+<table>
+    <thead>
+        <tr>
+            <th>Visite</th>
+        </tr>
+    </thead>
 
-            </tbody>
-        </table>
-        -->
-        <div class="calendar"></div>
-    </body>
-</html>
+    <tbody>
+        <% @examinations.each do |examination| %>
+        <tr>
+            <td>
+                <%= examination.patient_id %><%= button_to "Visualizza prescrizioni", examination_prescriptions_path(examination.id), :method => :get, class: "btn" %>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
