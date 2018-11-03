@@ -10,8 +10,8 @@ class ManagesController < ApplicationController
             @clinic = Clinic.find(params[:clinic_id])
             @manage = Manage.new(manage_params)
             @manage.save!
-            @secretary.manages << @manage
-            @clinic.manages << @manage
+            #@secretary.manages << @manage
+            #@clinic.manages << @manage
             redirect_to new_owner_path(@clinic.owner_id)
         end
     end

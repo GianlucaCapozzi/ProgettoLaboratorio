@@ -58,7 +58,7 @@ class Ability
 		end
 		
 		if type == "Secretary"
-			can :read, Clinic
+			can [:read, :showClinics, :searchDoctor], Clinic
 			can :read, Doctor
 			can :read, Prescription
 			can [:read, :update, :destroy], Examination
@@ -69,7 +69,7 @@ class Ability
 		
 		if type == "Owner"
 			can [:manage], Clinic
-			can [:create, :read, :update, :destroy], Manage
+			can [:manage], Manage
 			can :update, Owner
 			can [:manage], Work
 			can [:read,:update], User

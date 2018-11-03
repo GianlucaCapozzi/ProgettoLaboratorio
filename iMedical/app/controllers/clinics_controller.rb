@@ -87,10 +87,12 @@ class ClinicsController < ApplicationController
     def searchDoctor
         if(session[:type] == "Owner")
             session[:clinic_id] = Clinic.find(params[:id])
-		    @doctors = Doctor.all.order('created_at DESC')
+		    @doctors = User.get_doctors.all.order('created_at DESC')
 		    @doctors = @doctors.search(params[:search]) if params[:search].present?
         elsif(session[:type] == "Secretary")
-            session[:clinic_id] = Clinic.find(params[:clinic_id])
+            session[:clinic_id] = Clinic.find(params[:id])
+			@doctors = User.get_doctors.all.order('created_at DESC')
+		    @doctors = @doctors.search(params[:search]) if params[:search].present?
         end
 	end
 
