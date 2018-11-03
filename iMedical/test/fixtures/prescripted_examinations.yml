@@ -8,6 +8,6 @@ one:
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
 
-two:
-    created_at: <%= Time.zone.now %>
-    updated_at: <%= Time.zone.now %>
+#two:
+#    created_at: <%= Time.zone.now %>
+#    updated_at: <%= Time.zone.now %>

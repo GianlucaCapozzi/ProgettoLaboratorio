@@ -119,7 +119,7 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(user_params)
-		user.roles_mask = 0
+		@user.roles_mask = 0
 		# We store all emails in lowercase to avoid duplicates and case-sensitive login errors
 		#@user.email.downcase!
 
@@ -222,7 +222,7 @@ class UsersController < ApplicationController
 		user.roles_mask = user.roles_mask | 4
 		user.save!(validate: false)
 		session[:type] = 'Patient'
-		
+
 	end
 
 	def newSecretary

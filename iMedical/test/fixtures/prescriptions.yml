@@ -5,6 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 one:
+    id: 1
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     comment: Medicina
@@ -12,9 +13,9 @@ one:
     examination_id: 1
     type: Drug
 
-two:
-    created_at: <%= Time.zone.now %>
-    updated_at: <%= Time.zone.now %>
-    comment: Visita
-    examination_id: 2
-    type: Prescripted Examination
+#two:
+#    created_at: <%= Time.zone.now %>
+#    updated_at: <%= Time.zone.now %>
+#    comment: Visita
+#    examination_id: 2
+#    type: Prescripted Examination

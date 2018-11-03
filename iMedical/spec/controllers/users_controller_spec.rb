@@ -39,6 +39,7 @@ RSpec.describe UsersController, type: :controller do
         password_confirmation: "password",
         phoneNumber: "3215463453",
         cf: "XMPMCH80R23G502B",
+        type: "Owner",
         activated: true
     }
   }
@@ -52,7 +53,8 @@ RSpec.describe UsersController, type: :controller do
           password_confirmation: "password",
           phoneNumber: "3215763453",
           cf: "XGPMCH80R23G502B",
-          activated: true
+          activated: true,
+          type: "Owner"
       }
   }
 
@@ -65,7 +67,8 @@ RSpec.describe UsersController, type: :controller do
           password_confirmation: "passwords",
           phoneNumber: "3215463453",
           cf: "XGPMCH80R23G502B",
-          activated: true
+          activated: true,
+          type: "Owner"
       }
   }
 
@@ -78,6 +81,7 @@ RSpec.describe UsersController, type: :controller do
     @user = User.create!(valid_attributes)
     log_in(@user)
     @user.save!
+    allow_any_instance_of(CanCan::ControllerResource).to receive(:load_and_authorize_resource){ nil }
   end
 
   describe "GET #index" do
