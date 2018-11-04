@@ -1,5 +1,6 @@
 class PrescriptionsController < ApplicationController	
 	load_and_authorize_resource	
+	skip_authorize_resource :only => [:create, :new]
 	def index
 		case session[:type]
 			when "Doctor"
@@ -79,15 +80,15 @@ class PrescriptionsController < ApplicationController
 						prescription.comment = params[:prescription][:comment]
 						prescription.drugName = params[:prescription][:drugName]
 						prescription.type = params[:type]
-						prescription.examination_id = params[:examination_id]
-						prescription.save
+						prescription.examination_id = params[:examination_id]	
 					when "PrescriptedExamination"
 						params.require(:prescription).permit(:comment)
 						prescription.comment = params[:prescription][:comment]
 						prescription.type = params[:type]
 						prescription.examination_id = params[:examination_id]
-						prescription.save
 				end
+				authorize! :create, prescription
+				prescription.save
 				redirect_to examination_prescriptions_path(@examination)
 			when "Secretary"
 			

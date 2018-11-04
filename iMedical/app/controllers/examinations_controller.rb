@@ -1,5 +1,7 @@
 class ExaminationsController < ApplicationController
 	load_and_authorize_resource
+	skip_authorize_resource :only => :create
+	
     #before_action :set_examination, only: [:show, :edit, :update, :destroy]
     #before_action :set_examinations, only: [:index, :show, :edit]
     #before_action :set_patient, only: [:index, :new, :edit]
@@ -66,6 +68,7 @@ class ExaminationsController < ApplicationController
 				examination.doctor_id = params[:doctor_id]
 				examination.clinic_id = params[:clinic_id]
 				examination.patient_id = session[:user_id]
+				authorize! :create, examination
 				examination.save
 				redirect_to patient_examinations_path(session[:user_id])
 		end
