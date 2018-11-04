@@ -76,7 +76,7 @@ class UsersController < ApplicationController
 
 			when "Secretary"
 				case params[:type]
-					When "Doctor"
+					when "Doctor"
 						if params[:date] == nil
 							redirect_to clinic_doctor_path(params[:clinic_id], params[:id])+"?date="+DateTime.now.to_date.to_s
 						else
@@ -95,6 +95,7 @@ class UsersController < ApplicationController
 							puts @bookableDates
 							render "showDoctorForSecretary"
 						end
+				end		
 
 			when "Owner"
 				case params[:type]
