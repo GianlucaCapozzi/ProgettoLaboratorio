@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 	post '/login' => 'sessions#createLocal'
 	delete '/logout' => 'sessions#destroy', as: :logout
 
-	resources :sessions, only: [:create, :destroy]
+	resources :sessions, only: [:create, :destroy, :new]
 	resources :home
 	resources :users
 	#resources :doctors, controller: 'users', type: 'Doctor' do
