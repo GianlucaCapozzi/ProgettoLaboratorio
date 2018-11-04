@@ -73,7 +73,28 @@ class UsersController < ApplicationController
 						clinic = Clinic.find(params[:clinic_id])
 						redirect_to clinic_patient_examinations_path(clinic, patient)
 				end
+
 			when "Secretary"
+				case params[:type]
+					When "Doctor"
+						if params[:date] == nil
+							redirect_to clinic_doctor_path(params[:clinic_id], params[:id])+"?date="+DateTime.now.to_date.to_s
+						else
+							@clinic = Clinic.find(params[:clinic_id])
+							@doctor = User.get_doctors.find(params[:id])
+							@examinations = getExaminations()
+							@nextDay = (params[:date].to_date + 1.days).to_s
+							@previousDay = (params[:date].to_date - 1.days).to_s
+							@works = Work.select('day, start_time, end_time').where("clinic_id = ? AND doctor_id = ? AND day = ?", params[:clinic_id], params[:id], params[:date].to_date.wday)
+							@bookableDates = []
+							if @works.length != 0
+								@startDateTime = params[:date] + " " + @works[0].start_time
+								@endDateTime = params[:date] + " " + @works[0].end_time
+								@bookableDates = getBookableDates(@examinations, @startDateTime, @endDateTime)
+							end
+							puts @bookableDates
+							render "showDoctorForSecretary"
+						end
 
 			when "Owner"
 				case params[:type]
