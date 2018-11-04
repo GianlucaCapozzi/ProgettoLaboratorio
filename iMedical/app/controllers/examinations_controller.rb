@@ -37,7 +37,7 @@ class ExaminationsController < ApplicationController
 				#@prescriptions = @examination.prescriptions
 				render 'examinationShow'
 			when "Secretary"
-				
+
 			when "Patient"
 				@examination = Examination.find(params[:id])
 				@doctor = User.get_doctors.find(@examination.doctor_id)
@@ -48,10 +48,10 @@ class ExaminationsController < ApplicationController
 		end
 	end
 
-    def new
-        @examinations = current_user.examinations.select { |a| a.persisted? }
-        @examination = current_user.examinations.build
-    end
+    #def new
+    #    @examinations = current_user.examinations.select { |a| a.persisted? }
+    #    @examination = current_user.examinations.build
+    #end
 
 
     def create
@@ -93,32 +93,7 @@ class ExaminationsController < ApplicationController
 
     private
 
-    #def set_patient
-    #    @patient = Patient.find(params[:patient_id])
-    #end
-
-    #def set_doctor
-    #    @doctor = Doctor.find(params[:doctor_id])
-    #end
-
-    #def set_clinic
-    #    @clinic = Clinic.find(params[:clinic_id])
-    #end
-
-    def set_examination
-        #patient = Patient.find(params[:patient_id])
-        #@examination = patient.examinations.find(params[:id])
-        #if @examination.nil?
-        #    flash[:error] = "Visita non trovata"
-        #    redirect_to examinations_path
-        #end
-    end
-
     def set_examinations
-        #if(session[:type] == "Patient")
-        #    patient = Patient.find(params[:patient_id])
-        #    @examinations = patient.examinations.order(start_time: :desc)
-        #end
         @examinations = Examination.all
     end
 
