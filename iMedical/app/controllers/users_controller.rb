@@ -36,7 +36,8 @@ class UsersController < ApplicationController
 						render "ownerClinicDoctorsIndex"
 					when "Secretary"
 						params.require(:clinic_id)
-
+						@secretaries = User.get_secretaries.select("manages.id, users.name, users.surname").joins("INNER JOIN manages ON users.id = manages.secretary_id").where("manages.clinic_id = ?", params[:clinic_id])
+						render "ownerClinicSecretariesIndex"
 				end
 			when "Patient"
 				# Dove devo metterle?
@@ -111,6 +112,7 @@ class UsersController < ApplicationController
 						@days = ["Domenica", "Lunedi", "Martedi", "Mercoledi", "Giovedi", "Venerdi", "Sabato"]
 						render "ownerClinicDoctorsShow"
 				end
+
 			when "Patient"
 				case params[:type]
 					when "Doctor"
