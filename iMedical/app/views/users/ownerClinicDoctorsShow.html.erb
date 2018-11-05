@@ -9,7 +9,7 @@ Clinica: <%= @clinic.name %> <br>
 			<td> <%= @days[work.day] %> </td>
 			<td> <%= work.start_time %> </td>
 			<td> <%= work.end_time %> </td>
-			<td> <%= link_to "Elimina giorno di lavoro", work_path(work), method: :delete %> </td>
+			<td> <%= button_to "Elimina giorno di lavoro", work_path(work), method: :delete %> </td>
 		</tr>
 	<% end %>
 </table>

@@ -73,7 +73,7 @@ Rails.application.routes.draw do
 	end
 	# I want to see the prescriptions of a examinations
 	resources :examinations do
-		resources :prescriptions, shallow: true, only: [:index, :show, :edit, :destroy]
+		resources :prescriptions, shallow: true
 		resources :drugs, controller: 'prescriptions', type: 'Drug', only: [:new, :create]
 		resources :prescriptedExaminations, controller: 'prescriptions', type: 'PrescriptedExamination', only: [:new, :create]
 	end

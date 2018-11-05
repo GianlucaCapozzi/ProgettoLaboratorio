@@ -1,9 +1,12 @@
 <h2> Prescrizioni di una data visita (vista del medico) </h2>
 <br>
 
-STO QUA ?
-<table>
-	<%= @prescriptions.each do |prescription| %>
-		<tr> <td> <%= link_to prescription.id, prescription_path(prescription) %>  </td> </tr> 
+<table border="1">
+	<% @prescriptions.each do |prescription| %>
+		<tr> 
+			<td> <%= prescription.id %> </td> 
+			<td> <%= prescription.type %> </td>
+			<td> <%= button_to "Visualizza prescrizione", prescription_path(prescription), method: :get %>  </td>
+		</tr> 
 	<% end %>
 </table>

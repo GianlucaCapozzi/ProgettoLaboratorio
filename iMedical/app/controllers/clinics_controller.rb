@@ -19,8 +19,8 @@ class ClinicsController < ApplicationController
         end
 		# If the user is a secretary I show the doctors that work in this clinic
 		# If the user is a owner I show.. nothing?
-		puts session
-		puts params
+		#puts session
+		#puts params
 		clinic = Clinic.find(params[:id])
 		case session[:type]
 			when "Doctor"

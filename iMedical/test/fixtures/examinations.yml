@@ -19,5 +19,5 @@ two:
  patient_id: 2
  doctor_id: 2
  clinic_id: 2
- start_time: <%= Time.zone.now %>
+ start_time: <%= Time.zone.now+1.hours %>
  end_time: <%= Time.zone.now %>

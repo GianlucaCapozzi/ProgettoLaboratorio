@@ -1,19 +1,11 @@
 <h2> Lista cliniche </h2><br>
-<table>
-	<%= form_tag('/prova', method: "post") do %>
-		<% @clinics.each do |clinic| %>
-			<tr> 
-				<td> <%= radio_button_tag(:id, clinic.id) %> </td>
-				<td> <%= clinic.name %> </td>
-			</tr>
-		<% end %>
-		<%= submit_tag("Select") %>
-	<% end %>
-</table>
 
 <br>
-<table>
+<table border="1">
 	<% @clinics.each do |clinic| %>
-		<td> <%= link_to clinic.name, clinic_path(clinic) %> </td>
+		<tr>
+			<td> <%= clinic.name %> </td>
+			<td> <%= button_to "Visualizza clinica", clinic_path(clinic), method: :get %> </td>
+		</tr>
 	<% end %>
 </table>

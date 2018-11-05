@@ -1,7 +1,12 @@
 <h2> Lista visite di un paziente (Vista paziente) </h2> 
 
-<table>
-	<%= @examinations.each do |examination| %>
-		<tr> <td> <%= link_to examination.id, examination_path(examination) %></td> </tr>
+<table border="1">
+	<% @examinations.each do |examination| %>
+		<tr> 
+			<td> <%= examination.id %> </td>
+			<td> <%= examination.start_time %> </td>
+			<td> <%= User.get_doctors.find(examination.doctor_id).surname + " " + User.get_doctors.find(examination.doctor_id).name %> </td>
+			<td> <%= button_to "Visualizza visita", examination_path(examination), method: :get %></td> 
+		</tr>
 	<% end %>
 </table>

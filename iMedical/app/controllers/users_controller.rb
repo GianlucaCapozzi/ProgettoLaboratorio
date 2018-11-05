@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
 	def index
 		# Different view for every role
-		puts params
+		#puts params
 		#puts session[:role]
 		case session[:type]
 			when "Doctor"
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 						# List of patients if the user has connected as Doctor
 						# The doctor id is stored in session[:user_id]
 						@patients = User.get_patients.joins("INNER JOIN examinations ON users.id = examinations.patient_id").where("examinations.doctor_id = ? AND examinations.clinic_id = ?", session[:user_id], params[:clinic_id]).uniq
-						puts params
+						#puts params
 						@clinic = Clinic.find(params[:clinic_id])
 						render "doctorPatients"
 				end
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		puts params
+		#puts params
 		# Role of the session
 		case session[:type]
 			when "Doctor"
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 						#@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id])
 						@clinics = Clinic.joins("INNER JOIN works ON works.clinic_id = clinics.id").where("works.doctor_id = ?", session[:user_id]).uniq
 						#puts @clinics.all
-						puts session[:user_id]
+						#puts session[:user_id]
 						render 'showDoctor'
 					when "Secretary"
 
@@ -96,7 +96,7 @@ class UsersController < ApplicationController
 								@endDateTime = params[:date] + " " + @works[0].end_time
 								@bookableDates = getBookableDates(@examinations, @startDateTime, @endDateTime)
 							end
-							puts @bookableDates
+							#puts @bookableDates
 							render "showDoctorForSecretary"
 						end
 				end
@@ -133,7 +133,7 @@ class UsersController < ApplicationController
 								@endDateTime = params[:date] + " " + @works[0].end_time
 								@bookableDates = getBookableDates(@examinations, @startDateTime, @endDateTime)
 							end
-							puts @bookableDates
+							#puts @bookableDates
 							render "patientDoctorShow"
 						end
 					when "Secretary"
@@ -224,7 +224,7 @@ class UsersController < ApplicationController
 				row = row.chomp
 				# Splitting the row using delimeter ;
 				doctor = row.split(";")
-				puts doctor
+				#puts doctor
 				if doctor[4] == doctorID && user.surname.downcase == doctor[0].downcase && user.name.downcase == doctor[1].downcase && user.birthdayDate == doctor[2] && user.birthdayPlace.downcase == doctor[3].downcase
 					# Found the doctor in the file and the information are correct
 					user.type = "Doctor"
@@ -233,10 +233,10 @@ class UsersController < ApplicationController
 					user.save!(validate: false)
 					puts "Trovato!"
 				else
-					puts user.surname.downcase == doctor[0].downcase
-					puts user.name.downcase == doctor[1].downcase
-					puts user.birthdayDate == doctor[2]
-					puts user.birthdayPlace.downcase == doctor[3].downcase
+					#puts user.surname.downcase == doctor[0].downcase
+					#puts user.name.downcase == doctor[1].downcase
+					#puts user.birthdayDate == doctor[2]
+					#puts user.birthdayPlace.downcase == doctor[3].downcase
 					puts "Non corrisponde"
 				end
 			end
@@ -269,13 +269,13 @@ class UsersController < ApplicationController
 
 	def showPatientStory
 		@patient = User.get_patients.find(params[:id])
-		puts @patient
+		#puts @patient
 	end
 
 	def searchClinic
 		@clinics = Clinic.all.order('created_at DESC')
-		puts session
-		puts session[:user_id]
+		#puts session
+		#puts session[:user_id]
 		@clinics = @clinics.search(params[:search]) if params[:search].present?
 	end
 
@@ -308,9 +308,9 @@ class UsersController < ApplicationController
 		#puts examinations
 		if time.utc > Time.now.utc
 			examinations.each do |examination|
-				puts time
-				puts Time.now.utc
-				puts time < Time.now.utc
+				#puts time
+				#puts Time.now.utc
+				#puts time < Time.now.utc
 				if examination.start_time.to_datetime == time
 					#puts "Occupato!"
 					availability = availability & false

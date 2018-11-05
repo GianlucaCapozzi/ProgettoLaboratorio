@@ -25,7 +25,6 @@ class ExaminationsController < ApplicationController
 			when "Owner"
 				#Nothing?
 		end
-
 	end
 
 	def show

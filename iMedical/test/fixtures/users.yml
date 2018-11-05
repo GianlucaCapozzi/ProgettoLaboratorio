@@ -16,6 +16,7 @@ owner:
   reset_digest: <%= User.digest('reset_token') %>
   reset_sent_at: <%= Time.zone.now %>
   type: Owner
+  roles_mask: 1
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>
 
@@ -53,6 +54,7 @@ patient:
   activation_digest: <%= User.digest('activation_digest') %>
   reset_digest: <%= User.digest('reset_token') %>
   reset_sent_at: <%= Time.zone.now %>
+  roles_mask: 4
   type: Patient
   created_at: <%= Time.zone.now %>
   updated_at: <%= Time.zone.now %>

@@ -3,7 +3,7 @@
 <table border="1">
 	<%= @doctors.each do |doctor| %>
 		<tr>
-			<td> <%= link_to doctor.surname + " " + doctor.name, owner_clinic_doctor_path(current_user.id, @clinic, doctor) %> </td>
+			<td> <%= button_to doctor.surname + " " + doctor.name, owner_clinic_doctor_path(current_user.id, @clinic, doctor) %> </td>
 		</tr>
 	<% end %>
 </table>
