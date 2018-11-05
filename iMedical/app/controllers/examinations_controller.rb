@@ -16,7 +16,7 @@ class ExaminationsController < ApplicationController
 				#puts @examinations
 				render 'clinicDoctorPatient'
 			when "Secretary"
-				@examinations = Examination.where("clinic_id = ? AND doctor_id = ?", params[:clinic_id], params[:doctor_id])
+				#@examinations = Examination.where("clinic_id = ? AND doctor_id = ?", params[:clinic_id], params[:doctor_id])
 			when "Patient"
 				#List of examination
 				@patient = User.get_patients.find(current_user.id)

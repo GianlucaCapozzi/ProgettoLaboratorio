@@ -4,10 +4,12 @@ class ClinicsController < ApplicationController
     def index
         if(session[:type] == "Owner")
             @owner = User.get_owners.find(params[:owner_id])
-            @clinics = @owner.clinics
+            #@clinics = @owner.clinics
+            @clinics = Clinics.where("owner_id = ?", @owner.id)
         else
             @secretary = User.get_secretaries.find(params[:secretary_id])
-            @clinics = @secretary.clinics
+            #@clinics = @secretary.clinics
+            @clinics = Clinics.joins("INNER JOIN manages ON clinics.id = manages.clinic_id").where("manages.secretary_id = ?", @secretary.id)
         end
 
     end
@@ -50,7 +52,8 @@ class ClinicsController < ApplicationController
     def create
         #@owner = User.get_owners.find(params[:owner_id])
         @owner = User.get_owners.find(session[:user_id])
-        @clinic = @owner.clinics.create!(clinic_params)
+        #@clinic = @owner.clinics.create!(clinic_params)
+        @clinic = Clinic.create!(clinic_params)
         @clinic.owner_id = current_user.id
         @clinic.save
         #redirect_to new_owner_path(params[:owner_id])
@@ -71,14 +74,16 @@ class ClinicsController < ApplicationController
 
     def showClinics
         @secretary = User.get_secretaries.find(params[:secretary_id])
-        @clinics = @secretary.clinics
+        #@clinics = @secretary.clinics
+		@clinics = Clinic.joins("INNER JOIN manages ON clinics.id = manages.clinic_id").where("manages.secretary_id = ?", @secretary.id)
     end
     
     # Owner's functions
 
     def showClinicsForDoctor
         @owner = User.get_owners.find(params[:owner_id])
-        @clinics = @owner.clinics
+        #@clinics = @owner.clinics
+        @clinics = Clinic.where("owner_id = ?", @owner.id)
     end
 
     def showClinicsForSecretary

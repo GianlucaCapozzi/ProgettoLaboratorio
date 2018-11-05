@@ -9,8 +9,8 @@ class PrescriptionsController < ApplicationController
 				@prescriptions = @examination.prescriptions
 				render "doctorPrescriptionsIndex"
 			when "Secretary"
-				@examination = Examination.find(params[:examination_id])
-				@prescriptions = @examination.prescriptions	
+				#@examination = Examination.find(params[:examination_id])
+				#@prescriptions = @examination.prescriptions	
 			when "Patient"
 				#@patient = Patient.find(params[:patient_id])
 				@examination = Examination.find(params[:examination_id])
