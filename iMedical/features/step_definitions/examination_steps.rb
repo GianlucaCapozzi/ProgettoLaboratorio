@@ -13,14 +13,14 @@ Then("I should be redirected to clinics' search form") do
 end
 
 Given("I am on the clinics search page") do
-    visit("/patient/searchClinic")
+    visit(search_clinic_path)
 end
 
 When("I click on Informazioni button") do
-    visit("/patient/searchClinic")
-    click_button("Informazioni")
+    first('.btn').click
 end
 
 Then("I should be redirected to clinic show page") do
-    expect(current_path).to eq(clinics_show_path(clinic.id))
+    @clinic = Clinic.find(1)
+    expect(current_path).to eq(clinics_show_path(1))
 end
