@@ -9,6 +9,7 @@ When("I click on cerca studio medico button") do
 end
 
 Then("I should be redirected to clinics' search form") do
+    puts current_path
     expect(current_path).to eq("/patient/searchClinic")
 end
 
@@ -17,10 +18,41 @@ Given("I am on the clinics search page") do
 end
 
 When("I click on Informazioni button") do
-    first('.btn').click
+    page.first(:xpath, "//input[@value='Informazioni']").click
 end
 
 Then("I should be redirected to clinic show page") do
     @clinic = Clinic.find(1)
-    expect(current_path).to eq(clinics_show_path(1))
+    puts current_path
+    expect(current_path).to eq(clinics_show_path(@clinic.id))
+end
+
+Given("I am on Info page") do
+    @clinic = Clinic.find(1)
+    visit(clinics_show_path(@clinic.id))
+end
+
+When("I click on lista medici link") do
+    click_link("Lista medici")
+end
+
+Then("I should be redirected to clinic doctors page") do
+    @clinic = Clinic.find(1)
+    expect(current_path).to eq(clinic_doctors_path(@clinic.id))
+end
+
+Given("I am on clinic doctors page") do
+    @clinic = Clinic.find(1)
+    visit(clinic_doctors_path(@clinic.id))
+end
+
+When("I click on the first doctor link") do
+    puts current_path
+    page.first(:xpath, "//input[@value='Calendario']").click
+end
+
+Then("I should be redirected to clinic doctor page") do
+    @clinic = Clinic.find(1)
+    @doctor = User.find(2)
+    expect(current_path).to eq(clinic_doctor_path(@clinic.id, @doctor.id))
 end

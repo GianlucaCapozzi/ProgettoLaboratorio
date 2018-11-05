@@ -98,7 +98,7 @@ class UsersController < ApplicationController
 							end
 							puts @bookableDates
 							render "showDoctorForSecretary"
-						end	
+						end
 				end
 
 			when "Owner"
@@ -112,7 +112,7 @@ class UsersController < ApplicationController
 						@days = ["Domenica", "Lunedi", "Martedi", "Mercoledi", "Giovedi", "Venerdi", "Sabato"]
 						render "ownerClinicDoctorsShow"
 				end
-				
+
 			when "Patient"
 				case params[:type]
 					when "Doctor"
@@ -235,7 +235,7 @@ class UsersController < ApplicationController
 				else
 					puts user.surname.downcase == doctor[0].downcase
 					puts user.name.downcase == doctor[1].downcase
-					puts user.birthdayDate == doctor[2] 
+					puts user.birthdayDate == doctor[2]
 					puts user.birthdayPlace.downcase == doctor[3].downcase
 					puts "Non corrisponde"
 				end
@@ -274,6 +274,8 @@ class UsersController < ApplicationController
 
 	def searchClinic
 		@clinics = Clinic.all.order('created_at DESC')
+		puts session
+		puts session[:user_id]
 		@clinics = @clinics.search(params[:search]) if params[:search].present?
 	end
 
