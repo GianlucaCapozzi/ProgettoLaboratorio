@@ -56,3 +56,19 @@ Then("I should be redirected to clinic doctor page") do
     @doctor = User.find(2)
     expect(current_path).to eq(clinic_doctor_path(@clinic.id, @doctor.id))
 end
+
+Given("I am on the calendar page") do
+    @clinic = Clinic.find(1)
+    @doctor = User.find(2)
+    visit(clinic_doctor_path(@clinic.id, @doctor.id))
+    puts current_path
+end
+
+When("I click on prenota button") do
+    page.first(:xpath, "//input[@value='Prenota']").click
+end
+
+Then("I should be redirected to patient examination page") do
+    @patient = current_user
+    expect(current_path).to eq(patient_examinations_path(@patient.id))
+end

@@ -9,15 +9,60 @@ one:
     updated_at: <%= Time.zone.now %>
     doctor_id: 2
     clinic_id: 1
-    day: 1
+    day: 0
     start_time: "13:00"
     end_time: "19:00"
 
 two:
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
-    doctor_id: 1
+    doctor_id: 2
+    clinic_id: 1
+    day: 1
+    start_time: "13:00"
+    end_time: "19:00"
+
+three:
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    doctor_id: 2
+    clinic_id: 1
+    day: 2
+    start_time: "13:00"
+    end_time: "19:00"
+
+four:
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    doctor_id: 2
+    clinic_id: 1
+    day: 3
+    start_time: "13:00"
+    end_time: "19:00"
+
+five:
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    doctor_id: 2
     clinic_id: 1
     day: 4
-    start_time: <%= Time.zone.now %>
-    end_time: <%= Time.zone.now %>
+    start_time: "13:00"
+    end_time: "19:00"
+
+six:
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    doctor_id: 2
+    clinic_id: 1
+    day: 5
+    start_time: "13:00"
+    end_time: "19:00"
+
+seven:
+    created_at: <%= Time.zone.now %>
+    updated_at: <%= Time.zone.now %>
+    doctor_id: 2
+    clinic_id: 1
+    day: 6
+    start_time: "13:00"
+    end_time: "19:00"
