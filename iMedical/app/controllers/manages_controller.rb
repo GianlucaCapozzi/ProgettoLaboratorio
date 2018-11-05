@@ -16,6 +16,14 @@ class ManagesController < ApplicationController
         end
     end
 
+	def destroy
+		@manage = Manage.find(params[:id])
+		clinic = Clinic.find(@manage.clinic_id)
+		secretary = User.get_secretaries.find(@manage.secretary_id)
+		@manage.delete
+		redirect_to owner_clinic_secretaries_path(clinic, secretary)
+	end
+
     private
 
     def manage_params
