@@ -40,8 +40,8 @@ Rails.application.routes.draw do
 	delete '/logout' => 'sessions#destroy', as: :logout
 
 	resources :sessions, only: [:create, :destroy, :new]
-	resources :home
-	resources :users
+	resources :home, only: [:show]
+	resources :users, only: [:show, :new, :create, :destroy, :update, :edit ]
 	#resources :doctors, controller: 'users', type: 'Doctor' do
 	#	resources :clinics, shallow: true do
 	#		resources :patient, controller: 'users', type: 'Patient', shallow: true do
@@ -53,11 +53,11 @@ Rails.application.routes.draw do
 	#end
 
 	# I want to see where the given doctor works
-	resources :doctors, controller: 'users', type: 'Doctor' do
+	resources :doctors, controller: 'users', type: 'Doctor', only: [:index, :show] do
 		resources :clinics, shallow: true, only: [:index, :show]
 	end
 	# I want to see the patient that had a visit in the given clinic
-	resources :clinics do
+	resources :clinics, only: [:index, :show] do
 		resources :patients, controller: 'users', type: 'Patient', only: [:index, :show] do
 			resources :examinations, only: [:index]
 		end
@@ -67,13 +67,13 @@ Rails.application.routes.draw do
 		end
 	end
 	# I want to see the visits of a patient
-	resources :patients, controller: 'users', type: 'Patient' do
+	resources :patients, controller: 'users', type: 'Patient', only: [:index, :show] do
 		resources :examinations, shallow: true, only: [:index, :show, :create]
-		resources :prescriptions, shallow: true
+		#resources :prescriptions, shallow: true
 	end
 	# I want to see the prescriptions of a examinations
 	resources :examinations do
-		resources :prescriptions, shallow: true, only: [:index, :show]
+		resources :prescriptions, shallow: true, only: [:index, :show, :edit, :destroy]
 		resources :drugs, controller: 'prescriptions', type: 'Drug', only: [:new, :create]
 		resources :prescriptedExaminations, controller: 'prescriptions', type: 'PrescriptedExamination', only: [:new, :create]
 	end
@@ -81,27 +81,27 @@ Rails.application.routes.draw do
 	# Route to search drug
 	get '/searchDrug', to: 'prescriptions#searchDrug', as:  :search_drug
 
-	resources :secretaries, controller: 'users', type: 'Secretary' do
-		resources :clinics, shallow: true
+	resources :secretaries, controller: 'users', type: 'Secretary', only: [:index, :show] do
+		resources :clinics, shallow: true, only: [:index, :show]
 	end
 
-	resources :patient, controller: 'users', type: 'Patient'
-	resources :manages do
-		resources :clinics
-		resources :secretaries
+	#resources :patient, controller: 'users', type: 'Patient'
+	resources :manages, only: [:new, :destroy] do
+		#resources :clinics
+		#resources :secretaries
 	end
 
-	resources :owner, controller: 'users', type: 'Owner' do
+	resources :owner, controller: 'users', type: 'Owner', only: [:show] do
 		resources :clinics do
 			resources :doctors, controller: 'users', type: 'Doctor', only: [:index, :show]
 			resources :secretaries, controller: 'users', type: 'Secretary', only: [:index]
 		end
 	end
-	resources :works do
-		resources :clinics
-		resources :doctors
+	resources :works, only: [:new, :create, :destroy] do
+		#resources :clinics
+		#resources :doctors
 	end
-	resources :homepage
+	resources :homepage, only: [:index]
 	resources :account_activations, only: [:edit]
     resources :password_resets, only: [:new, :create, :edit, :update]
 

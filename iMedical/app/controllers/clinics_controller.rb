@@ -48,11 +48,13 @@ class ClinicsController < ApplicationController
     end
 
     def create
-        @owner = User.get_owners.find(params[:owner_id])
+        #@owner = User.get_owners.find(params[:owner_id])
+        @owner = User.get_owners.find(session[:user_id])
         @clinic = @owner.clinics.create!(clinic_params)
         @clinic.owner_id = current_user.id
         @clinic.save
-        redirect_to new_owner_path(params[:owner_id])
+        #redirect_to new_owner_path(params[:owner_id])
+        redirect_to new_owner_path(session[:user_id])
     end
 
     def edit
