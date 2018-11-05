@@ -102,7 +102,7 @@ class ClinicsController < ApplicationController
 			#puts @wd
         elsif(session[:type] == "Secretary")
             #session[:clinic_id] = Clinic.find(params[:id])
-			@doctors = User.get_doctors.all.order('created_at DESC')
+			@doctors = User.get_doctors.joins("INNER JOIN works ON users.id = works.doctor_id").where("works.clinic_id = ?", params[:id]).order('created_at DESC').uniq
 		    @doctors = @doctors.search(params[:search]) if params[:search].present?
         end
 	end

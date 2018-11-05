@@ -106,8 +106,10 @@ class ExaminationsController < ApplicationController
 		# Only the patient that booked the examination can delete a booked appointment
 		# or the secretary of that doctor
 		@examination = Examination.find(params[:id])
+		doctor = User.get_doctors.find(@examination.doctor_id)
+		clinic = Clinic.find(@examination.clinic_id)
         @examination.destroy
-        redirect_to clinic_doctor_path(params[:id], doctor.id)
+        redirect_to clinic_doctor_path(clinic.id, doctor.id)
     end
 
     private

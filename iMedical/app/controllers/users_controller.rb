@@ -79,6 +79,7 @@ class UsersController < ApplicationController
 				end
 
 			when "Secretary"
+				puts params
 				case params[:type]
 					when "Doctor"
 						if params[:date] == nil
@@ -96,7 +97,7 @@ class UsersController < ApplicationController
 								@endDateTime = params[:date] + " " + @works[0].end_time
 								@bookableDates = getBookableDates(@examinations, @startDateTime, @endDateTime)
 							end
-							#puts @bookableDates
+							puts @bookableDates
 							render "showDoctorForSecretary"
 						end
 				end
