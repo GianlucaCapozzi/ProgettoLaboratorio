@@ -10,8 +10,8 @@ one:
     doctor_id: 2
     clinic_id: 1
     day: 0
-    start_time: "13:00"
-    end_time: "19:00"
+    start_time: "00:00"
+    end_time: "23:30"
 
 two:
     created_at: <%= Time.zone.now %>
@@ -19,8 +19,8 @@ two:
     doctor_id: 2
     clinic_id: 1
     day: 1
-    start_time: "13:00"
-    end_time: "19:00"
+    start_time: "00:00"
+    end_time: "23:30"
 
 three:
     created_at: <%= Time.zone.now %>
@@ -28,8 +28,8 @@ three:
     doctor_id: 2
     clinic_id: 1
     day: 2
-    start_time: "13:00"
-    end_time: "19:00"
+    start_time: "00:00"
+    end_time: "23:30"
 
 four:
     created_at: <%= Time.zone.now %>
@@ -46,8 +46,8 @@ five:
     doctor_id: 2
     clinic_id: 1
     day: 4
-    start_time: "13:00"
-    end_time: "19:00"
+    start_time: "00:00"
+    end_time: "23:30"
 
 six:
     created_at: <%= Time.zone.now %>
@@ -55,8 +55,8 @@ six:
     doctor_id: 2
     clinic_id: 1
     day: 5
-    start_time: "13:00"
-    end_time: "19:00"
+    start_time: "00:00"
+    end_time: "23:30"
 
 seven:
     created_at: <%= Time.zone.now %>
@@ -64,5 +64,5 @@ seven:
     doctor_id: 2
     clinic_id: 1
     day: 6
-    start_time: "13:00"
-    end_time: "19:00"
+    start_time: "00:00"
+    end_time: "23:30"

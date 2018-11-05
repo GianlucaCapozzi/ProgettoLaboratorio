@@ -1,7 +1,7 @@
 class ExaminationsController < ApplicationController
 	load_and_authorize_resource
 	skip_authorize_resource :only => :create
-	
+
     #before_action :set_examination, only: [:show, :edit, :update, :destroy]
     #before_action :set_examinations, only: [:index, :show, :edit]
     #before_action :set_patient, only: [:index, :new, :edit]
@@ -36,7 +36,7 @@ class ExaminationsController < ApplicationController
 				@clinic = Clinic.find(@examination.clinic_id)
 				@patient = User.get_patients.find(@examination.patient_id)
 				#@prescriptions = @examination.prescriptions
-				render 'showDoctorForSecretary'
+				render 'examinationShow'
 			when "Secretary"
 				@examination = Examination.find(params[:id])
 				@doctor = User.get_doctors.find(@examination.doctor_id)
@@ -109,7 +109,12 @@ class ExaminationsController < ApplicationController
 		doctor = User.get_doctors.find(@examination.doctor_id)
 		clinic = Clinic.find(@examination.clinic_id)
         @examination.destroy
-        redirect_to clinic_doctor_path(clinic.id, doctor.id)
+        if session[:type] == "Secretary"
+			redirect_to clinic_doctor_path(clinic.id, doctor.id)
+		end
+		if session[:type] == "Patient"
+			redirect_to examinations_path
+		end
     end
 
     private

@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_113607) do
+
+ActiveRecord::Schema.define(version: 2018_11_05_224029) do
 
   create_table "clinics", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -43,7 +44,6 @@ ActiveRecord::Schema.define(version: 2018_11_05_113607) do
     t.integer "doctor_id"
     t.integer "clinic_id"
     t.datetime "start_time"
-    t.datetime "end_time"
     t.index ["clinic_id"], name: "index_examinations_on_clinic_id"
     t.index ["doctor_id", "start_time"], name: "index_examinations_on_doctor_id_and_start_time", unique: true
     t.index ["doctor_id"], name: "index_examinations_on_doctor_id"

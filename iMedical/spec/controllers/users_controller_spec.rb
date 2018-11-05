@@ -39,7 +39,7 @@ RSpec.describe UsersController, type: :controller do
         password_confirmation: "password",
         phoneNumber: "3215463453",
         cf: "XMPMCH80R23G502B",
-        type: "Owner",
+        roles_mask: 1,
         activated: true
     }
   }
@@ -54,7 +54,7 @@ RSpec.describe UsersController, type: :controller do
           phoneNumber: "3215763453",
           cf: "XGPMCH80R23G502B",
           activated: true,
-          type: "Owner"
+          roles_mask: 1
       }
   }
 
@@ -68,7 +68,7 @@ RSpec.describe UsersController, type: :controller do
           phoneNumber: "3215463453",
           cf: "XGPMCH80R23G502B",
           activated: true,
-          type: "Owner"
+          roles_mask: 1
       }
   }
 
