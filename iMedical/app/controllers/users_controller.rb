@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 						render "ownerClinicDoctorsIndex"
 					when "Secretary"
 						params.require(:clinic_id)
-						
+
 				end
 			when "Patient"
 				# Dove devo metterle?
@@ -97,7 +97,7 @@ class UsersController < ApplicationController
 							end
 							puts @bookableDates
 							render "showDoctorForSecretary"
-						end	
+						end
 				end
 
 			when "Owner"
@@ -233,7 +233,7 @@ class UsersController < ApplicationController
 				else
 					puts user.surname.downcase == doctor[0].downcase
 					puts user.name.downcase == doctor[1].downcase
-					puts user.birthdayDate == doctor[2] 
+					puts user.birthdayDate == doctor[2]
 					puts user.birthdayPlace.downcase == doctor[3].downcase
 					puts "Non corrisponde"
 				end
@@ -272,6 +272,8 @@ class UsersController < ApplicationController
 
 	def searchClinic
 		@clinics = Clinic.all.order('created_at DESC')
+		puts session
+		puts session[:user_id]
 		@clinics = @clinics.search(params[:search]) if params[:search].present?
 	end
 

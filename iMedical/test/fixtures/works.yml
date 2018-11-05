@@ -9,15 +9,15 @@ one:
     updated_at: <%= Time.zone.now %>
     doctor_id: 2
     clinic_id: 1
-    day: 23102018
-    start_time: <%= Time.zone.now %>
-    end_time: <%= Time.zone.now %>
+    day: 1
+    start_time: "13:00"
+    end_time: "19:00"
 
 two:
     created_at: <%= Time.zone.now %>
     updated_at: <%= Time.zone.now %>
     doctor_id: 1
     clinic_id: 1
-    day: 26102018
+    day: 4
     start_time: <%= Time.zone.now %>
     end_time: <%= Time.zone.now %>
