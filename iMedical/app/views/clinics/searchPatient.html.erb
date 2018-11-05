@@ -1,0 +1,14 @@
+<%= form_tag(search_secretary_path, method: :get, id: "owDoct-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search ..." %>
+<% end %>
+<table>
+    <% @patients.each do |patient| %>
+        <tr>
+            <td><%= patient.name %>
+				<% if !@workingPatients.include?(patient.id) %>
+					<%= button_to "Prenota", clinic_doctor_path(params[:id], doctor.id), :method => :get, class: "btn" %>
+				<% end %>
+			</td>
+        </tr>
+    <% end %>
+</table>

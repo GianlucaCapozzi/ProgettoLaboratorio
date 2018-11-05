@@ -37,8 +37,12 @@ class ExaminationsController < ApplicationController
 				@clinic = Clinic.find(@examination.clinic_id)
 				@patient = User.get_patients.find(@examination.patient_id)
 				#@prescriptions = @examination.prescriptions
-				render 'examinationShow'
+				render 'showDoctorForSecretary'
 			when "Secretary"
+				@examination = Examination.find(params[:id])
+				@doctor = User.get_doctors.find(@examination.doctor_id)
+				@clinic = Clinic.find(@examination.clinic_id)
+				render 'showDoctorForSecretary'
 
 			when "Patient"
 				@examination = Examination.find(params[:id])
@@ -71,6 +75,19 @@ class ExaminationsController < ApplicationController
 				authorize! :create, examination
 				examination.save
 				redirect_to patient_examinations_path(session[:user_id])
+
+			when "Secretary"
+				params.require(:doctor_id)
+				params.require(:clinic_id)
+				params.require(:date)
+				examination = Examination.new
+				examination.start_time = params[:date]
+				examination.doctor_id = params[:doctor_id]
+				examination.clinic_id = params[:clinic_id]
+				examination.patient_id = params[:patient_id]
+				authorize! :create, examination
+				examination.save
+				redirect_to clinic_doctor_path(params[:clinic_id], params[:doctor_id])
 		end
     end
 
@@ -91,7 +108,7 @@ class ExaminationsController < ApplicationController
 		# or the secretary of that doctor
 		@examination = Examination.find(params[:id])
         @examination.destroy
-        redirect_to examinations_path
+        redirect_to clinic_doctor_path(params[:id], doctor.id)
     end
 
     private

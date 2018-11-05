@@ -1,0 +1,13 @@
+<%= form_tag(search_patient_path, method: :get, id: "searchDoct-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search ..." %>
+<% end %>
+
+<table>
+    <% @patients.each do |patient| %>
+        <tr>
+            <td><%= patient.name %>
+                    <%=  button_to "Prenota", clinic_doctor_examinations_path(params[:clinic_id], params[:doctor_id]), params: { patient_id: patient.id, date: params[:date]}, class: "btn" %>
+            </td>
+        </tr>
+    <% end %>
+</table>

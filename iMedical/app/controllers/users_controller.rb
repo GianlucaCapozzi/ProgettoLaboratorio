@@ -321,6 +321,13 @@ class UsersController < ApplicationController
 		end
 		availability
 	end
+	
+	def searchPatient
+        if(session[:type] == "Secretary")
+		    @patients = User.get_patients.all.order('created_at DESC')
+		    @patients = @patients.search(params[:search]) if params[:search].present?	
+		end
+	end
 
 	private
 
