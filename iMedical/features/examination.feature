@@ -20,3 +20,9 @@ Scenario: I want to select a doctor
     Given I am on clinic doctors page
     When I click on the first doctor link
     Then I should be redirected to clinic doctor page
+
+Scenario: I want to book an examination
+    Given As a PATIENT
+    Given I am on the calendar page
+    When I click on prenota button
+    Then I should be redirected to patient examination page
