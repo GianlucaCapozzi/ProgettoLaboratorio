@@ -73,7 +73,7 @@ class ClinicsController < ApplicationController
         @secretary = User.get_secretaries.find(params[:secretary_id])
         @clinics = @secretary.clinics
     end
-
+    
     # Owner's functions
 
     def showClinicsForDoctor
@@ -130,5 +130,4 @@ class ClinicsController < ApplicationController
 	def verifyRole
 		# The role is set in session variable :role
 	end
-
 end

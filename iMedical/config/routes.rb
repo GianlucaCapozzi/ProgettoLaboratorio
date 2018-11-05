@@ -23,7 +23,9 @@ Rails.application.routes.draw do
 	get '/work/addNewDoctor/:doctor_id&:clinic_id' => 'works#addNewDoctor', as: :add_new_doctor
 	get '/manage/addNewSecretary/:secretary_id&:clinic_id' => 'manages#addNewSecretary', as: :add_new_secretary
 
+	#Secretary's routes
 	get '/secretary/:secretary_id/clinics/showClinics' => 'clinics#showClinics', as: :show_clinics
+    get '/secretary/:secretary_id/clinics/:clinic_id/doctors/:doctor_id/searchPatient' => 'users#searchPatient', as: :search_patient
 
 	# Patient's routes
 	get '/patient/:id/showStory' => 'users#showPatientStory', as: :show_patient_story

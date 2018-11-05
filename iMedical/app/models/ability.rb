@@ -108,6 +108,8 @@ class Ability
 			#can :read, Patient
 			can :read, Work
 			can :read, User
+			can :create, Examination
+			can :searchPatient, User
 		end
 
 		if type == "Owner"
