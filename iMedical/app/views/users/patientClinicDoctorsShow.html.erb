@@ -1,4 +1,4 @@
 <h2> Lista medici di una determinata clinica </h2>
-<%= @doctors.each do |doctor| %>
-	<%=doctor.name %><%= button_to "Calendario", clinic_doctor_path(@clinic, doctor), :method => "get", class: "btn" %>
+<% @doctors.each do |doctor| %>
+	<%=doctor.name %> <%= button_to "Calendario", clinic_doctor_path(@clinic, doctor), :method => "get", class: "btn" %> <br>
 <% end %>
