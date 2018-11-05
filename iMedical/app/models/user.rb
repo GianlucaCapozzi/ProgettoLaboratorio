@@ -17,15 +17,19 @@ class User < ApplicationRecord
 
 	def self.from_omniauth(auth)
 		where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
-			user.provider = auth.provider
-			user.uid = auth.uid
-			user.name = auth.info.name
-			user.email = auth.info.email
-			user.password_digest = auth.credentials.token
-			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-			user.roles_mask = 0
-			user.activate
-			user.save!(validate: false)
+			if(!User.find_by(uid: auth.uid))
+				user.provider = auth.provider
+				user.uid = auth.uid
+				user.name = auth.info.name
+				user.email = auth.info.email
+				user.password_digest = auth.credentials.token
+				user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+				user.roles_mask = 0
+				user.activate
+				user.save!(validate: false)
+			else
+				user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+			end
 		end
 	end
 
