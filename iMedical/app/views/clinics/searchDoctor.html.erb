@@ -13,7 +13,7 @@
             <% elsif(session[:type] == "Patient") %>
                 <td><%= doctor.name %><%= button_to "Prenota visita", add_new_doctor_path(doctor.id, session[:clinic_id]), :method => :get, class: "btn" %></td>
             <% elsif(session[:type] == "Secretary") %>
-                <td><%= doctor.name %> <%= button_to "Visualizza Visite",  clinic_doctor_examinations_path(params[:id], doctor.id), :method => :get, class: "btn" %></td>  
+                <td><%= doctor.name %> <%= button_to "Visualizza Visite",  clinic_doctor_path(params[:id], doctor.id), :method => :get, class: "btn" %></td>  
             <% end %>
         </tr>
     <% end %>

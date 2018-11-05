@@ -36,19 +36,19 @@ class User < ApplicationRecord
 	def self.get_patients
 		where("roles_mask & 4 == 4")
 	end
-	
+
 	def self.get_owners
 		where("roles_mask & 1 == 1")
 	end
-	
+
 	def self.get_secretaries
 		where("roles_mask & 2 == 2")
 	end
-	
+
 	def self.get_doctors
 		where("roles_mask & 8 == 8")
 	end
-	
+
 
 	# Return the hash digest of the given string
 	def User.digest(string)
@@ -111,7 +111,7 @@ class User < ApplicationRecord
 		provider.blank?
 	end
 
-	
+
 	private
 
 	# Converts email to all lower-case

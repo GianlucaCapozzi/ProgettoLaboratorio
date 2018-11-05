@@ -56,3 +56,53 @@ end
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
+module CucHelper
+
+    include ApplicationHelper
+
+    def ex_user
+        usr = User.create(
+            name: "Cucuser",
+            surname: "Example",
+            email: "cucuser@example.com",
+            password: "password",
+            password_confirmation: "password",
+            activated: true,
+            birthdayDate: "15101980",
+            birthdayPlace: "Roma",
+            phoneNumber: "3421523145",
+            cf: "OWNMCH80R23G502B",
+            remember_digest: User.digest("remember_token"),
+            activation_digest: User.digest("activation_digest"),
+            reset_digest: User.digest("reset_token"),
+            reset_sent_at: Time.zone.now,
+            created_at: Time.zone.now,
+            updated_at: Time.zone.now,
+            roles_mask: 5
+        )
+        return usr
+    end
+
+    def current_user
+        User.find_by(email: "cucuser@example.com")
+    end
+
+    def complete_log_in
+        @user = ex_user
+        @user.activate
+        visit("/sessions/new")
+        fill_in("Email", :with => @user.email)
+        fill_in("Password", :with => @user.password)
+        click_button("Log In")
+    end
+
+end
+
+Before do
+    ActiveRecord::FixtureSet.reset_cache
+    fixtures_folder = File.join(Rails.root, 'spec', 'fixtures')
+	fixtures = Dir[File.join(fixtures_folder, '*.yml')].map {|f| File.basename(f, '.yml') }
+	ActiveRecord::FixtureSet.create_fixtures(fixtures_folder, fixtures)
+end
+
+World(CucHelper)
