@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
 	resources :sessions, only: [:create, :destroy, :new]
 	resources :home, only: [:show]
-	resources :users, only: [:show, :new, :create, :destroy, :update, :edit ]
+	resources :users, only: [:show, :new, :create, :destroy, :update, :edit, :index ]
 	#resources :doctors, controller: 'users', type: 'Doctor' do
 	#	resources :clinics, shallow: true do
 	#		resources :patient, controller: 'users', type: 'Patient', shallow: true do
