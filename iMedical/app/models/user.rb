@@ -23,6 +23,7 @@ class User < ApplicationRecord
 			user.email = auth.info.email
 			user.password_digest = auth.credentials.token
 			user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+			user.roles_mask = 0
 			user.activate
 			user.save!(validate: false)
 		end

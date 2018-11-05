@@ -1,5 +1,4 @@
 <h2> Dottore che lavora in una certa clinica per un certo proprietario </h2>
-
 Dottore: <%= @doctor.surname + " " + @doctor.name %> <br>
 Clinica: <%= @clinic.name %> <br>
 <br>
@@ -7,7 +6,7 @@ Clinica: <%= @clinic.name %> <br>
 	<%= @works.each do |work| %>
 		<tr>
 			<td> <%= work.id %> </td>
-			<td> <%= work.day %> </td>
+			<td> <%= @days[work.day] %> </td>
 			<td> <%= work.start_time %> </td>
 			<td> <%= work.end_time %> </td>
 			<td> <%= link_to "Elimina giorno di lavoro", work_path(work), method: :delete %> </td>

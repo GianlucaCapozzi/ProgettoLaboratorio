@@ -1,6 +1,6 @@
 <h2> Lista dottori che lavorano in una determinata clinica di un certo proprietario (Vista proprietario)</h2>
 
-<table>
+<table border="1">
 	<%= @doctors.each do |doctor| %>
 		<tr>
 			<td> <%= link_to doctor.surname + " " + doctor.name, owner_clinic_doctor_path(current_user.id, @clinic, doctor) %> </td>

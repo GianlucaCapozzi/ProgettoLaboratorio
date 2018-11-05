@@ -34,6 +34,9 @@ class UsersController < ApplicationController
 						@doctors = User.get_doctors.joins("INNER JOIN works ON users.id = works.doctor_id").where("works.clinic_id = ?", params[:clinic_id]).uniq
 						@clinic = Clinic.find(params[:clinic_id])
 						render "ownerClinicDoctorsIndex"
+					when "Secretary"
+						params.require(:clinic_id)
+						
 				end
 			when "Patient"
 				# Dove devo metterle?
@@ -74,7 +77,9 @@ class UsersController < ApplicationController
 						redirect_to clinic_patient_examinations_path(clinic, patient)
 				end
 			when "Secretary"
-
+				case params[:type]
+					when
+				end
 			when "Owner"
 				case params[:type]
 					when "Doctor"
@@ -83,6 +88,7 @@ class UsersController < ApplicationController
 						@doctor = User.get_doctors.find(params[:id])
 						@clinic = Clinic.find(params[:clinic_id])
 						@works = Work.where("clinic_id = ? AND doctor_id = ? ", params[:clinic_id], params[:id])
+						@days = ["Domenica", "Lunedi", "Martedi", "Mercoledi", "Giovedi", "Venerdi", "Sabato"]
 						render "ownerClinicDoctorsShow"
 				end
 			when "Patient"
@@ -205,6 +211,10 @@ class UsersController < ApplicationController
 					user.save!(validate: false)
 					puts "Trovato!"
 				else
+					puts user.surname.downcase == doctor[0].downcase
+					puts user.name.downcase == doctor[1].downcase
+					puts user.birthdayDate == doctor[2] 
+					puts user.birthdayPlace.downcase == doctor[3].downcase
 					puts "Non corrisponde"
 				end
 			end

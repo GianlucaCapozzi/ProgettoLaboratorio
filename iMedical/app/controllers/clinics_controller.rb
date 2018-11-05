@@ -88,7 +88,16 @@ class ClinicsController < ApplicationController
         if(session[:type] == "Owner")
             session[:clinic_id] = Clinic.find(params[:id])
 		    @doctors = User.get_doctors.all.order('created_at DESC')
+		    @works = Work.where("clinic_id = ?", params[:id])
 		    @doctors = @doctors.search(params[:search]) if params[:search].present?
+			@works = Work.select("DISTINCT doctor_id").where("works.clinic_id = ?", params[:id])
+			@wd = []
+			i = 0
+			while i < @works.length
+				@wd.push(@works[i].doctor_id)
+				i = i + 1
+			end
+			#puts @wd
         elsif(session[:type] == "Secretary")
             #session[:clinic_id] = Clinic.find(params[:id])
 			@doctors = User.get_doctors.all.order('created_at DESC')
@@ -100,6 +109,13 @@ class ClinicsController < ApplicationController
         session[:clinic_id] = Clinic.find(params[:id])
 		@secretaries = User.get_secretaries.all.order('created_at DESC')
 		@secretaries = @secretaries.search(params[:search]) if params[:search].present?
+		@manages = Manage.select("DISTINCT secretary_id").where("manages.clinic_id = ?", params[:id])
+		@workingSecretaries = []
+		i = 0
+		while i < @manages.length
+			@workingSecretaries.push(@manages[i].secretary_id)
+			i = i + 1
+		end
 	end
 
     private

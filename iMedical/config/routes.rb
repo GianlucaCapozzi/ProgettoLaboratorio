@@ -63,7 +63,7 @@ Rails.application.routes.draw do
 		end
 		#resources :doctors, controller: 'user', type: 'Doctor', shallow: true
 		resources :doctors, controller: 'users', type: 'Doctor', only: [:index, :show] do
-			resources :examinations, only: [:create]
+			resources :examinations, only: [:create, :index]
 		end
 	end
 	# I want to see the visits of a patient
@@ -94,6 +94,7 @@ Rails.application.routes.draw do
 	resources :owner, controller: 'users', type: 'Owner' do
 		resources :clinics do
 			resources :doctors, controller: 'users', type: 'Doctor', only: [:index, :show]
+			resources :secretaries, controller: 'users', type: 'Secretary', only: [:index]
 		end
 	end
 	resources :works do

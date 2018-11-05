@@ -117,7 +117,8 @@ class Ability
 				clinic.owner_id == session[:user_id]
 			end
 			#can :update, Owner
-			can [:manage], Work do |work|
+			#can :new, Work 
+			can :manage, Work do |work|
 				clinic = Clinic.find(work.clinic_id)
 				clinic.owner_id == session[:user_id]
 			end

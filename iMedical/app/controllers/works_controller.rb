@@ -1,5 +1,7 @@
 class WorksController < ApplicationController
 	load_and_authorize_resource
+	skip_authorize_resource :only => [:create, :new]
+	
     def new
 		params.require(:clinic_id)
 		params.require(:doctor_id)		
@@ -11,8 +13,8 @@ class WorksController < ApplicationController
     
     def create
 		params.require(:work).permit(:clinic_id, :doctor_id, :day, :start_time, :end_time)
-		clinic = Clinic.find(work.clinic_id)
-		doctor = User.get_doctors.find(work.doctor_id)
+		clinic = Clinic.find(params[:work][:clinic_id])
+		doctor = User.get_doctors.find(params[:work][:doctor_id])
 		work = Work.new
 		work.clinic_id = params[:work][:clinic_id]
 		work.doctor_id = params[:work][:doctor_id]
@@ -27,6 +29,10 @@ class WorksController < ApplicationController
         @doctor = User.get_doctors.find(params[:doctor_id])
         @clinic = Clinic.find(params[:clinic_id])
         @work = Work.new(work_params)
+        @work.day = 1
+        @work.start_time = "9:00"
+        @work.end_time = "18:00"
+		authorize! :create, @work
         @work.save!
         #@doctor.work << @work
         #@clinic.work << @work
@@ -40,7 +46,12 @@ class WorksController < ApplicationController
 		clinic = Clinic.find(work.clinic_id)
 		doctor = User.get_doctors.find(work.doctor_id)
 		Work.delete(work)
-		redirect_to owner_clinic_doctor_path(current_user.id, clinic, doctor)
+		works = Work.where("doctor_id = ? AND clinic_id = ?", doctor.id, clinic.id)
+		if works.length > 0 
+			redirect_to owner_clinic_doctor_path(current_user.id, clinic, doctor)
+		else
+			redirect_to owner_clinic_path(current_user.id, clinic)
+		end
 	end
 	
     private
