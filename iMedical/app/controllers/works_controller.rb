@@ -28,8 +28,21 @@ class WorksController < ApplicationController
     def addNewDoctor
         @doctor = User.get_doctors.find(params[:doctor_id])
         @clinic = Clinic.find(params[:clinic_id])
+        actualWorks = Work.select("day").where("doctor_id = ?", @doctor.id)
+        daysBusy = []
+        i = 0
+        while i < actualWorks.length 
+			daysBusy.push(actualWorks[i].day)
+			i = i + 1
+        end
         @work = Work.new(work_params)
         @work.day = 1
+        # If there is a day free, i search it
+        if daysBusy.length != 7
+			while daysBusy.include?(@work.day)
+				@work.day = (@work.day + 1)%7
+			end
+		end
         @work.start_time = "9:00"
         @work.end_time = "18:00"
 		authorize! :create, @work

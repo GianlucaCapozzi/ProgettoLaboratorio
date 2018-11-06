@@ -5,11 +5,11 @@ class ClinicsController < ApplicationController
         if(session[:type] == "Owner")
             @owner = User.get_owners.find(params[:owner_id])
             #@clinics = @owner.clinics
-            @clinics = Clinics.where("owner_id = ?", @owner.id)
+            @clinics = Clinic.where("owner_id = ?", @owner.id)
         else
             @secretary = User.get_secretaries.find(params[:secretary_id])
             #@clinics = @secretary.clinics
-            @clinics = Clinics.joins("INNER JOIN manages ON clinics.id = manages.clinic_id").where("manages.secretary_id = ?", @secretary.id)
+            @clinics = Clinic.joins("INNER JOIN manages ON clinics.id = manages.clinic_id").where("manages.secretary_id = ?", @secretary.id)
         end
 
     end
@@ -35,7 +35,8 @@ class ClinicsController < ApplicationController
 
 			when "Owner"
 				@owner = User.get_owners.find(params[:owner_id])
-				@clinics = @owner.clinics
+				#@clinics = @owner.clinics
+				@clinics = Clinic.where("owner_id = ?", @owner.id)
 		end
     end
 
