@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_224029) do
+ActiveRecord::Schema.define(version: 2018_11_05_234942) do
 
   create_table "clinics", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 2018_11_05_224029) do
     t.string "provider"
     t.string "uid"
     t.string "doctorID"
-    t.string "type"
     t.string "story"
     t.string "remember_digest"
     t.string "activation_digest"

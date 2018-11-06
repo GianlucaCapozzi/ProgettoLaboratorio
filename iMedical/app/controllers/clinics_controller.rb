@@ -88,7 +88,8 @@ class ClinicsController < ApplicationController
 
     def showClinicsForSecretary
         @owner = User.get_owners.find(params[:owner_id])
-        @clinics = @owner.clinics
+        #@clinics = @owner.clinics
+        @clinics = Clinic.where("owner_id = ?", @owner.id)
     end
 
     def searchDoctor

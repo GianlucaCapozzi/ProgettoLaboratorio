@@ -184,7 +184,7 @@ class UsersController < ApplicationController
 
 	def newOwner
 		user = User.find(params[:id])
-		user.type = 'Owner'
+		#user.type = 'Owner'
 		user.roles_mask = user.roles_mask | 1
 		user.save!(validate: false)
 		session[:type] = 'Owner'
@@ -228,7 +228,7 @@ class UsersController < ApplicationController
 				#puts doctor
 				if doctor[4] == doctorID && user.surname.downcase == doctor[0].downcase && user.name.downcase == doctor[1].downcase && user.birthdayDate == doctor[2] && user.birthdayPlace.downcase == doctor[3].downcase
 					# Found the doctor in the file and the information are correct
-					user.type = "Doctor"
+					#user.type = "Doctor"
 					user.doctorID = doctor[4]
 					user.roles_mask = user.roles_mask | 8
 					user.save!(validate: false)
@@ -251,7 +251,7 @@ class UsersController < ApplicationController
 
 	def newPatient
 		user = User.find(params[:id])
-		user.type = 'Patient'
+		#user.type = 'Patient'
 		user.roles_mask = user.roles_mask | 4
 		user.save!(validate: false)
 		session[:type] = 'Patient'
@@ -260,7 +260,7 @@ class UsersController < ApplicationController
 
 	def newSecretary
 		user = User.find(params[:id])
-		user.type = 'Secretary'
+		#user.type = 'Secretary'
 		user.roles_mask = user.roles_mask | 2
 		user.save!(validate: false)
 		session[:type] = 'Secretary'

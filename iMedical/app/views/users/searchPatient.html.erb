@@ -5,7 +5,7 @@
 <table>
     <% @patients.each do |patient| %>
         <tr>
-            <td><%= patient.name %>
+            <td><%= patient.name %> <%= patient.surname %>
                     <%=  button_to "Prenota", clinic_doctor_examinations_path(params[:clinic_id], params[:doctor_id]), params: { patient_id: patient.id, date: params[:date]}, class: "btn" %>
             </td>
         </tr>

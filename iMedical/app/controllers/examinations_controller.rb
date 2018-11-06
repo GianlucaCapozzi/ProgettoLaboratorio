@@ -20,7 +20,8 @@ class ExaminationsController < ApplicationController
 			when "Patient"
 				#List of examination
 				@patient = User.get_patients.find(current_user.id)
-				@examinations = @patient.examinations
+				#@examinations = @patient.examinations
+				@examinations = Examination.where("patient_id = ?", @patient.id)
 				render "patientIndex"
 			when "Owner"
 				#Nothing?
