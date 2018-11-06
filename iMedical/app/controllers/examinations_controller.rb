@@ -11,8 +11,8 @@ class ExaminationsController < ApplicationController
    def index
 		case session[:type]
 			when "Doctor"
-				#List of examination
-				@examinations = Examination.where("clinic_id = ? AND patient_id = ?", params[:clinic_id], params[:patient_id])
+				#List of examination of a doctor in given clinic of a given patient
+				@examinations = Examination.where("clinic_id = ? AND patient_id = ? AND doctor_id = ?", params[:clinic_id], params[:patient_id], session[:user_id])
 				#puts @examinations
 				render 'clinicDoctorPatient'
 			when "Secretary"
