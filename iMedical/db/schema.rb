@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_234942) do
+ActiveRecord::Schema.define(version: 2018_11_06_011932) do
 
   create_table "clinics", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -115,6 +115,8 @@ ActiveRecord::Schema.define(version: 2018_11_05_234942) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.integer "roles_mask"
+    t.index ["cf"], name: "index_users_on_cf", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "works", force: :cascade do |t|
