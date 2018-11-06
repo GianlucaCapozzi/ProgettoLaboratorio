@@ -130,7 +130,7 @@ class ClinicsController < ApplicationController
     private
 
     def clinic_params
-        params.require(:clinic).permit(:name, :address, :description, :province, :city, :latitude, :longitude)
+        params.require(:clinic).permit(:name, :address, :description, :province, :city, :latitude, :longitude).merge(owner_id: current_user.id)
     end
 
 	# Method to verify if the user with the actual role can go in this page
