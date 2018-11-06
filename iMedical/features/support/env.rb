@@ -71,7 +71,7 @@ module CucHelper
             birthdayDate: "15101980",
             birthdayPlace: "Roma",
             phoneNumber: "3421523145",
-            cf: "OWNMCH80R23G502B",
+            cf: "OWNMCH80R23G502Z",
             remember_digest: User.digest("remember_token"),
             activation_digest: User.digest("activation_digest"),
             reset_digest: User.digest("reset_token"),
