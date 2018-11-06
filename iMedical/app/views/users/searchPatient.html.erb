@@ -1,5 +1,6 @@
 <%= form_tag(search_patient_path, method: :get, id: "searchDoct-form") do %>
     <%= text_field_tag :search, params[:search], placeholder: "Search ..." %>
+    <%= hidden_field_tag :date, params[:date] %>
 <% end %>
 
 <table>
